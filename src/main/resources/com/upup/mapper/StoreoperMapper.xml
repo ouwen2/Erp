@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.upup.mapper.StoreoperMapper" >
+  <resultMap id="BaseResultMap" type="com.upup.model.Storeoper" >
+    <constructor >
+      <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sys_empUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OPERTIME" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="STOREUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="GOODSUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="NUM" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TYPE" jdbcType="CHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UUID, sys_empUUID, OPERTIME, STOREUUID, GOODSUUID, NUM, TYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from storeoper
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from storeoper
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.upup.model.Storeoper" >
+    insert into storeoper (UUID, sys_empUUID, OPERTIME, 
+      STOREUUID, GOODSUUID, NUM, 
+      TYPE)
+    values (#{uuid,jdbcType=INTEGER}, #{sysEmpuuid,jdbcType=INTEGER}, #{opertime,jdbcType=DATE}, 
+      #{storeuuid,jdbcType=INTEGER}, #{goodsuuid,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
+      #{type,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.upup.model.Storeoper" >
+    insert into storeoper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="sysEmpuuid != null" >
+        sys_empUUID,
+      </if>
+      <if test="opertime != null" >
+        OPERTIME,
+      </if>
+      <if test="storeuuid != null" >
+        STOREUUID,
+      </if>
+      <if test="goodsuuid != null" >
+        GOODSUUID,
+      </if>
+      <if test="num != null" >
+        NUM,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=INTEGER},
+      </if>
+      <if test="sysEmpuuid != null" >
+        #{sysEmpuuid,jdbcType=INTEGER},
+      </if>
+      <if test="opertime != null" >
+        #{opertime,jdbcType=DATE},
+      </if>
+      <if test="storeuuid != null" >
+        #{storeuuid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsuuid != null" >
+        #{goodsuuid,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.model.Storeoper" >
+    update storeoper
+    <set >
+      <if test="sysEmpuuid != null" >
+        sys_empUUID = #{sysEmpuuid,jdbcType=INTEGER},
+      </if>
+      <if test="opertime != null" >
+        OPERTIME = #{opertime,jdbcType=DATE},
+      </if>
+      <if test="storeuuid != null" >
+        STOREUUID = #{storeuuid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsuuid != null" >
+        GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        NUM = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=CHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.upup.model.Storeoper" >
+    update storeoper
+    set sys_empUUID = #{sysEmpuuid,jdbcType=INTEGER},
+      OPERTIME = #{opertime,jdbcType=DATE},
+      STOREUUID = #{storeuuid,jdbcType=INTEGER},
+      GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
+      NUM = #{num,jdbcType=INTEGER},
+      TYPE = #{type,jdbcType=CHAR}
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
+</mapper>
