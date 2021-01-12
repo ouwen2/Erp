@@ -193,6 +193,7 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -306,7 +307,7 @@
   </dependencies>
 
   <build>
-    <finalName>ssm</finalName>
+    <finalName>Erp</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!--第一步就是配置maven-compiler-plugin插件-->

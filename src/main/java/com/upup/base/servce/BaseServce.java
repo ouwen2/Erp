@@ -1,4 +1,4 @@
 package com.upup.base.servce;
 
-public class BaseServce {
+public abstract class BaseServce {
 }

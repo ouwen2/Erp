@@ -1,13 +1,11 @@
-package com.upup.sys.mapper;
+package com.upup.sys.servce;
 
 import com.upup.sys.model.SysMenu;
 import com.upup.sys.model.SysRole;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 
-@Repository
-public interface SysMenuMapper {
+public interface ISysMenuServce {
     int deleteByPrimaryKey(String menuid);
 
     int insert(SysMenu record);

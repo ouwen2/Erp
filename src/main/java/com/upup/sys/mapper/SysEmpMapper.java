@@ -19,4 +19,6 @@ public interface SysEmpMapper {
     int updateByPrimaryKeySelective(SysEmp record);
 
     int updateByPrimaryKey(SysEmp record);
+
+
 }
