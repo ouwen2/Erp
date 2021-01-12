@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.upup.mapper.OrdersMapper" >
-  <resultMap id="BaseResultMap" type="com.upup.model.Orders" >
+<mapper namespace="com.upup.purchase.mapper.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.upup.purchase.model.Orders" >
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="CREATETIME" jdbcType="DATE" javaType="java.util.Date" />
@@ -29,11 +29,15 @@
     from orders
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
+  <select id="queryall" resultType="com.upup.purchase.model.Orders">
+    select * from orders;  
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from orders
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.upup.model.Orders" >
+  <insert id="insert" parameterType="com.upup.purchase.model.Orders" >
     insert into orders (UUID, CREATETIME, CHECKTIME, 
       STARTTIME, ENDTIME, TYPE, CREATER, 
       CHECKER, STARTER, ENDER, 
@@ -45,7 +49,7 @@
       #{supplieruuid,jdbcType=INTEGER}, #{totalmoney,jdbcType=INTEGER}, #{state,jdbcType=CHAR}, 
       #{waybillsn,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.model.Orders" >
+  <insert id="insertSelective" parameterType="com.upup.purchase.model.Orders" >
     insert into orders
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
@@ -136,7 +140,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.model.Orders" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.purchase.model.Orders" >
     update orders
     <set >
       <if test="createtime != null" >
@@ -181,7 +185,7 @@
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.model.Orders" >
+  <update id="updateByPrimaryKey" parameterType="com.upup.purchase.model.Orders" >
     update orders
     set CREATETIME = #{createtime,jdbcType=DATE},
       CHECKTIME = #{checktime,jdbcType=DATE},
