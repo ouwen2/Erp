@@ -28,6 +28,7 @@ public class SysMenuController {
         for (SysMenu sysMenu : leftAsideByPid) {
             sysMenu.setSysMenus(iSysMenuServce.getLeftAsideByPid(sysMenu.getMenuid()));
         }
+        System.out.println("leftAsideByPid:"+leftAsideByPid);
         return leftAsideByPid;
     }
 
