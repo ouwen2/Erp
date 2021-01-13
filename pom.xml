@@ -307,7 +307,7 @@
 
   <build>
     <finalName>erp</finalName>
-     <plugins>
+      <plugins>
         <!--第一步就是配置maven-compiler-plugin插件-->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
