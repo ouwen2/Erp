@@ -8,8 +8,8 @@
       <arg column="ORIGIN" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="PRODUCER" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="UNIT" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="INPRICE" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="OUTPRICE" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="INPRICE" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="OUTPRICE" jdbcType="REAL" javaType="java.lang.Float" />
       <arg column="GOODSTYPEUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
@@ -31,8 +31,8 @@
       PRODUCER, UNIT, INPRICE, 
       OUTPRICE, GOODSTYPEUUID)
     values (#{uuid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, 
-      #{producer,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{inprice,jdbcType=INTEGER}, 
-      #{outprice,jdbcType=INTEGER}, #{goodstypeuuid,jdbcType=INTEGER})
+      #{producer,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{inprice,jdbcType=REAL}, 
+      #{outprice,jdbcType=REAL}, #{goodstypeuuid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.upup.model.Goods" >
     insert into goods
@@ -79,10 +79,10 @@
         #{unit,jdbcType=VARCHAR},
       </if>
       <if test="inprice != null" >
-        #{inprice,jdbcType=INTEGER},
+        #{inprice,jdbcType=REAL},
       </if>
       <if test="outprice != null" >
-        #{outprice,jdbcType=INTEGER},
+        #{outprice,jdbcType=REAL},
       </if>
       <if test="goodstypeuuid != null" >
         #{goodstypeuuid,jdbcType=INTEGER},
@@ -105,10 +105,10 @@
         UNIT = #{unit,jdbcType=VARCHAR},
       </if>
       <if test="inprice != null" >
-        INPRICE = #{inprice,jdbcType=INTEGER},
+        INPRICE = #{inprice,jdbcType=REAL},
       </if>
       <if test="outprice != null" >
-        OUTPRICE = #{outprice,jdbcType=INTEGER},
+        OUTPRICE = #{outprice,jdbcType=REAL},
       </if>
       <if test="goodstypeuuid != null" >
         GOODSTYPEUUID = #{goodstypeuuid,jdbcType=INTEGER},
@@ -122,8 +122,8 @@
       ORIGIN = #{origin,jdbcType=VARCHAR},
       PRODUCER = #{producer,jdbcType=VARCHAR},
       UNIT = #{unit,jdbcType=VARCHAR},
-      INPRICE = #{inprice,jdbcType=INTEGER},
-      OUTPRICE = #{outprice,jdbcType=INTEGER},
+      INPRICE = #{inprice,jdbcType=REAL},
+      OUTPRICE = #{outprice,jdbcType=REAL},
       GOODSTYPEUUID = #{goodstypeuuid,jdbcType=INTEGER}
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>

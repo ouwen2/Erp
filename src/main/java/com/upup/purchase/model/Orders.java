@@ -37,7 +37,7 @@ public class Orders {
 
     private Integer supplieruuid;
 
-    private Integer totalmoney;
+    private Float totalmoney;
 
     private String state;
 

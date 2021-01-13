@@ -9,11 +9,11 @@ public class Returnorderdetail {
 
     private String goodsname;
 
-    private Integer price;
+    private Float price;
 
     private Integer num;
 
-    private Integer money;
+    private Float money;
 
     private Date endtime;
 
@@ -25,7 +25,7 @@ public class Returnorderdetail {
 
     private Integer ordersuuid;
 
-    public Returnorderdetail(Integer uuid, Integer goodsuuid, String goodsname, Integer price, Integer num, Integer money, Date endtime, Integer ender, Integer storeuuid, String state, Integer ordersuuid) {
+    public Returnorderdetail(Integer uuid, Integer goodsuuid, String goodsname, Float price, Integer num, Float money, Date endtime, Integer ender, Integer storeuuid, String state, Integer ordersuuid) {
         this.uuid = uuid;
         this.goodsuuid = goodsuuid;
         this.goodsname = goodsname;
@@ -67,11 +67,11 @@ public class Returnorderdetail {
         this.goodsname = goodsname;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -83,11 +83,11 @@ public class Returnorderdetail {
         this.num = num;
     }
 
-    public Integer getMoney() {
+    public Float getMoney() {
         return money;
     }
 
-    public void setMoney(Integer money) {
+    public void setMoney(Float money) {
         this.money = money;
     }
 
