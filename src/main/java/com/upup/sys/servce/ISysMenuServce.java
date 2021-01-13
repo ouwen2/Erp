@@ -18,6 +18,6 @@ public interface ISysMenuServce {
 
     int updateByPrimaryKey(SysMenu record);
 
-    ArrayList<SysRole> getLeftAsideByPid(Integer pid);
+    ArrayList<SysMenu> getLeftAsideByPid(String pid);
 
 }

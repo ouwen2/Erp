@@ -1,5 +1,6 @@
 package com.upup.sys.controller;
 
+import com.upup.sys.model.SysMenu;
 import com.upup.sys.model.SysRole;
 import com.upup.sys.servce.ISysMenuServce;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("Sys")
@@ -21,15 +23,12 @@ public class SysMenuController {
 
     @RequestMapping("/getLeftAsideByPid")
     @ResponseBody
-    public ModelAndView getLeftAsideByPid(Integer pid){
-        ModelAndView modelAndView = new ModelAndView();
-
-        ArrayList<SysRole> leftAsideByPid = iSysMenuServce.getLeftAsideByPid(pid);
-        modelAndView.addObject(leftAsideByPid);
-        System.out.println("=============OK=============");
-        modelAndView.setView(new MappingJackson2JsonView());
-
-        return modelAndView;
+    public List<SysMenu> getLeftAsideByPid(){
+        ArrayList<SysMenu> leftAsideByPid = iSysMenuServce.getLeftAsideByPid("0");
+        for (SysMenu sysMenu : leftAsideByPid) {
+            sysMenu.setSysMenus(iSysMenuServce.getLeftAsideByPid(sysMenu.getMenuid()));
+        }
+        return leftAsideByPid;
     }
 
 }

@@ -46,7 +46,7 @@ public class SysMenuServceImpl implements ISysMenuServce {
     }
 
     @Override
-    public ArrayList<SysRole> getLeftAsideByPid(Integer pid) {
+    public ArrayList<SysMenu> getLeftAsideByPid(String pid) {
         return sysMenuMapper.getLeftAsideByPid(pid);
     }
 }
