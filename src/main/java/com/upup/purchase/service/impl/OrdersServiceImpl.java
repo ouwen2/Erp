@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrdersServiceImpl implements IOrdersService {
@@ -47,10 +48,12 @@ public class OrdersServiceImpl implements IOrdersService {
     }
 
     @Override
-    public JsonResponseBody<List<Orders>> queryall() {
-        List<Orders> list=ordersMapper.queryall();
+    public JsonResponseBody<List<Map<String,Object>>> queryall() {
+        List<Map<String,Object>> list=ordersMapper.queryall();
+        System.out.println(list);
         if(list.size()==0)
             return new JsonResponseBody<>(ResponseStatus.STATUS_202);
+
         return new JsonResponseBody<>(list);
     }
 

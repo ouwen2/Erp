@@ -5,6 +5,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Repository
@@ -22,6 +23,6 @@ public interface OrdersMapper {
 
     int updateByPrimaryKey(Orders record);
 
-    List<Orders> queryall();
+    List<Map<String,Object>> queryall();
 
 }
