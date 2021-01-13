@@ -1,6 +1,13 @@
-package com.upup.model;
+package com.upup.personnel.model;
 
-public class Dep {
+import lombok.Builder;
+import lombok.ToString;
+
+import java.io.Serializable;
+
+@Builder
+@ToString
+public class Dep implements Serializable {
     private Integer uuid;
 
     private String name;

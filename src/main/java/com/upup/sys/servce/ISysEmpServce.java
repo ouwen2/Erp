@@ -1,10 +1,10 @@
-package com.upup.sys.mapper;
+package com.upup.sys.servce;
 
 import com.upup.sys.model.SysEmp;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-@Repository
-public interface SysEmpMapper {
+public interface ISysEmpServce {
     int deleteByPrimaryKey(Integer uuid);
 
     int insert(SysEmp record);
