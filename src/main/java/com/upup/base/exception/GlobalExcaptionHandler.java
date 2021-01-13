@@ -9,7 +9,6 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Controller
 public class GlobalExcaptionHandler implements HandlerExceptionResolver {
     @Override
     public ModelAndView resolveException(HttpServletRequest httpServletRequest,
@@ -29,12 +28,13 @@ public class GlobalExcaptionHandler implements HandlerExceptionResolver {
                 mv.addObject("msg","业务类异常");
                 mv.addObject("success",false);
                 mv.setView(new MappingJackson2JsonView());
-            }else{
-                mv.addObject("msg","其他异常");
-                mv.addObject("success",false);
-                mv.setView(new MappingJackson2JsonView());
             }
+//            else{
+//            }
         }
+        mv.addObject("msg","其他异常");
+        mv.addObject("success",false);
+        mv.setView(new MappingJackson2JsonView());
         return mv;
     }
 
