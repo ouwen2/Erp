@@ -306,8 +306,7 @@
   </dependencies>
 
   <build>
-    <finalName>ssm</finalName>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <finalName>erp</finalName>
       <plugins>
         <!--第一步就是配置maven-compiler-plugin插件-->
         <plugin>
@@ -338,6 +337,6 @@
           </configuration>
         </plugin>
       </plugins>
-    </pluginManagement>
+
   </build>
 </project>
