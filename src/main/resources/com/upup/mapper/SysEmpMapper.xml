@@ -1,157 +1,181 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.upup.sys.mapper.SysEmpMapper" >
-  <resultMap id="BaseResultMap" type="com.upup.sys.model.SysEmp" >
-    <constructor >
-      <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="USERNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="PWD" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="salt" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="GENDER" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="EMAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="TELE" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="ADDRESS" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="BIRTHDAY" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="DEPUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upup.sys.mapper.SysEmpMapper">
+  <resultMap id="BaseResultMap" type="com.upup.sys.model.SysEmp">
+    <constructor>
+      <idArg column="UUID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="USERNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PWD" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="salt" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="GENDER" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="TELE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ADDRESS" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="BIRTHDAY" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="DEPUUID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="display" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="is_password" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List" >
-    UUID, USERNAME, PWD, salt, NAME, GENDER, EMAIL, TELE, ADDRESS, BIRTHDAY, DEPUUID
+  <sql id="Base_Column_List">
+    UUID, USERNAME, PWD, salt, NAME, GENDER, EMAIL, TELE, ADDRESS, BIRTHDAY, DEPUUID,
+    display, is_password
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_emp
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
   <select id="selectByName" resultType="com.upup.sys.model.SysEmp">
-    select <include refid="Base_Column_List"/> from sys_emp where username = #{name}
+    select <include refid="Base_Column_List"/> from sys_emp
+    where username = #{empName}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_emp
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.upup.sys.model.SysEmp" >
+  <insert id="insert" parameterType="com.upup.sys.model.SysEmp">
     insert into sys_emp (UUID, USERNAME, PWD, 
       salt, NAME, GENDER, 
       EMAIL, TELE, ADDRESS, 
-      BIRTHDAY, DEPUUID)
+      BIRTHDAY, DEPUUID, display, 
+      is_password)
     values (#{uuid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
       #{salt,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
       #{email,jdbcType=VARCHAR}, #{tele,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{birthday,jdbcType=DATE}, #{depuuid,jdbcType=INTEGER})
+      #{birthday,jdbcType=DATE}, #{depuuid,jdbcType=INTEGER}, #{display,jdbcType=VARCHAR}, 
+      #{isPassword,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.sys.model.SysEmp" >
+  <insert id="insertSelective" parameterType="com.upup.sys.model.SysEmp">
     insert into sys_emp
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
         UUID,
       </if>
-      <if test="username != null" >
+      <if test="username != null">
         USERNAME,
       </if>
-      <if test="pwd != null" >
+      <if test="pwd != null">
         PWD,
       </if>
-      <if test="salt != null" >
+      <if test="salt != null">
         salt,
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         NAME,
       </if>
-      <if test="gender != null" >
+      <if test="gender != null">
         GENDER,
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         EMAIL,
       </if>
-      <if test="tele != null" >
+      <if test="tele != null">
         TELE,
       </if>
-      <if test="address != null" >
+      <if test="address != null">
         ADDRESS,
       </if>
-      <if test="birthday != null" >
+      <if test="birthday != null">
         BIRTHDAY,
       </if>
-      <if test="depuuid != null" >
+      <if test="depuuid != null">
         DEPUUID,
       </if>
+      <if test="display != null">
+        display,
+      </if>
+      <if test="isPassword != null">
+        is_password,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
         #{uuid,jdbcType=INTEGER},
       </if>
-      <if test="username != null" >
+      <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>
-      <if test="pwd != null" >
+      <if test="pwd != null">
         #{pwd,jdbcType=VARCHAR},
       </if>
-      <if test="salt != null" >
+      <if test="salt != null">
         #{salt,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="gender != null" >
+      <if test="gender != null">
         #{gender,jdbcType=INTEGER},
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="tele != null" >
+      <if test="tele != null">
         #{tele,jdbcType=VARCHAR},
       </if>
-      <if test="address != null" >
+      <if test="address != null">
         #{address,jdbcType=VARCHAR},
       </if>
-      <if test="birthday != null" >
+      <if test="birthday != null">
         #{birthday,jdbcType=DATE},
       </if>
-      <if test="depuuid != null" >
+      <if test="depuuid != null">
         #{depuuid,jdbcType=INTEGER},
+      </if>
+      <if test="display != null">
+        #{display,jdbcType=VARCHAR},
+      </if>
+      <if test="isPassword != null">
+        #{isPassword,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.sys.model.SysEmp" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.sys.model.SysEmp">
     update sys_emp
-    <set >
-      <if test="username != null" >
+    <set>
+      <if test="username != null">
         USERNAME = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="pwd != null" >
+      <if test="pwd != null">
         PWD = #{pwd,jdbcType=VARCHAR},
       </if>
-      <if test="salt != null" >
+      <if test="salt != null">
         salt = #{salt,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         NAME = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="gender != null" >
+      <if test="gender != null">
         GENDER = #{gender,jdbcType=INTEGER},
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         EMAIL = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="tele != null" >
+      <if test="tele != null">
         TELE = #{tele,jdbcType=VARCHAR},
       </if>
-      <if test="address != null" >
+      <if test="address != null">
         ADDRESS = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="birthday != null" >
+      <if test="birthday != null">
         BIRTHDAY = #{birthday,jdbcType=DATE},
       </if>
-      <if test="depuuid != null" >
+      <if test="depuuid != null">
         DEPUUID = #{depuuid,jdbcType=INTEGER},
+      </if>
+      <if test="display != null">
+        display = #{display,jdbcType=VARCHAR},
+      </if>
+      <if test="isPassword != null">
+        is_password = #{isPassword,jdbcType=VARCHAR},
       </if>
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.sys.model.SysEmp" >
+  <update id="updateByPrimaryKey" parameterType="com.upup.sys.model.SysEmp">
     update sys_emp
     set USERNAME = #{username,jdbcType=VARCHAR},
       PWD = #{pwd,jdbcType=VARCHAR},
@@ -162,7 +186,9 @@
       TELE = #{tele,jdbcType=VARCHAR},
       ADDRESS = #{address,jdbcType=VARCHAR},
       BIRTHDAY = #{birthday,jdbcType=DATE},
-      DEPUUID = #{depuuid,jdbcType=INTEGER}
+      DEPUUID = #{depuuid,jdbcType=INTEGER},
+      display = #{display,jdbcType=VARCHAR},
+      is_password = #{isPassword,jdbcType=VARCHAR}
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
 </mapper>
