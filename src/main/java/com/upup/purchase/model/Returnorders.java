@@ -1,15 +1,13 @@
-package com.upup.model;
+package com.upup.purchase.model;
 
 import java.util.Date;
 
-public class Orders {
+public class Returnorders {
     private Integer uuid;
 
     private Date createtime;
 
     private Date checktime;
-
-    private Date starttime;
 
     private Date endtime;
 
@@ -18,8 +16,6 @@ public class Orders {
     private Integer creater;
 
     private Integer checker;
-
-    private Integer starter;
 
     private Integer ender;
 
@@ -31,24 +27,25 @@ public class Orders {
 
     private Integer waybillsn;
 
-    public Orders(Integer uuid, Date createtime, Date checktime, Date starttime, Date endtime, String type, Integer creater, Integer checker, Integer starter, Integer ender, Integer supplieruuid, Integer totalmoney, String state, Integer waybillsn) {
+    private Integer ordersuuid;
+
+    public Returnorders(Integer uuid, Date createtime, Date checktime, Date endtime, String type, Integer creater, Integer checker, Integer ender, Integer supplieruuid, Integer totalmoney, String state, Integer waybillsn, Integer ordersuuid) {
         this.uuid = uuid;
         this.createtime = createtime;
         this.checktime = checktime;
-        this.starttime = starttime;
         this.endtime = endtime;
         this.type = type;
         this.creater = creater;
         this.checker = checker;
-        this.starter = starter;
         this.ender = ender;
         this.supplieruuid = supplieruuid;
         this.totalmoney = totalmoney;
         this.state = state;
         this.waybillsn = waybillsn;
+        this.ordersuuid = ordersuuid;
     }
 
-    public Orders() {
+    public Returnorders() {
         super();
     }
 
@@ -74,14 +71,6 @@ public class Orders {
 
     public void setChecktime(Date checktime) {
         this.checktime = checktime;
-    }
-
-    public Date getStarttime() {
-        return starttime;
-    }
-
-    public void setStarttime(Date starttime) {
-        this.starttime = starttime;
     }
 
     public Date getEndtime() {
@@ -114,14 +103,6 @@ public class Orders {
 
     public void setChecker(Integer checker) {
         this.checker = checker;
-    }
-
-    public Integer getStarter() {
-        return starter;
-    }
-
-    public void setStarter(Integer starter) {
-        this.starter = starter;
     }
 
     public Integer getEnder() {
@@ -162,5 +143,13 @@ public class Orders {
 
     public void setWaybillsn(Integer waybillsn) {
         this.waybillsn = waybillsn;
+    }
+
+    public Integer getOrdersuuid() {
+        return ordersuuid;
+    }
+
+    public void setOrdersuuid(Integer ordersuuid) {
+        this.ordersuuid = ordersuuid;
     }
 }

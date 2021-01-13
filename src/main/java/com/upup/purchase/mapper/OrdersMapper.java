@@ -1,8 +1,15 @@
-package com.upup.mapper;
+package com.upup.purchase.mapper;
 
-import com.upup.model.Orders;
+import com.upup.purchase.model.Orders;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+
+@Repository
 public interface OrdersMapper {
+
     int deleteByPrimaryKey(Integer uuid);
 
     int insert(Orders record);
@@ -14,4 +21,7 @@ public interface OrdersMapper {
     int updateByPrimaryKeySelective(Orders record);
 
     int updateByPrimaryKey(Orders record);
+
+    List<Orders> queryall();
+
 }

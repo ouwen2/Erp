@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.upup.mapper.OrderdetailMapper" >
-  <resultMap id="BaseResultMap" type="com.upup.model.Orderdetail" >
+<mapper namespace="com.upup.purchase.mapper.OrderdetailMapper" >
+  <resultMap id="BaseResultMap" type="com.upup.purchase.model.Orderdetail" >
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="GOODSUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -30,7 +30,7 @@
     delete from orderdetail
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.upup.model.Orderdetail" >
+  <insert id="insert" parameterType="com.upup.purchase.model.Orderdetail" >
     insert into orderdetail (UUID, GOODSUUID, GOODSNAME, 
       PRICE, NUM, MONEY, 
       ENDTIME, ENDER, STOREUUID, 
@@ -40,7 +40,7 @@
       #{endtime,jdbcType=DATE}, #{ender,jdbcType=INTEGER}, #{storeuuid,jdbcType=INTEGER}, 
       #{state,jdbcType=CHAR}, #{ordersuuid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.model.Orderdetail" >
+  <insert id="insertSelective" parameterType="com.upup.purchase.model.Orderdetail" >
     insert into orderdetail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
@@ -113,7 +113,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.model.Orderdetail" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.purchase.model.Orderdetail" >
     update orderdetail
     <set >
       <if test="goodsuuid != null" >
@@ -149,7 +149,7 @@
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.model.Orderdetail" >
+  <update id="updateByPrimaryKey" parameterType="com.upup.purchase.model.Orderdetail" >
     update orderdetail
     set GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
       GOODSNAME = #{goodsname,jdbcType=VARCHAR},

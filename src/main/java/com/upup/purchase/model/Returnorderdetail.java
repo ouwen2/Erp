@@ -1,8 +1,8 @@
-package com.upup.model;
+package com.upup.purchase.model;
 
 import java.util.Date;
 
-public class Orderdetail {
+public class Returnorderdetail {
     private Integer uuid;
 
     private Integer goodsuuid;
@@ -25,7 +25,7 @@ public class Orderdetail {
 
     private Integer ordersuuid;
 
-    public Orderdetail(Integer uuid, Integer goodsuuid, String goodsname, Integer price, Integer num, Integer money, Date endtime, Integer ender, Integer storeuuid, String state, Integer ordersuuid) {
+    public Returnorderdetail(Integer uuid, Integer goodsuuid, String goodsname, Integer price, Integer num, Integer money, Date endtime, Integer ender, Integer storeuuid, String state, Integer ordersuuid) {
         this.uuid = uuid;
         this.goodsuuid = goodsuuid;
         this.goodsname = goodsname;
@@ -39,7 +39,7 @@ public class Orderdetail {
         this.ordersuuid = ordersuuid;
     }
 
-    public Orderdetail() {
+    public Returnorderdetail() {
         super();
     }
 

@@ -1,6 +1,6 @@
-package com.upup.mapper;
+package com.upup.purchase.mapper;
 
-import com.upup.model.Returnorders;
+import com.upup.purchase.model.Returnorders;
 
 public interface ReturnordersMapper {
     int deleteByPrimaryKey(Integer uuid);

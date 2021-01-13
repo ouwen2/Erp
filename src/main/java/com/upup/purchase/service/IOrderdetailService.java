@@ -1,8 +1,8 @@
-package com.upup.mapper;
+package com.upup.purchase.service;
 
-import com.upup.model.Orderdetail;
+import com.upup.purchase.model.Orderdetail;
 
-public interface OrderdetailMapper {
+public interface IOrderdetailService {
     int deleteByPrimaryKey(Integer uuid);
 
     int insert(Orderdetail record);

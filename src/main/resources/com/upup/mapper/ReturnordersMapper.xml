@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.upup.mapper.ReturnordersMapper" >
-  <resultMap id="BaseResultMap" type="com.upup.model.Returnorders" >
+<mapper namespace="com.upup.purchase.mapper.ReturnordersMapper" >
+  <resultMap id="BaseResultMap" type="com.upup.purchase.model.Returnorders" >
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="CREATETIME" jdbcType="DATE" javaType="java.util.Date" />
@@ -32,7 +32,7 @@
     delete from returnorders
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.upup.model.Returnorders" >
+  <insert id="insert" parameterType="com.upup.purchase.model.Returnorders" >
     insert into returnorders (UUID, CREATETIME, CHECKTIME, 
       ENDTIME, TYPE, CREATER, CHECKER, 
       ENDER, SUPPLIERUUID, TOTALMONEY, 
@@ -44,7 +44,7 @@
       #{state,jdbcType=CHAR}, #{waybillsn,jdbcType=INTEGER}, #{ordersuuid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.model.Returnorders" >
+  <insert id="insertSelective" parameterType="com.upup.purchase.model.Returnorders" >
     insert into returnorders
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
@@ -129,7 +129,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.model.Returnorders" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.purchase.model.Returnorders" >
     update returnorders
     <set >
       <if test="createtime != null" >
@@ -171,7 +171,7 @@
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.model.Returnorders" >
+  <update id="updateByPrimaryKey" parameterType="com.upup.purchase.model.Returnorders" >
     update returnorders
     set CREATETIME = #{createtime,jdbcType=DATE},
       CHECKTIME = #{checktime,jdbcType=DATE},
