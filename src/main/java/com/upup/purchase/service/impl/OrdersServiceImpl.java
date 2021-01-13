@@ -29,7 +29,7 @@ public class OrdersServiceImpl implements IOrdersService {
 
     @Override
     public Orders selectByPrimaryKey(Integer uuid) {
-        return null;
+        return ordersMapper.selectByPrimaryKey(uuid);
     }
 
     @Override

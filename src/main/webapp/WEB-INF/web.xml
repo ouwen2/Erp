@@ -23,7 +23,7 @@
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
     </listener>
 
-    <!-- 中文乱码处理 -->
+        <!-- 中文乱码处理 -->
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -50,6 +50,16 @@
     </filter>
     <filter-mapping>
         <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- CorsFilter 解决跨域向題-->
+    <filter>
+        <filter-name>corsFilter</filter-name>
+        <filter-class>com.upup.base.util.CorsFilter2</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name >corsFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 

@@ -16,11 +16,9 @@ public class OrdersController {
     @Autowired
     private IOrdersService ordersService;
 
-    @RequestMapping("/")
+    @RequestMapping("/queryall")
     @ResponseBody
     public List<Orders> queryall(){
-
-
         return null;
     }
 
