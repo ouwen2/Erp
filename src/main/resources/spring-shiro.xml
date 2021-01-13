@@ -32,7 +32,7 @@
         <!-- Shiro的核心安全接口,这个属性是必须的 -->
         <property name="securityManager" ref="securityManager" />
         <!-- 身份验证失败，跳转到登录页面 -->
-        <property name="loginUrl" value="/"/>
+<!--        <property name="loginUrl" value="/"/>-->
         <!-- 身份验证成功，跳转到指定页面 -->
 <!--        <property name="successUrl" value="index"/>-->
         <!-- 权限验证失败，跳转到指定页面 -->

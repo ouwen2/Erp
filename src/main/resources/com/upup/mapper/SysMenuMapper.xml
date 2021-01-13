@@ -19,7 +19,7 @@
     from sys_menu
     where MENUID = #{menuid,jdbcType=VARCHAR}
   </select>
-    <select id="getLeftAsideByPid" resultType="com.upup.sys.model.SysRole">
+    <select id="getLeftAsideByPid" resultMap="BaseResultMap">
       select <include refid="Base_Column_List"/> from sys_menu
       where pid = #{pid}
     </select>
