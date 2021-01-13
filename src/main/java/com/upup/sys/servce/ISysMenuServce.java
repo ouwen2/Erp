@@ -1,14 +1,11 @@
-package com.upup.sys.mapper;
+package com.upup.sys.servce;
 
 import com.upup.sys.model.SysMenu;
 import com.upup.sys.model.SysRole;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 
-@Repository
-public interface SysMenuMapper {
+public interface ISysMenuServce {
     int deleteByPrimaryKey(String menuid);
 
     int insert(SysMenu record);
@@ -21,6 +18,6 @@ public interface SysMenuMapper {
 
     int updateByPrimaryKey(SysMenu record);
 
-    ArrayList<SysMenu> getLeftAsideByPid(@Param("pid") String pid);
+    ArrayList<SysMenu> getLeftAsideByPid(String pid);
 
 }

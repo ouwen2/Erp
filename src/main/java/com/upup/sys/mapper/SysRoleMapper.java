@@ -2,6 +2,8 @@ package com.upup.sys.mapper;
 
 import com.upup.sys.model.SysRole;
 
+import java.util.ArrayList;
+
 public interface SysRoleMapper {
     int deleteByPrimaryKey(Integer uuid);
 
@@ -14,4 +16,5 @@ public interface SysRoleMapper {
     int updateByPrimaryKeySelective(SysRole record);
 
     int updateByPrimaryKey(SysRole record);
+
 }

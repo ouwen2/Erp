@@ -2,7 +2,6 @@ package com.upup.sys.mapper;
 
 import com.upup.sys.model.SysEmp;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Repository
 public interface SysEmpMapper {
@@ -19,4 +18,6 @@ public interface SysEmpMapper {
     int updateByPrimaryKeySelective(SysEmp record);
 
     int updateByPrimaryKey(SysEmp record);
+
+
 }

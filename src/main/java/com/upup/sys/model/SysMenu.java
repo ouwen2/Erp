@@ -1,5 +1,12 @@
 package com.upup.sys.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import java.util.List;
+
+@Data
+@AllArgsConstructor
 public class SysMenu {
     private String menuid;
 
@@ -10,6 +17,8 @@ public class SysMenu {
     private String url;
 
     private String pid;
+
+    private List<SysMenu> sysMenus;
 
     public SysMenu(String menuid, String menuname, String icon, String url, String pid) {
         this.menuid = menuid;

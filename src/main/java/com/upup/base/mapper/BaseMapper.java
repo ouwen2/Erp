@@ -1,4 +1,4 @@
 package com.upup.base.mapper;
 
-public class BaseMapper {
+public abstract class BaseMapper {
 }
