@@ -16,14 +16,20 @@
     from sys_role
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
+  <select id="getSysRoleByRoleNamePage" resultType="com.upup.sys.model.SysRole">
+    select <include refid="Base_Column_List"/>
+    from sys_role
+    where 1=1
+    and name like concat('%',#{name},'%')
+  </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sys_role
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.upup.sys.model.SysRole" >
-    insert into sys_role (UUID, NAME)
-    values (#{uuid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+    insert into sys_role (NAME)
+    values (#{name,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.upup.sys.model.SysRole" >
     insert into sys_role

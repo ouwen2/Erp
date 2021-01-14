@@ -1,5 +1,8 @@
 package com.upup.sys.model;
 
+import lombok.ToString;
+
+@ToString
 public class SysRole {
     private Integer uuid;
 

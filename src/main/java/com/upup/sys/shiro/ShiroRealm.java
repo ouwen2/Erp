@@ -1,4 +1,4 @@
-package com.upup.base.shiro;
+package com.upup.sys.shiro;
 
 import com.upup.sys.mapper.SysEmpMapper;
 import com.upup.sys.model.SysEmp;
@@ -9,6 +9,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Set;
 
 public class ShiroRealm extends AuthorizingRealm {
 
@@ -24,13 +26,13 @@ public class ShiroRealm extends AuthorizingRealm {
 
         String username = principalCollection.getPrimaryPrincipal().toString();
 
-//        Set<String> roles = sysEmpMapper.findRoles(username);
+        Set<String> roles = sysEmpMapper.findRoles(username);
 
-//        Set<String> permissions = sysEmpMapper.findPermissions(username);
+        Set<String> permissions = sysEmpMapper.findPermissions(username);
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-//        simpleAuthorizationInfo.setRoles(roles);
-//        simpleAuthorizationInfo.setStringPermissions(permissions);
+        simpleAuthorizationInfo.setRoles(roles);
+        simpleAuthorizationInfo.setStringPermissions(permissions);
 
         return simpleAuthorizationInfo;
     }
