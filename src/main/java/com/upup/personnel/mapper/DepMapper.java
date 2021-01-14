@@ -1,6 +1,7 @@
 package com.upup.personnel.mapper;
 
 import com.upup.personnel.model.Dep;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.Mapping;
 
@@ -48,5 +49,5 @@ public interface DepMapper {
      * @param tele 电话
      * @return
      */
-    List<Dep> selectByPager(String name, String tele);
+    List<Dep> selectByPager(Dep dep);
 }

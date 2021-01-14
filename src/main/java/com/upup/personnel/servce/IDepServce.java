@@ -43,5 +43,5 @@ public interface IDepServce {
      * @param tele 电话
      * @return
      */
-    List<Dep> selectByPager(String name, String tele, PageBean pageBean);
+    List<Dep> selectByPager(Dep dep, PageBean pageBean);
 }

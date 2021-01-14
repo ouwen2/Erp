@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-
+@RequestMapping("Per")
 public class DepController {
     @Autowired
     private IDepServce iDepServce;
@@ -30,11 +30,13 @@ public class DepController {
 
     @RequestMapping("/select")
     @ResponseBody
-    public List<Dep> select(@RequestParam(value = "name",required = true)String name,@RequestParam(value = "tele",required = true)String tele){
+    public List<Dep> select(Dep dep){
         PageBean pageBean=new PageBean();
-        List<Dep> deps = iDepServce.selectByPager(name, tele, pageBean);
+        System.out.println("dep:"+dep.toString());
+        List<Dep> deps = iDepServce.selectByPager(dep, pageBean);
         /*JsonUtil jsonUtil=new JsonUtil();
         String json = jsonUtil.toJsonString(deps);*/
+        System.out.println("deps:"+deps);
         return deps;
     }
 
