@@ -12,7 +12,7 @@
       <arg column="CHECKER" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="ENDER" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="SUPPLIERUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="TOTALMONEY" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="TOTALMONEY" jdbcType="REAL" javaType="java.lang.Float" />
       <arg column="STATE" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="WAYBILLSN" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="ORDERSUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -40,7 +40,7 @@
       )
     values (#{uuid,jdbcType=INTEGER}, #{createtime,jdbcType=DATE}, #{checktime,jdbcType=DATE}, 
       #{endtime,jdbcType=DATE}, #{type,jdbcType=CHAR}, #{creater,jdbcType=INTEGER}, #{checker,jdbcType=INTEGER}, 
-      #{ender,jdbcType=INTEGER}, #{supplieruuid,jdbcType=INTEGER}, #{totalmoney,jdbcType=INTEGER}, 
+      #{ender,jdbcType=INTEGER}, #{supplieruuid,jdbcType=INTEGER}, #{totalmoney,jdbcType=REAL}, 
       #{state,jdbcType=CHAR}, #{waybillsn,jdbcType=INTEGER}, #{ordersuuid,jdbcType=INTEGER}
       )
   </insert>
@@ -116,7 +116,7 @@
         #{supplieruuid,jdbcType=INTEGER},
       </if>
       <if test="totalmoney != null" >
-        #{totalmoney,jdbcType=INTEGER},
+        #{totalmoney,jdbcType=REAL},
       </if>
       <if test="state != null" >
         #{state,jdbcType=CHAR},
@@ -157,7 +157,7 @@
         SUPPLIERUUID = #{supplieruuid,jdbcType=INTEGER},
       </if>
       <if test="totalmoney != null" >
-        TOTALMONEY = #{totalmoney,jdbcType=INTEGER},
+        TOTALMONEY = #{totalmoney,jdbcType=REAL},
       </if>
       <if test="state != null" >
         STATE = #{state,jdbcType=CHAR},
@@ -181,7 +181,7 @@
       CHECKER = #{checker,jdbcType=INTEGER},
       ENDER = #{ender,jdbcType=INTEGER},
       SUPPLIERUUID = #{supplieruuid,jdbcType=INTEGER},
-      TOTALMONEY = #{totalmoney,jdbcType=INTEGER},
+      TOTALMONEY = #{totalmoney,jdbcType=REAL},
       STATE = #{state,jdbcType=CHAR},
       WAYBILLSN = #{waybillsn,jdbcType=INTEGER},
       ORDERSUUID = #{ordersuuid,jdbcType=INTEGER}

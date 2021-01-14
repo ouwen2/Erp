@@ -11,13 +11,13 @@ public class Goods {
 
     private String unit;
 
-    private Integer inprice;
+    private Float inprice;
 
-    private Integer outprice;
+    private Float outprice;
 
     private Integer goodstypeuuid;
 
-    public Goods(Integer uuid, String name, String origin, String producer, String unit, Integer inprice, Integer outprice, Integer goodstypeuuid) {
+    public Goods(Integer uuid, String name, String origin, String producer, String unit, Float inprice, Float outprice, Integer goodstypeuuid) {
         this.uuid = uuid;
         this.name = name;
         this.origin = origin;
@@ -72,19 +72,19 @@ public class Goods {
         this.unit = unit;
     }
 
-    public Integer getInprice() {
+    public Float getInprice() {
         return inprice;
     }
 
-    public void setInprice(Integer inprice) {
+    public void setInprice(Float inprice) {
         this.inprice = inprice;
     }
 
-    public Integer getOutprice() {
+    public Float getOutprice() {
         return outprice;
     }
 
-    public void setOutprice(Integer outprice) {
+    public void setOutprice(Float outprice) {
         this.outprice = outprice;
     }
 

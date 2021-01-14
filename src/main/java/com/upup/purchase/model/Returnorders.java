@@ -21,7 +21,7 @@ public class Returnorders {
 
     private Integer supplieruuid;
 
-    private Integer totalmoney;
+    private Float totalmoney;
 
     private String state;
 
@@ -29,7 +29,7 @@ public class Returnorders {
 
     private Integer ordersuuid;
 
-    public Returnorders(Integer uuid, Date createtime, Date checktime, Date endtime, String type, Integer creater, Integer checker, Integer ender, Integer supplieruuid, Integer totalmoney, String state, Integer waybillsn, Integer ordersuuid) {
+    public Returnorders(Integer uuid, Date createtime, Date checktime, Date endtime, String type, Integer creater, Integer checker, Integer ender, Integer supplieruuid, Float totalmoney, String state, Integer waybillsn, Integer ordersuuid) {
         this.uuid = uuid;
         this.createtime = createtime;
         this.checktime = checktime;
@@ -121,11 +121,11 @@ public class Returnorders {
         this.supplieruuid = supplieruuid;
     }
 
-    public Integer getTotalmoney() {
+    public Float getTotalmoney() {
         return totalmoney;
     }
 
-    public void setTotalmoney(Integer totalmoney) {
+    public void setTotalmoney(Float totalmoney) {
         this.totalmoney = totalmoney;
     }
 
