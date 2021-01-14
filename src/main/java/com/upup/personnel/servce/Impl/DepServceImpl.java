@@ -43,8 +43,7 @@ public class DepServceImpl implements IDepServce {
 
 
     @Override
-    public List<Dep> selectByPager(String name, String tele, PageBean pageBean) {
-
-        return depMapper.selectByPager(name,tele);
+    public List<Dep> selectByPager(Dep dep, PageBean pageBean) {
+        return depMapper.selectByPager(dep);
     }
 }
