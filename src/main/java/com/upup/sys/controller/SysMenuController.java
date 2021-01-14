@@ -1,5 +1,6 @@
 package com.upup.sys.controller;
 
+import com.upup.base.controller.BaseController;
 import com.upup.sys.model.SysMenu;
 import com.upup.sys.model.SysRole;
 import com.upup.sys.servce.ISysMenuServce;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("Sys")
-public class SysMenuController {
+public class SysMenuController extends BaseController {
 
     @Autowired
     private ISysMenuServce iSysMenuServce;

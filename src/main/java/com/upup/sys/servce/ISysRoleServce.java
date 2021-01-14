@@ -1,13 +1,11 @@
-package com.upup.sys.mapper;
+package com.upup.sys.servce;
 
+import com.upup.base.util.PageBean;
 import com.upup.sys.model.SysRole;
-import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Repository
-public interface SysRoleMapper {
+public interface ISysRoleServce{
     int deleteByPrimaryKey(Integer uuid);
 
     int insert(SysRole record);
@@ -20,5 +18,5 @@ public interface SysRoleMapper {
 
     int updateByPrimaryKey(SysRole record);
 
-    List<SysRole> getSysRoleByRoleNamePage(SysRole sysRole);
+    List<SysRole> getSysRoleByRoleNamePage(SysRole sysRole, PageBean pageBean);
 }
