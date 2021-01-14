@@ -34,6 +34,11 @@ public interface DepMapper {
      */
     int updateByPrimaryKeySelective(Dep record);
 
+    /**
+     * 修改管理员组的电话
+     * @param record
+     * @return
+     */
     int updateByPrimaryKey(Dep record);
 
     /**
@@ -41,7 +46,7 @@ public interface DepMapper {
      * @param name 要查询的部门名称
      * @return
      */
-    int selectByDepName(String name);
+    Dep selectByDepName(String name);
 
     /**
      * 模糊查询

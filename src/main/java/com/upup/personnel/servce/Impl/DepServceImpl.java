@@ -17,27 +17,31 @@ public class DepServceImpl implements IDepServce {
 
     @Override
     public int deleteByPrimaryKey(Integer uuid) {
-
         return depMapper.deleteByPrimaryKey(uuid);
     }
 
     @Override
     public int insertSelective(Dep record) {
-        int i = depMapper.selectByDepName(record.getName());
-        int i1=0;
-        if(i==1) {
-            i1 = depMapper.insertSelective(record);
+        int i = 0;
+        System.out.println(record.toString());
+        if (depMapper.selectByDepName(record.getName()) == null) {
+            i = depMapper.insertSelective(record);
         }
-        return i1;
+        return i;
     }
 
     @Override
     public int updateByPrimaryKeySelective(Dep record) {
-        return depMapper.updateByPrimaryKeySelective(record);
+        int i = 0;
+        if (depMapper.selectByDepName(record.getName()) == null) {
+            i = depMapper.updateByPrimaryKeySelective(record);
+        }
+        return i;
     }
 
+
     @Override
-    public int selectByDepName(String name) {
+    public Dep selectByDepName(String name) {
         return depMapper.selectByDepName(name);
     }
 
