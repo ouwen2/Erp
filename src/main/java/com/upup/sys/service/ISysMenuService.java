@@ -1,11 +1,10 @@
-package com.upup.sys.servce;
+package com.upup.sys.service;
 
 import com.upup.sys.model.SysMenu;
-import com.upup.sys.model.SysRole;
 
 import java.util.ArrayList;
 
-public interface ISysMenuServce {
+public interface ISysMenuService {
     int deleteByPrimaryKey(String menuid);
 
     int insert(SysMenu record);

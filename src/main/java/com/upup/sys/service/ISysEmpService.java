@@ -1,15 +1,12 @@
-package com.upup.sys.servce;
+package com.upup.sys.service;
 
-import com.github.pagehelper.Page;
 import com.upup.base.util.PageBean;
 import com.upup.sys.model.SysEmp;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
-public interface ISysEmpServce {
+public interface ISysEmpService {
     int deleteByPrimaryKey(Integer uuid);
 
     int insert(SysEmp record);

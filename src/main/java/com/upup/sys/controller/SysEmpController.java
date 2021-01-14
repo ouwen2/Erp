@@ -5,7 +5,7 @@ import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.PageBean;
 import com.upup.base.util.ResponseStatus;
 import com.upup.sys.model.SysEmp;
-import com.upup.sys.servce.ISysEmpServce;
+import com.upup.sys.service.ISysEmpService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -28,7 +28,7 @@ import java.util.Map;
 public class SysEmpController extends BaseController {
 
     @Autowired
-    private ISysEmpServce iSysEmpServce;
+    private ISysEmpService iSysEmpServce;
 
     @RequestMapping("/login")
     @ResponseBody

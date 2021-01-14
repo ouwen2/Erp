@@ -4,7 +4,7 @@ import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.PageBean;
 import com.upup.base.util.ResponseStatus;
 import com.upup.sys.model.SysRole;
-import com.upup.sys.servce.ISysRoleServce;
+import com.upup.sys.service.ISysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("SysRole")
 public class SysRoleController {
     @Autowired
-    private ISysRoleServce iSysRoleServce;
+    private ISysRoleService iSysRoleServce;
 
     @RequestMapping("/getListPage")
     @ResponseBody

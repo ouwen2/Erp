@@ -16,7 +16,7 @@ import java.util.List;
 public class PageAop {
 
     @SneakyThrows
-    @Around("execution(* *..*Servce.*Page(..))")
+    @Around("execution(* *..*Service.*Page(..))")
     public Object invoke(ProceedingJoinPoint joinPoint){
         Object[] args = joinPoint.getArgs();
         PageBean pageBean = null;

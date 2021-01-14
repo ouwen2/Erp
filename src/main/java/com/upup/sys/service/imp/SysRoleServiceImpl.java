@@ -1,16 +1,16 @@
-package com.upup.sys.servce.imp;
+package com.upup.sys.service.imp;
 
 import com.upup.base.util.PageBean;
 import com.upup.sys.mapper.SysRoleMapper;
 import com.upup.sys.model.SysRole;
-import com.upup.sys.servce.ISysRoleServce;
+import com.upup.sys.service.ISysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SysRoleServceImpl implements ISysRoleServce {
+public class SysRoleServiceImpl implements ISysRoleService {
 
     @Autowired
     private SysRoleMapper sysRoleMapper;

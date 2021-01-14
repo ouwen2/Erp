@@ -1,16 +1,15 @@
-package com.upup.sys.servce.imp;
+package com.upup.sys.service.imp;
 
 import com.upup.sys.mapper.SysMenuMapper;
 import com.upup.sys.model.SysMenu;
-import com.upup.sys.model.SysRole;
-import com.upup.sys.servce.ISysMenuServce;
+import com.upup.sys.service.ISysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 @Service
-public class SysMenuServceImpl implements ISysMenuServce {
+public class SysMenuServiceImpl implements ISysMenuService {
 
     @Autowired
     private SysMenuMapper sysMenuMapper;

@@ -2,25 +2,21 @@ package com.upup.sys.controller;
 
 import com.upup.base.controller.BaseController;
 import com.upup.sys.model.SysMenu;
-import com.upup.sys.model.SysRole;
-import com.upup.sys.servce.ISysMenuServce;
+import com.upup.sys.service.ISysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("Sys")
 public class SysMenuController extends BaseController {
 
     @Autowired
-    private ISysMenuServce iSysMenuServce;
+    private ISysMenuService iSysMenuServce;
 
     @RequestMapping("/getLeftAsideByPid")
     @ResponseBody
