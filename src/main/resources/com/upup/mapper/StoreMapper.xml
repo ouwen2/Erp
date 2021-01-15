@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.upup.mapper.StoreMapper" >
-  <resultMap id="BaseResultMap" type="com.upup.model.Store" >
+<mapper namespace="com.upup.basics.mapper.StoreMapper" >
+  <resultMap id="BaseResultMap" type="com.upup.basics.model.Store" >
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -17,17 +17,30 @@
     from store
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
+    <select id="queryAllStore" resultType="com.upup.basics.model.Store">
+      select <include refid="Base_Column_List"/> from store where 1=1
+      <if test="null!=name and ''!=name">
+        and name like concat('%',#{name},'%')
+      </if>
+    </select>
+  <select id="queryStorePager" resultType="com.upup.basics.model.Store">
+    select  <include refid="Base_Column_List"/> from store where 1=1
+    <if test="null!=name and ''!=name">
+      and store like concat('%',#{name},'%')
+    </if>
+    order by uuid desc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from store
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.upup.model.Store" >
-    insert into store (UUID, NAME, sys_empUUID
+  <insert id="insert" parameterType="com.upup.basics.model.Store" >
+    insert into store (NAME, sys_empUUID
       )
-    values (#{uuid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sysEmpuuid,jdbcType=INTEGER}
+    values (#{name,jdbcType=VARCHAR}, #{sysEmpuuid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.model.Store" >
+  <insert id="insertSelective" parameterType="com.upup.basics.model.Store" >
     insert into store
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
@@ -52,7 +65,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.model.Store" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.basics.model.Store" >
     update store
     <set >
       <if test="name != null" >
@@ -64,7 +77,7 @@
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.model.Store" >
+  <update id="updateByPrimaryKey" parameterType="com.upup.basics.model.Store" >
     update store
     set NAME = #{name,jdbcType=VARCHAR},
       sys_empUUID = #{sysEmpuuid,jdbcType=INTEGER}

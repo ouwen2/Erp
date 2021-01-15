@@ -1,7 +1,11 @@
-package com.upup.mapper;
+package com.upup.basics.mapper;
 
-import com.upup.model.Store;
+import com.upup.basics.model.Store;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface StoreMapper {
     int deleteByPrimaryKey(Integer uuid);
 
@@ -14,4 +18,10 @@ public interface StoreMapper {
     int updateByPrimaryKeySelective(Store record);
 
     int updateByPrimaryKey(Store record);
+
+    //查询
+    List<Store> queryAllStore(Store store);
+
+    //分页查询
+    List<Store> queryStorePager(Store store);
 }
