@@ -130,7 +130,7 @@
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.model.Goods" >
+  <update id="updateByPrimaryKey" parameterType="com.upup.basics.model.Goods" >
     update goods
     set NAME = #{name,jdbcType=VARCHAR},
       ORIGIN = #{origin,jdbcType=VARCHAR},
