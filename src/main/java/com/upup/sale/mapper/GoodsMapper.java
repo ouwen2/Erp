@@ -1,7 +1,10 @@
-package com.upup.mapper;
+package com.upup.sale.mapper;
 
-import com.upup.model.Goods;
+import com.upup.sale.model.Goods;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface GoodsMapper {
     int deleteByPrimaryKey(Integer uuid);
 
@@ -14,4 +17,6 @@ public interface GoodsMapper {
     int updateByPrimaryKeySelective(Goods record);
 
     int updateByPrimaryKey(Goods record);
+
+    List<Goods> queryNameAll();
 }

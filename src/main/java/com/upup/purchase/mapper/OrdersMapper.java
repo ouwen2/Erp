@@ -24,5 +24,4 @@ public interface OrdersMapper {
     int updateByPrimaryKey(Orders record);
 
     List<Map<String,Object>> queryall();
-
 }

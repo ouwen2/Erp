@@ -1,5 +1,11 @@
-package com.upup.model;
+package com.upup.sale.model;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.ToString;
+
+@ToString
+@Builder
 public class Goods {
     private Integer uuid;
 
