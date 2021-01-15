@@ -1,6 +1,6 @@
-package com.upup.mapper;
+package com.upup.stock.mapper;
 
-import com.upup.model.Inventory;
+import com.upup.stock.model.Inventory;
 
 public interface InventoryMapper {
     int deleteByPrimaryKey(Integer uuid);
@@ -14,4 +14,7 @@ public interface InventoryMapper {
     int updateByPrimaryKeySelective(Inventory record);
 
     int updateByPrimaryKey(Inventory record);
+
+
+
 }
