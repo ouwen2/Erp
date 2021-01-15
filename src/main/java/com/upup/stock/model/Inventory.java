@@ -1,4 +1,4 @@
-package com.upup.model;
+package com.upup.stock.model;
 
 import java.util.Date;
 

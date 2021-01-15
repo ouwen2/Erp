@@ -1,7 +1,14 @@
-package com.upup.mapper;
+package com.upup.stock.mapper;
 
 import com.upup.model.Storedetail;
+import com.upup.stock.vo.StoredetailVo;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
+@Repository
 public interface StoredetailMapper {
     int deleteByPrimaryKey(Integer uuid);
 
@@ -14,4 +21,6 @@ public interface StoredetailMapper {
     int updateByPrimaryKeySelective(Storedetail record);
 
     int updateByPrimaryKey(Storedetail record);
+
+    List<Map<String,Object>> queryStoredetailPager(StoredetailVo storedetailVo);
 }
