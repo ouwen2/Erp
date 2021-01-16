@@ -27,7 +27,8 @@
     uuid,name
     from goods
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goods
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
