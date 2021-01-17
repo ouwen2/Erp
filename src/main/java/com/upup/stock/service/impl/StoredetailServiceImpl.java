@@ -1,7 +1,9 @@
 package com.upup.stock.service.impl;
 
 import com.upup.base.util.PageBean;
+import com.upup.model.Store;
 import com.upup.model.Storedetail;
+import com.upup.sale.model.Goods;
 import com.upup.stock.mapper.StoredetailMapper;
 import com.upup.stock.service.IStoredetailService;
 import com.upup.stock.vo.StoredetailVo;
@@ -20,13 +22,23 @@ public class StoredetailServiceImpl implements IStoredetailService {
 
 
     @Override
-    public List<Map<String,Object>> queryStoredetailPager(StoredetailVo storedetailVo, PageBean pageBean) {
+    public List<Map<String,Object>> queryStoredetailPage(StoredetailVo storedetailVo, PageBean pageBean) {
         if(storedetailVo.getStoreName()==null){
             storedetailVo.setStoreName("");
         }
         if(storedetailVo.getGoodsName()==null){
             storedetailVo.setGoodsName("");
         }
-        return storedetailMapper.queryStoredetailPager(storedetailVo);
+        return storedetailMapper.queryStoredetailPage(storedetailVo);
+    }
+
+    @Override
+    public List<Store> selectStores() {
+        return storedetailMapper.selectStores();
+    }
+
+    @Override
+    public List<Goods> selectGoods() {
+        return storedetailMapper.selectGoods();
     }
 }

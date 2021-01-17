@@ -10,6 +10,6 @@ import java.util.Map;
 public interface IStoreoperService {
 
 
-    List<Map<String,Object>> queryStoredetailPager(StoreoperVo storeoperVo, PageBean pageBean);
+    List<Map<String,Object>> queryStoredetailPage(StoreoperVo storeoperVo, PageBean pageBean);
 
 }

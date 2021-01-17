@@ -20,10 +20,10 @@ public class StoreoperController {
     @Autowired
     private IStoreoperService storeoperService;
 
-    @RequestMapping("/pager")
+    @RequestMapping("/page")
     @ResponseBody
-    public List<Map<String, Object>> Pager(StoreoperVo storeoperVo, PageBean pageBean){
-            List<Map<String, Object>> maps = storeoperService.queryStoredetailPager(storeoperVo, pageBean);
+    public List<Map<String, Object>> Page(StoreoperVo storeoperVo, PageBean pageBean){
+            List<Map<String, Object>> maps = storeoperService.queryStoredetailPage(storeoperVo, pageBean);
             String msg="查询失败";
                System.out.println("storeoperService:"+maps);
         //        if(msg!=null){

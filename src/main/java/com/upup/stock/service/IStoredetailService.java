@@ -1,7 +1,9 @@
 package com.upup.stock.service;
 
 import com.upup.base.util.PageBean;
+import com.upup.model.Store;
 import com.upup.model.Storedetail;
+import com.upup.sale.model.Goods;
 import com.upup.stock.vo.StoredetailVo;
 
 import java.util.List;
@@ -21,6 +23,11 @@ public interface IStoredetailService {
 //
 //    int updateByPrimaryKey(Storedetail record);
 
-    List<Map<String,Object>> queryStoredetailPager(StoredetailVo storedetailVo, PageBean pageBean);
+    List<Map<String,Object>> queryStoredetailPage(StoredetailVo storedetailVo, PageBean pageBean);
+
+    List<Store> selectStores();
+
+    List<Goods> selectGoods();
+
 
 }

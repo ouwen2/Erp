@@ -3,7 +3,9 @@ package com.upup.stock.controller;
 import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.PageBean;
 import com.upup.base.util.ResponseStatus;
+import com.upup.model.Store;
 import com.upup.model.Storedetail;
+import com.upup.sale.model.Goods;
 import com.upup.stock.service.IStoredetailService;
 import com.upup.stock.service.IStoreoperService;
 import com.upup.stock.vo.StoredetailVo;
@@ -22,20 +24,60 @@ import java.util.Map;
 public class StoredetailController {
 
     @Autowired
-    private IStoreoperService storeoperService;
+    private IStoredetailService storedetailService;
 
-    @RequestMapping("/Pager")
+
+
+
+
+
+
+    @RequestMapping("/Page")
     @ResponseBody
-    public JsonResponseBody Pager(StoreoperVo storeoperVo, PageBean pageBean){
-        List<Map<String, Object>> maps = storeoperService.queryStoredetailPager(storeoperVo, pageBean);
+    public JsonResponseBody Page(StoredetailVo storeoperVo, PageBean pageBean){
+        List<Map<String, Object>> maps = storedetailService.queryStoredetailPage(storeoperVo,pageBean);
         String msg="查询失败";
             if(null!=msg){
-                System.out.println("storeoperService："+maps);
                 int total = pageBean.getTotal();
                 return new JsonResponseBody(maps,total);
             }else{
                 return new JsonResponseBody(ResponseStatus.STATUS_202);
             }
+    }
+
+
+    /**
+     * 查询仓库字段
+     * @param
+     * @return
+     */
+    @RequestMapping("/Store")
+    @ResponseBody
+    public JsonResponseBody Store(){
+        List<Store> stores = storedetailService.selectStores();
+        String msg="查询";
+        if(null!=msg){
+            return new JsonResponseBody(stores);
+        }else{
+            return new JsonResponseBody(ResponseStatus.STATUS_202);
+        }
+    }
+
+    /**
+     * 查询商品字段
+     * @param
+     * @return
+     */
+    @RequestMapping("/Goods")
+    @ResponseBody
+    public JsonResponseBody Goods(){
+        List<Goods> goods = storedetailService.selectGoods();
+        String msg="查询";
+        if(null!=msg){
+            return new JsonResponseBody(goods);
+        }else{
+            return new JsonResponseBody(ResponseStatus.STATUS_202);
+        }
     }
 
 

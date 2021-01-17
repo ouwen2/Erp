@@ -17,7 +17,7 @@ public class StoreoperServiceImpl implements IStoreoperService {
     private StoreoperMapper storeoperMapper;
 
     @Override
-    public List<Map<String, Object>> queryStoredetailPager(StoreoperVo storeoperVo, PageBean pageBean) {
+    public List<Map<String, Object>> queryStoredetailPage(StoreoperVo storeoperVo, PageBean pageBean) {
 
         if(storeoperVo.getSysEmpUuid()==null){
             storeoperVo.setSysEmpUuid("");
@@ -30,6 +30,6 @@ public class StoreoperServiceImpl implements IStoreoperService {
         }
         System.out.println(storeoperVo);
 
-        return storeoperMapper.queryStoredetailPager(storeoperVo);
+        return storeoperMapper.queryStoredetailPage(storeoperVo);
     }
 }

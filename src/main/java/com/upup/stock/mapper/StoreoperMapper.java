@@ -22,6 +22,6 @@ public interface StoreoperMapper {
 
     int updateByPrimaryKey(Storeoper record);
 
-    List<Map<String,Object>> queryStoredetailPager(StoreoperVo storeoperVo);
+    List<Map<String,Object>> queryStoredetailPage(StoreoperVo storeoperVo);
 
 }
