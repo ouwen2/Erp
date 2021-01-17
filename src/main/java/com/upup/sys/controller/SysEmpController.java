@@ -70,7 +70,7 @@ public class SysEmpController extends BaseController {
     }
 
 //    @RequiresRoles(value = {"管理员","高级用户"},logical = Logical.OR)
-//    @RequiresPermissions(value = "/getEmpListPage")
+    @RequiresPermissions(value = "/getEmpListPage")
     @RequestMapping("/getEmpListPage")
     @ResponseBody
     public JsonResponseBody getEmpListPage(SysEmp sysEmp,HttpServletRequest request){
@@ -81,7 +81,6 @@ public class SysEmpController extends BaseController {
 
         for (int i = 0;i<sysEmpByUserNamePage.size();i++) {
 //            //因为没有用join 会查到重复的用户  手动去重复并且把roleName合并
-//
 //            for (int y = i+1;y<sysEmpByUserNamePage.size();y++){
 //                if(sysEmpByUserNamePage.get(i).get("UUID").equals(
 //                        sysEmpByUserNamePage.get(y).get("UUID"))){
@@ -101,5 +100,9 @@ public class SysEmpController extends BaseController {
         return new JsonResponseBody(sysEmpByUserNamePage,sysEmpByUserNamePage.size());
     }
 
+    public JsonResponseBody updatePassword(Integer empId){
+
+        return new JsonResponseBody();
+    }
 
 }
