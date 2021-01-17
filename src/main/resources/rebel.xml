@@ -9,13 +9,13 @@
 	<id>Erp</id>
 
 	<classpath>
-		<dir name="D:/ideaIUs/Erp/target/classes">
+		<dir name="E:/Y1/idea/yuanma/erp/target/classes">
 		</dir>
 	</classpath>
 
 	<web>
 		<link target="/">
-			<dir name="D:/ideaIUs/Erp/src/main/webapp">
+			<dir name="E:/Y1/idea/yuanma/erp/src/main/webapp">
 			</dir>
 		</link>
 	</web>
