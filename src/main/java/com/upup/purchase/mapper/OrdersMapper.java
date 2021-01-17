@@ -15,7 +15,8 @@ public interface OrdersMapper {
 
     int insert(Orders record);
 
-    int insertSelective(Orders record);
+    //添加订单
+    int insertSelective(Orders orders);
 
     Orders selectByPrimaryKey(Integer uuid);
 

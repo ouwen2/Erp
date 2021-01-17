@@ -1,13 +1,12 @@
-package com.upup.mapper;
+package com.upup.service;
 
+import com.upup.base.util.JsonResponseBody;
 import com.upup.model.Goods;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
-@Repository
-public interface GoodsMapper {
+public interface IGoodsService {
     int deleteByPrimaryKey(Integer uuid);
 
     int insert(Goods record);
@@ -20,10 +19,7 @@ public interface GoodsMapper {
 
     int updateByPrimaryKey(Goods record);
 
-    //查询全部
-    List<Map<String,Object>> querygoodall();
+    JsonResponseBody<?> querygoodall();
 
-    //根据名字查询单个
-    Goods selectSinglegood(String goodname);
-
+    JsonResponseBody<?> selectSinglegood(String goodname);
 }

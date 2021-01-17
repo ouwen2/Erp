@@ -21,6 +21,11 @@
     from supplier
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
+
+  <select id="queryall" resultType="com.upup.model.Supplier">
+    select <include refid="Base_Column_List"/> from supplier
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from supplier
     where UUID = #{uuid,jdbcType=INTEGER}
