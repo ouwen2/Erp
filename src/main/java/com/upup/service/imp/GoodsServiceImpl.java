@@ -1,8 +1,8 @@
 package com.upup.service.imp;
 
 import com.upup.base.util.JsonResponseBody;
-import com.upup.mapper.GoodsMapper;
-import com.upup.model.Goods;
+import com.upup.sale.mapper.GoodsMapper;
+import com.upup.sale.model.Goods;
 import com.upup.service.IGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

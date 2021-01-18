@@ -1,7 +1,7 @@
 package com.upup.service;
 
 import com.upup.base.util.JsonResponseBody;
-import com.upup.model.Goods;
+import com.upup.sale.model.Goods;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

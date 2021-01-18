@@ -47,7 +47,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
     @Override
     public JsonResponseBody<List<Goods>> queryNameAll() {
-        List<Goods> list=goodsMapper.queryNameAll();
-        return new JsonResponseBody<>(list);
+//        List<Goods> list=goodsMapper.queryNameAll();
+        return new JsonResponseBody<>();
     }
 }
