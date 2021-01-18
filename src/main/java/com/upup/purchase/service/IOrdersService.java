@@ -1,9 +1,12 @@
 package com.upup.purchase.service;
 
 import com.upup.base.util.JsonResponseBody;
+import com.upup.base.util.PageBean;
 import com.upup.purchase.model.Orders;
+import com.upup.purchase.vo.OrderSa;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IOrdersService {
 
@@ -20,4 +23,11 @@ public interface IOrdersService {
     int updateByPrimaryKey(Orders record);
 
     JsonResponseBody<?> queryall();
+
+    /**
+     * 销售统计
+     * @param orderSa
+     * @return
+     */
+    List<Map<String,Object>>  getBySalesPage(OrderSa orderSa, PageBean pageBean);
 }

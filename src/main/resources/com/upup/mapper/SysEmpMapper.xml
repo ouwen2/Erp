@@ -55,6 +55,31 @@
     and er.ROLEUUID = r.UUID
     and e.username like concat('%',#{username},'%')
   </select>
+  <select id="selectByEmpPage" resultType="java.util.Map">
+    select se.uuid,se.username,se.name,se.gender,se.email,se.tele,se.address,date_format(se.birthday,'%Y-%m-%d') as birthday,d.name as depuuid from dep as d,sys_emp as se where d.uuid=se.depuuid
+    <if test="name !=null and name !=''">
+     and se.name like concat(#{name},'%')
+    </if>
+    <if test="gender != null">
+     and gender = #{gender}
+    </if>
+    <if test="tele !=null and tele !=''">
+     and se.tele like concat(#{tele},'%')
+    </if>
+    <if test="address !=null and address !=''">
+     and se.address like concat('%',#{address},'%')
+    </if>
+    <if test="birthday2 !=null and birthday2!='' ">
+      and DATE_FORMAT(birthday,'%m-%d') &gt;=#{birthday2}
+    </if>
+    <if test="birthday3 !=null and birthday3 !='' ">
+      and DATE_FORMAT(birthday,'%m-%d') &lt;=#{birthday3}
+    </if>
+    <if test="depuuid !=null and depuuid !=''">
+     and se.depuuid =#{depuuid}
+    </if>
+  </select>
+
   <insert id="insert" parameterType="com.upup.sys.model.SysEmp">
     insert into sys_emp (UUID, USERNAME, PWD, 
       salt, NAME, GENDER, 
@@ -70,18 +95,10 @@
   <insert id="insertSelective" parameterType="com.upup.sys.model.SysEmp">
     insert into sys_emp
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        UUID,
-      </if>
       <if test="username != null">
         USERNAME,
       </if>
-      <if test="pwd != null">
         PWD,
-      </if>
-      <if test="salt != null">
-        salt,
-      </if>
       <if test="name != null">
         NAME,
       </if>
@@ -103,26 +120,14 @@
       <if test="depuuid != null">
         DEPUUID,
       </if>
-      <if test="display != null">
         display,
-      </if>
-      <if test="isPassword != null">
         is_password,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        #{uuid,jdbcType=INTEGER},
-      </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>
-      <if test="pwd != null">
-        #{pwd,jdbcType=VARCHAR},
-      </if>
-      <if test="salt != null">
-        #{salt,jdbcType=VARCHAR},
-      </if>
+       '88888888',
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
@@ -139,17 +144,13 @@
         #{address,jdbcType=VARCHAR},
       </if>
       <if test="birthday != null">
-        #{birthday,jdbcType=DATE},
+        #{birthday},
       </if>
       <if test="depuuid != null">
         #{depuuid,jdbcType=INTEGER},
       </if>
-      <if test="display != null">
-        #{display,jdbcType=VARCHAR},
-      </if>
-      <if test="isPassword != null">
-        #{isPassword,jdbcType=VARCHAR},
-      </if>
+        '0',
+        '1',
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.upup.sys.model.SysEmp">
@@ -157,15 +158,6 @@
     <set>
       <if test="username != null">
         USERNAME = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="pwd != null">
-        PWD = #{pwd,jdbcType=VARCHAR},
-      </if>
-      <if test="salt != null">
-        salt = #{salt,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        NAME = #{name,jdbcType=VARCHAR},
       </if>
       <if test="gender != null">
         GENDER = #{gender,jdbcType=INTEGER},
@@ -185,29 +177,10 @@
       <if test="depuuid != null">
         DEPUUID = #{depuuid,jdbcType=INTEGER},
       </if>
-      <if test="display != null">
-        display = #{display,jdbcType=VARCHAR},
-      </if>
-      <if test="isPassword != null">
-        is_password = #{isPassword,jdbcType=VARCHAR},
-      </if>
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.upup.sys.model.SysEmp">
-    update sys_emp
-    set USERNAME = #{username,jdbcType=VARCHAR},
-      PWD = #{pwd,jdbcType=VARCHAR},
-      salt = #{salt,jdbcType=VARCHAR},
-      NAME = #{name,jdbcType=VARCHAR},
-      GENDER = #{gender,jdbcType=INTEGER},
-      EMAIL = #{email,jdbcType=VARCHAR},
-      TELE = #{tele,jdbcType=VARCHAR},
-      ADDRESS = #{address,jdbcType=VARCHAR},
-      BIRTHDAY = #{birthday,jdbcType=DATE},
-      DEPUUID = #{depuuid,jdbcType=INTEGER},
-      display = #{display,jdbcType=VARCHAR},
-      is_password = #{isPassword,jdbcType=VARCHAR}
-    where UUID = #{uuid,jdbcType=INTEGER}
+    update sys_emp set depuuid=0 where uuid=#{uuid,jdbcType=INTEGER} and uuid &lt;&gt; 1
   </update>
 </mapper>

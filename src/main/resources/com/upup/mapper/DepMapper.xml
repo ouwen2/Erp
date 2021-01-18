@@ -23,7 +23,7 @@
   <select id="selectByDepName" resultType="com.upup.personnel.model.Dep">
     <include refid="DepList"/> where name =#{name}
   </select>
-  <select id="selectByPager" resultType="com.upup.personnel.model.Dep">
+  <select id="selectByPage" resultType="com.upup.personnel.model.Dep">
     <include refid="DepList"/>  where 1=1
       <if test="name !=null and name !=''">
       and name like concat(#{name},'%')
@@ -31,6 +31,9 @@
       <if test="tele !=null and tele !=''">
       and tele like concat('%',#{tele},'%')
       </if>
+  </select>
+  <select id="selectByUUid" resultType="com.upup.personnel.model.Dep">
+    select uuid,name from dep
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

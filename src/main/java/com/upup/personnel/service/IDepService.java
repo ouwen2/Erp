@@ -1,14 +1,13 @@
-package com.upup.personnel.servce;
+package com.upup.personnel.service;
 
+import com.upup.base.aop.PageAop;
 import com.upup.base.util.PageBean;
 import com.upup.personnel.model.Dep;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 //@Transactional
-public interface IDepServce {
+public interface IDepService {
     /**
      * 删除
      * @param uuid 编号
@@ -22,6 +21,12 @@ public interface IDepServce {
      * @return
      */
     int insertSelective(Dep record);
+
+    /**
+     * 下拉框的值
+     * @return
+     */
+    List<Dep>  selectByUUid();
 
     /**
      * 修改
@@ -50,5 +55,5 @@ public interface IDepServce {
      * @param tele 电话
      * @return
      */
-    List<Dep> selectByPager(Dep dep, PageBean pageBean);
+    List<Dep> selectByPage(Dep dep, PageBean pageBean);
 }

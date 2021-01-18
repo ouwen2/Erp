@@ -28,6 +28,12 @@ public interface DepMapper {
     Dep selectByPrimaryKey(Integer uuid);
 
     /**
+     * 下拉框的值
+     * @return
+     */
+    List<Dep> selectByUUid();
+
+    /**
      * 修改
      * @param record
      * @return
@@ -54,5 +60,5 @@ public interface DepMapper {
      * @param tele 电话
      * @return
      */
-    List<Dep> selectByPager(Dep dep);
+    List<Dep> selectByPage(Dep dep);
 }

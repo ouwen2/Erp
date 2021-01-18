@@ -1,10 +1,12 @@
 package com.upup.purchase.service.impl;
 
 import com.upup.base.util.JsonResponseBody;
+import com.upup.base.util.PageBean;
 import com.upup.base.util.ResponseStatus;
 import com.upup.purchase.mapper.OrdersMapper;
 import com.upup.purchase.model.Orders;
 import com.upup.purchase.service.IOrdersService;
+import com.upup.purchase.vo.OrderSa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +57,11 @@ public class OrdersServiceImpl implements IOrdersService {
             return new JsonResponseBody<>(ResponseStatus.STATUS_202);
 
         return new JsonResponseBody<>(list);
+    }
+
+    @Override
+    public List<Map<String,Object>>  getBySalesPage(OrderSa orderSa, PageBean pageBean) {
+        return ordersMapper.getBySalesPage(orderSa);
     }
 
 

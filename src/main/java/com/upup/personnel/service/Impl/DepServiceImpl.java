@@ -1,16 +1,17 @@
-package com.upup.personnel.servce.Impl;
+package com.upup.personnel.service.Impl;
 
+import com.upup.base.aop.PageAop;
 import com.upup.base.util.PageBean;
 import com.upup.personnel.mapper.DepMapper;
 import com.upup.personnel.model.Dep;
-import com.upup.personnel.servce.IDepServce;
+import com.upup.personnel.service.IDepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DepServceImpl implements IDepServce {
+public class DepServiceImpl implements IDepService {
 
     @Autowired
     private DepMapper depMapper;
@@ -31,6 +32,11 @@ public class DepServceImpl implements IDepServce {
     }
 
     @Override
+    public  List<Dep>  selectByUUid() {
+        return depMapper.selectByUUid();
+    }
+
+    @Override
     public int updateByPrimaryKeySelective(Dep record) {
         int i = 0;
         if (depMapper.selectByDepName(record.getName()) == null) {
@@ -47,7 +53,7 @@ public class DepServceImpl implements IDepServce {
 
 
     @Override
-    public List<Dep> selectByPager(Dep dep, PageBean pageBean) {
-        return depMapper.selectByPager(dep);
+    public List<Dep> selectByPage(Dep dep,  PageBean pageBean) {
+        return depMapper.selectByPage(dep);
     }
 }

@@ -1,17 +1,14 @@
 package com.upup.personnel.controller;
 
-import com.upup.base.controller.BaseController;
+import com.upup.base.aop.PageAop;
 import com.upup.base.util.JsonResponseBody;
-import com.upup.base.util.JsonUtil;
 import com.upup.base.util.PageBean;
 import com.upup.base.util.ResponseStatus;
 import com.upup.personnel.model.Dep;
-import com.upup.personnel.servce.IDepServce;
+import com.upup.personnel.service.IDepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,7 +18,7 @@ import java.util.List;
 @RequestMapping("Per")
 public class DepController {
     @Autowired
-    private IDepServce iDepServce;
+    private IDepService iDepService;
 
     @RequestMapping("/AddDep")
     @ResponseBody
@@ -29,7 +26,7 @@ public class DepController {
         ModelAndView mv=new ModelAndView();
         String msg = "";
         int total=0;
-        if(iDepServce.insertSelective(dep)!=0){
+        if(iDepService.insertSelective(dep)!=0){
             msg = "OK";
             total=1;
         }else {
@@ -43,7 +40,7 @@ public class DepController {
     @ResponseBody
     public List<Dep> select(Dep dep){
         PageBean pageBean=new PageBean();
-        List<Dep> deps = iDepServce.selectByPager(dep, pageBean);
+        List<Dep> deps = iDepService.selectByPage(dep, pageBean);
         /*JsonUtil jsonUtil=new JsonUtil();
         String json = jsonUtil.toJsonString(deps);*/
         return deps;
@@ -54,7 +51,7 @@ public class DepController {
     public JsonResponseBody delete(Integer uuid){
         String msg = "";
         int total=0;
-        if(iDepServce.deleteByPrimaryKey(uuid)!=0){
+        if(iDepService.deleteByPrimaryKey(uuid)!=0){
             msg = "OK";
             total=1;
         }else if(uuid==1) {
@@ -73,7 +70,7 @@ public class DepController {
         System.out.println(dep.toString());
         String msg = "";
         int total=0;
-        if(iDepServce.updateByPrimaryKeySelective(dep)!=0){
+        if(iDepService.updateByPrimaryKeySelective(dep)!=0){
             msg = "OK";
             total=1;
         }else if(dep.getUuid()==1) {

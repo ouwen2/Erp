@@ -1,6 +1,8 @@
 package com.upup.purchase.mapper;
 
+import com.upup.base.util.PageBean;
 import com.upup.purchase.model.Orders;
+import com.upup.purchase.vo.OrderSa;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
@@ -25,4 +27,10 @@ public interface OrdersMapper {
 
     List<Map<String,Object>> queryall();
 
+    /**
+     * 销售统计
+     * @param orderSa
+     * @return
+     */
+    List<Map<String,Object>> getBySalesPage(OrderSa orderSa);
 }

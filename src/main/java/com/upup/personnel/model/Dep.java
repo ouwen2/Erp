@@ -20,6 +20,11 @@ public class Dep implements Serializable {
         this.tele = tele;
     }
 
+   /* public Dep(Integer uuid, String name) {
+        this.uuid = uuid;
+        this.name = name;
+    }
+*/
     public Dep() {
         super();
     }

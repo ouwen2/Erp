@@ -1,9 +1,11 @@
 package com.upup.sys.servce.imp;
 
 import com.upup.base.util.PageBean;
+import com.upup.personnel.model.Dep;
 import com.upup.sys.mapper.SysEmpMapper;
 import com.upup.sys.model.SysEmp;
 import com.upup.sys.servce.ISysEmpServce;
+import com.upup.sys.vo.SysEmpDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +31,11 @@ public class SysEmpServceImpl implements ISysEmpServce {
 
     @Override
     public int insertSelective(SysEmp record) {
-        return SysEmpMapper.insertSelective(record);
+        int i=0;
+        if(SysEmpMapper.selectByName(record.getUsername())==null){
+            i=SysEmpMapper.insertSelective(record);
+        }
+        return i;
     }
 
     @Override
@@ -45,6 +51,11 @@ public class SysEmpServceImpl implements ISysEmpServce {
     @Override
     public int updateByPrimaryKey(SysEmp record) {
         return SysEmpMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public  List<Map<String,Object>> selectByEmpPage(SysEmpDate sysEmpDate, PageBean pageBean) {
+        return SysEmpMapper.selectByEmpPage(sysEmpDate);
     }
 
     @Override
