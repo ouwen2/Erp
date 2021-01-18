@@ -33,28 +33,26 @@
     where username = #{empName}
   </select>
   <select id="findRoles" resultType="java.lang.String">
-    select r.name from sys_emp_role er,sys_emp e,sys_role r
-    where er.sys_empUUID = e.UUID
-    and e.username = #{username}
-    and r.UUID = er.ROLEUUID
+    select er.* from sys_emp_role er,sys_emp e
+    where er.sys_empUUID = e.UUID and e.username = #{username}
   </select>
   <select id="findPermissions" resultType="java.lang.String">
-    select m.url
-    from sys_emp_role er,sys_emp e,sys_role_menu rm,sys_role r,sys_menu m
-    where e.uuid = er.sys_empUUID
-    and er.ROLEUUID = r.UUID
-    and r.UUID = rm.ROLEUUID
-    and rm.MENUUUID = m.menuid
-    and e.username = #{username}
+    select rm.* from sys_emp_role er,sys_emp e,sys_role_menu rm
+    where er.sys_empUUID = e.UUID
+    and e.USERNAME = #{username}
+    and er.ROLEUUID = rm.MENUUUID
+
   </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_emp
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
   <select id="getSysEmpByUserNamePage" resultType="java.util.Map">
-    select e.*,d.name depName
-    from sys_emp e,dep d
+    select e.*,d.name depName,r.`NAME` roleName
+    from sys_emp e,dep d,sys_emp_role er,sys_role r
     where e.DEPUUID = d.UUID
+    and er.sys_empUUID = e.UUID
+    and er.ROLEUUID = r.UUID
     and e.username like concat('%',#{username},'%')
   </select>
   <insert id="insert" parameterType="com.upup.sys.model.SysEmp">
@@ -211,5 +209,10 @@
       display = #{display,jdbcType=VARCHAR},
       is_password = #{isPassword,jdbcType=VARCHAR}
     where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
+  <update id="updatePassword">
+    update sys_emp
+    set pwd = #{pwd},salt = #{salt}
+    where uuid = #{uuid}
   </update>
 </mapper>

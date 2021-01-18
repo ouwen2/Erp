@@ -1,5 +1,6 @@
 package com.upup.purchase.service.impl;
 
+import com.upup.base.aop.PageAop;
 import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.ResponseStatus;
 import com.upup.purchase.mapper.OrdersMapper;
@@ -54,6 +55,12 @@ public class OrdersServiceImpl implements IOrdersService {
         if(list.size()==0)
             return new JsonResponseBody<>(ResponseStatus.STATUS_202);
 
+        return new JsonResponseBody<>(list);
+    }
+
+    @Override
+    public JsonResponseBody<List<Map<String,Object>>> querywckPage() {
+        List<Map<String,Object>> list=ordersMapper.querywckPage();
         return new JsonResponseBody<>(list);
     }
 

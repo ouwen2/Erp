@@ -4,8 +4,6 @@ import com.upup.base.util.PageBean;
 import com.upup.sys.mapper.SysRoleMapper;
 import com.upup.sys.model.SysRole;
 import com.upup.sys.service.ISysRoleService;
-import com.upup.sys.vo.SysEmpRole;
-import com.upup.sys.vo.SysRoleMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,21 +52,6 @@ public class SysRoleServiceImpl implements ISysRoleService {
             sysRole.setName("");
         }
         return sysRoleMapper.getSysRoleByRoleNamePage(sysRole);
-    }
-
-    @Override
-    public List<SysRole> getRoleListByEmpId(Integer empId) {
-        return sysRoleMapper.getRoleListByEmpId(empId);
-    }
-
-    @Override
-    public int saveEmpRole(SysEmpRole sysEmpRole) {
-        return sysRoleMapper.saveEmpRole(sysEmpRole);
-    }
-
-    @Override
-    public int deleteEmpRole(Integer empId) {
-        return sysRoleMapper.deleteEmpRole(empId);
     }
 
 

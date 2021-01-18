@@ -20,4 +20,7 @@ public interface OrderdetailMapper {
 
     List<Orderdetail> queryByuuidAll(Integer ordersuuid);
 
+    List<Orderdetail> queryByuuidwfh(Integer ordersuuid);
+
+
 }

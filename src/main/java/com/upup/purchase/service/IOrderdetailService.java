@@ -19,4 +19,7 @@ public interface IOrderdetailService {
     int updateByPrimaryKey(Orderdetail record);
 
     JsonResponseBody<?> queryByuuidAll(Integer ordersuuid);
+
+    JsonResponseBody<?> queryByuuidwfh(Integer ordersuuid);
+
 }

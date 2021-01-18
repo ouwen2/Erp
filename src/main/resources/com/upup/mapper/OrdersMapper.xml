@@ -40,7 +40,44 @@
        left join sys_emp as u2 on o.checker =u2.uuid left join  sys_emp u3 on o.starter=u3.uuid left join
       sys_emp u4 on o.ender=u4.uuid left join  supplier s1 on o.supplieruuid=s1.uuid
   </select>
-  
+
+
+
+
+
+
+    <!--************************************************************-->
+    <select id="querywckPage" resultType="java.util.Map">
+    select o.uuid,date_format(o.createtime,'%Y-%m-%d ') as createtime,
+             date_format(o.checktime,'%Y-%m-%d ') as checktime,
+             date_format(o.starttime,'%Y-%m-%d ') as starttime,
+             date_format(o.endtime,'%Y-%m-%d ') as endtime,
+                    o.type,u1.name as creatername,
+       u2.name as checkername,u3.name as startername,u4.name as endername, s1.name as suppliername,o.totalmoney,
+       o.state,o.waybillsn  from orders o inner join sys_emp u1 on o.creater=u1.uuid
+       left join sys_emp as u2 on o.checker =u2.uuid left join  sys_emp u3 on o.starter=u3.uuid left join
+      sys_emp u4 on o.ender=u4.uuid left join  supplier s1 on o.supplieruuid=s1.uuid where o.state=1
+
+    </select>
+  <!--************************************************************-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from orders
     where UUID = #{uuid,jdbcType=INTEGER}

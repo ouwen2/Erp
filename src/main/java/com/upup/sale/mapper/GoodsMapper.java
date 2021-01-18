@@ -1,5 +1,6 @@
 package com.upup.sale.mapper;
 
+import com.upup.model.Store;
 import com.upup.sale.model.Goods;
 import org.springframework.stereotype.Repository;
 
@@ -19,5 +20,7 @@ public interface GoodsMapper {
     int updateByPrimaryKey(Goods record);
 
     List<Goods> queryNameAll();
+
+    List<Store> queryBynameAll(String name);
 
 }

@@ -58,6 +58,4 @@ public class SysEmpServiceImpl implements ISysEmpService {
             sysEmp.setUsername("");
         return SysEmpMapper.getSysEmpByUserNamePage(sysEmp);
     }
-
-
 }

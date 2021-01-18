@@ -1,6 +1,7 @@
 package com.upup.sale.service;
 
 import com.upup.base.util.JsonResponseBody;
+import com.upup.model.Store;
 import com.upup.sale.model.Goods;
 
 import java.util.List;
@@ -21,4 +22,7 @@ public interface IGoodsService {
     int updateByPrimaryKey(Goods record);
 
     JsonResponseBody<?> queryNameAll();
+
+    JsonResponseBody<?> queryBynameAll(String name);
+
 }

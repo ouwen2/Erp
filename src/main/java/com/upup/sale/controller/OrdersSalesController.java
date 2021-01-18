@@ -24,5 +24,9 @@ public class OrdersSalesController {
         return ordersService.queryall();
     }
 
-
+    @RequestMapping("/querywckPage")
+    @ResponseBody
+    public JsonResponseBody querywckPage(){
+        return ordersService.querywckPage();
+    }
 }

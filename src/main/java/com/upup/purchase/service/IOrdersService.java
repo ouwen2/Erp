@@ -1,5 +1,6 @@
 package com.upup.purchase.service;
 
+import com.upup.base.aop.PageAop;
 import com.upup.base.util.JsonResponseBody;
 import com.upup.purchase.model.Orders;
 
@@ -20,4 +21,8 @@ public interface IOrdersService {
     int updateByPrimaryKey(Orders record);
 
     JsonResponseBody<?> queryall();
+
+    //假
+    JsonResponseBody<?> querywckPage();
+
 }

@@ -40,6 +40,8 @@ public class CorsFilter2 implements Filter {
 		httpResponse.setHeader("Access-Control-Allow-Headers", "responseType,Origin,X-Requested-With,Content-Type, Accept,jwt");
 		httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
 
+
+
 		//允许客户端处理一个新的响应头jwt
 		httpResponse.setHeader("Access-Control-Expose-Headers", "jwt,Content-Disposition");
 		

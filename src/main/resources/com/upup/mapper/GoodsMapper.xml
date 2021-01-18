@@ -28,6 +28,12 @@
     from goods
   </select>
 
+  <!---->
+    <select id="queryBynameAll" resultType="com.upup.model.Store">
+    select * from store where sys_empUUID =
+(select uuid from sys_emp where name =#{name})
+    </select>
+<!---->
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goods
     where UUID = #{uuid,jdbcType=INTEGER}
