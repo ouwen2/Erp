@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.upup.mapper.GoodsMapper" >
-  <resultMap id="BaseResultMap" type="com.upup.model.Goods" >
+<mapper namespace="com.upup.sale.mapper.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.upup.sale.model.Goods" >
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -22,20 +22,23 @@
     from goods
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
-    <select id="querygoodall" resultType="java.util.Map">
-         SELECT g.UUID as uuid,g.`NAME` as goodname,g.ORIGIN as origin,g.PRODUCER as producer,g.UNIT as unit,
-         g.INPRICE as inprice,g.OUTPRICE as outprice,gt.`NAME` AS goodtype
-        FROM goods g,goodstype gt WHERE g.GOODSTYPEUUID=gt.UUID
-    </select>
-  <select id="selectSinglegood" resultType="com.upup.model.Goods">
-    select  <include refid="Base_Column_List"/> from goods where name= #{goodname}
+  <select id="queryNameAll" resultType="com.upup.sale.model.Goods">
+    select
+    uuid,name
+    from goods
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <!---->
+    <select id="queryBynameAll" resultType="com.upup.model.Store">
+    select * from store where sys_empUUID =
+(select uuid from sys_emp where name =#{name})
+    </select>
+<!---->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goods
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.upup.model.Goods" >
+  <insert id="insert" parameterType="com.upup.sale.model.Goods" >
     insert into goods (UUID, NAME, ORIGIN, 
       PRODUCER, UNIT, INPRICE, 
       OUTPRICE, GOODSTYPEUUID)
@@ -43,7 +46,7 @@
       #{producer,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{inprice,jdbcType=REAL}, 
       #{outprice,jdbcType=REAL}, #{goodstypeuuid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.model.Goods" >
+  <insert id="insertSelective" parameterType="com.upup.sale.model.Goods" >
     insert into goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
@@ -98,7 +101,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.model.Goods" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.sale.model.Goods" >
     update goods
     <set >
       <if test="name != null" >
@@ -125,7 +128,7 @@
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.model.Goods" >
+  <update id="updateByPrimaryKey" parameterType="com.upup.sale.model.Goods" >
     update goods
     set NAME = #{name,jdbcType=VARCHAR},
       ORIGIN = #{origin,jdbcType=VARCHAR},

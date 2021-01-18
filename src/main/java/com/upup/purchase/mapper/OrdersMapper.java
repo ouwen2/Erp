@@ -15,8 +15,7 @@ public interface OrdersMapper {
 
     int insert(Orders record);
 
-    //添加订单
-    int insertSelective(Orders orders);
+    int insertSelective(Orders record);
 
     Orders selectByPrimaryKey(Integer uuid);
 
@@ -25,4 +24,9 @@ public interface OrdersMapper {
     int updateByPrimaryKey(Orders record);
 
     List<Map<String,Object>> queryall();
+
+
+    List<Map<String,Object>> querywckPage();
+
+
 }

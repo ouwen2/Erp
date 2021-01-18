@@ -30,4 +30,10 @@ public class GoodsController {
         return goodsService.selectByPrimaryKey(uuidd);
     }
 
+    @RequestMapping("StoreQueryByNameAll")
+    @ResponseBody
+    public JsonResponseBody StoreQueryByNameAll(String name) {
+        return goodsService.queryBynameAll(name);
+    }
+
 }

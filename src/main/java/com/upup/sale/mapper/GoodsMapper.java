@@ -1,12 +1,10 @@
 package com.upup.sale.mapper;
 
-import com.upup.sale.model.Goods;
+import com.upup.model.Store;
 import com.upup.sale.model.Goods;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
-
 @Repository
 public interface GoodsMapper {
     int deleteByPrimaryKey(Integer uuid);
@@ -21,10 +19,8 @@ public interface GoodsMapper {
 
     int updateByPrimaryKey(Goods record);
 
-    //查询全部
-    List<Map<String,Object>> querygoodall();
+    List<Goods> queryNameAll();
 
-    //根据名字查询单个
-    Goods selectSinglegood(String goodname);
+    List<Store> queryBynameAll(String name);
 
 }

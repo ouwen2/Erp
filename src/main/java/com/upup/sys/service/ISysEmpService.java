@@ -22,5 +22,4 @@ public interface ISysEmpService {
     SysEmp selectByName(String empName);
 
     List<Map<String,Object>> getSysEmpByUserNamePage(SysEmp sysEmp, PageBean pageBean);
-
 }

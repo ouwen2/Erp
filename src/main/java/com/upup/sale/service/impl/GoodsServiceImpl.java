@@ -1,7 +1,9 @@
 package com.upup.sale.service.impl;
 
 import com.upup.base.util.JsonResponseBody;
+import com.upup.model.Store;
 import com.upup.sale.mapper.GoodsMapper;
+
 import com.upup.sale.model.Goods;
 import com.upup.sale.service.IGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,13 @@ public class GoodsServiceImpl implements IGoodsService {
 
     @Override
     public JsonResponseBody<List<Goods>> queryNameAll() {
-//        List<Goods> list=goodsMapper.queryNameAll();
-        return new JsonResponseBody<>();
+        List<Goods> list=goodsMapper.queryNameAll();
+        return new JsonResponseBody<>(list);
+    }
+
+    @Override
+    public JsonResponseBody<List<Store>> queryBynameAll(String name) {
+        List<Store> list = goodsMapper.queryBynameAll(name);
+        return new JsonResponseBody<>(list);
     }
 }

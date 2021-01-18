@@ -46,7 +46,13 @@ public class OrderdetailServiceImpl implements IOrderdetailService {
 
     @Override
     public JsonResponseBody<List<Orderdetail>> queryByuuidAll(Integer ordersuuid) {
-//        List<Orderdetail> orderdetails = orderdetailMapper.queryByuuidAll(ordersuuid);
-        return new  JsonResponseBody<>();
+        List<Orderdetail> orderdetails = orderdetailMapper.queryByuuidAll(ordersuuid);
+        return new  JsonResponseBody<>(orderdetails);
+    }
+
+    @Override
+    public JsonResponseBody<?> queryByuuidwfh(Integer ordersuuid) {
+        List<Orderdetail> orderdetails = orderdetailMapper.queryByuuidwfh(ordersuuid);
+        return new  JsonResponseBody<>(orderdetails);
     }
 }

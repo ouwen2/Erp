@@ -1,14 +1,28 @@
 package com.upup.purchase.service;
 
+import com.upup.base.aop.PageAop;
 import com.upup.base.util.JsonResponseBody;
 import com.upup.purchase.model.Orders;
 
 import java.util.List;
-import java.util.Map;
 
 public interface IOrdersService {
 
-    JsonResponseBody<?> insertSelective(Orders orders);
+    int deleteByPrimaryKey(Integer uuid);
+
+    int insert(Orders record);
+
+    int insertSelective(Orders record);
+
+    Orders selectByPrimaryKey(Integer uuid);
+
+    int updateByPrimaryKeySelective(Orders record);
+
+    int updateByPrimaryKey(Orders record);
 
     JsonResponseBody<?> queryall();
+
+    //假
+    JsonResponseBody<?> querywckPage();
+
 }

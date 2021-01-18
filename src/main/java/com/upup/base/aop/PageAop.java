@@ -28,12 +28,11 @@ public class PageAop {
         if(pageBean!=null&&pageBean.isPagination()){
             PageHelper.startPage(pageBean.getPage(),pageBean.getRows());
         }
-
-        Object proceed = joinPoint.proceed(args);
-
+        Object proceed = (List)joinPoint.proceed(args);
         if(pageBean!=null&&pageBean.isPagination()){
             PageInfo pageInfo = new PageInfo((List) proceed);
         }
+        System.out.println("proceed"+proceed);
         return proceed;
     }
 }
