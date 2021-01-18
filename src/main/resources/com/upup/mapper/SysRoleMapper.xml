@@ -22,10 +22,20 @@
     where 1=1
     and name like concat('%',#{name},'%')
   </select>
+    <select id="getRoleListByEmpId" resultType="com.upup.sys.model.SysRole">
+      select r.*
+      from sys_emp e,sys_emp_role er,sys_role r
+      where e.UUID = er.sys_empUUID
+      and er.ROLEUUID = r.UUID
+      and e.uuid = #{empId};
+    </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sys_role
     where UUID = #{uuid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteEmpRole">
+    delete from sys_emp_role where sys_empUUID = #{empId}
   </delete>
   <insert id="insert" parameterType="com.upup.sys.model.SysRole" >
     insert into sys_role (NAME)
@@ -49,6 +59,9 @@
         #{name,jdbcType=VARCHAR},
       </if>
     </trim>
+  </insert>
+  <insert id="saveEmpRole">
+    insert into sys_emp_role values(#{empUUID},#{roleUUID})
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.upup.sys.model.SysRole" >
     update sys_role

@@ -2,6 +2,7 @@ package com.upup.purchase.service;
 
 import com.upup.base.util.JsonResponseBody;
 import com.upup.purchase.model.Orderdetail;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
