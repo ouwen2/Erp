@@ -22,19 +22,16 @@
     from goods
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
-  <select id="queryNameAll" resultType="com.upup.sale.model.Goods">
-    select
-    uuid,name
-    from goods
+    <select id="querygoodall" resultType="java.util.Map">
+         SELECT g.UUID as uuid,g.`NAME` as goodname,g.ORIGIN as origin,g.PRODUCER as producer,g.UNIT as unit,
+         g.INPRICE as inprice,g.OUTPRICE as outprice,gt.`NAME` AS goodtype
+        FROM goods g,goodstype gt WHERE g.GOODSTYPEUUID=gt.UUID
+    </select>
+  <select id="selectSinglegood" resultType="com.upup.sale.model.Goods">
+    select  <include refid="Base_Column_List"/> from goods where name= #{goodname}
   </select>
 
-  <!---->
-    <select id="queryBynameAll" resultType="com.upup.model.Store">
-    select * from store where sys_empUUID =
-(select uuid from sys_emp where name =#{name})
-    </select>
-<!---->
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goods
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>

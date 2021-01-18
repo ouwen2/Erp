@@ -1,13 +1,12 @@
-package com.upup.mapper;
+package com.upup.service;
 
+import com.upup.base.util.JsonResponseBody;
 import com.upup.model.Supplier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
-@Repository
-public interface SupplierMapper {
+public interface ISupplierService {
     int deleteByPrimaryKey(Integer uuid);
 
     int insert(Supplier record);
@@ -21,5 +20,5 @@ public interface SupplierMapper {
     int updateByPrimaryKey(Supplier record);
 
     //查询
-    List<Supplier> queryall();
+    JsonResponseBody<?> queryall();
 }

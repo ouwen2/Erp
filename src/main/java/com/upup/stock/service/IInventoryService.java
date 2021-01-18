@@ -14,7 +14,7 @@ public interface IInventoryService {
 
     int insert(Inventory record);
 
-    List<Map<String,Object>> queryInventoryshPage(Inventory inventory, PageBean pageBean);
+    List<Map<String,Object>> queryInventoryshPage(Inventory inventory,PageBean pageBean);
 
     int updateByPrimaryKey(Inventory record);
 

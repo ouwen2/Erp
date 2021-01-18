@@ -33,18 +33,17 @@ public class CorsFilter2 implements Filter {
 		// Access-Control-Allow-Headers跨域允许包含的头。
 		// Access-Control-Allow-Methods是允许的请求方式
 		httpResponse.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");// *,任何域名
-//		httpResponse.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		// 		httpResponse.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		httpResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
 		
 		//允许客户端发一个新的请求头jwt
 		httpResponse.setHeader("Access-Control-Allow-Headers", "responseType,Origin,X-Requested-With,Content-Type, Accept,jwt");
+		//允许客户端处理一个新的响应头jwt
+		httpResponse.setHeader("Access-Control-Expose-Headers", "jwt,Content-Disposition");
+
 		httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
 
 
-
-		//允许客户端处理一个新的响应头jwt
-		httpResponse.setHeader("Access-Control-Expose-Headers", "jwt,Content-Disposition");
-		
 		//axios的ajax会发两次请求，第一次提交方式为:options,直接返回即可
 		if("OPTIONS".equals(req.getMethod())) {
 			return ;

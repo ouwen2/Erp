@@ -9,9 +9,12 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.Set;
 
+@Configuration
 public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired
@@ -58,7 +61,7 @@ public class ShiroRealm extends AuthorizingRealm {
                 ByteSource.Util.bytes(sysEmp.getSalt()),
                 this.getName()
         );
-
+        System.out.println(sysEmp);
         return simpleAuthenticationInfo;
     }
 

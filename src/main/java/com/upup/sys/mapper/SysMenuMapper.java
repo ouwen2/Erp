@@ -2,10 +2,12 @@ package com.upup.sys.mapper;
 
 import com.upup.sys.model.SysMenu;
 import com.upup.sys.model.SysRole;
+import com.upup.sys.vo.SysRoleMenu;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public interface SysMenuMapper {
@@ -23,4 +25,9 @@ public interface SysMenuMapper {
 
     ArrayList<SysMenu> getLeftAsideByPid(@Param("pid") String pid);
 
+    List<SysMenu> getSysTreeByRoleUUIDList(SysRoleMenu sysRoleMenu);
+
+    int saveSysRoleMenu(SysRoleMenu sysRoleMenu);
+
+    int delSysRoleMenu(Integer roleuuid);
 }
