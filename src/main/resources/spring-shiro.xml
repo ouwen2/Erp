@@ -58,8 +58,6 @@
                  /dict/**              = authc
                  /console/**           = roles[admin]
                  /**                   = anon-->
-                /SysEmp/login          = anon
-                /SysEmp                = authc
             </value>
         </property>
     </bean>

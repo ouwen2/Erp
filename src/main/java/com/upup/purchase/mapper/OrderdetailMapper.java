@@ -3,6 +3,7 @@ package com.upup.purchase.mapper;
 import com.upup.purchase.model.Orderdetail;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 @Repository
 public interface OrderdetailMapper {
     int deleteByPrimaryKey(Integer uuid);
@@ -16,4 +17,10 @@ public interface OrderdetailMapper {
     int updateByPrimaryKeySelective(Orderdetail record);
 
     int updateByPrimaryKey(Orderdetail record);
+
+    List<Orderdetail> queryByuuidAll(Integer ordersuuid);
+
+    List<Orderdetail> queryByuuidwfh(Integer ordersuuid);
+
+
 }
