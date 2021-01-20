@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -42,4 +43,22 @@ public class OrdersController {
         return new JsonResponseBody(ResponseStatus.STATUS_200,bySalesPage);
     }
 
+    @RequestMapping("/TrendPage")
+    @ResponseBody
+    public JsonResponseBody TrendPage(String ytime, HttpServletRequest request){
+        System.out.println(ytime);
+        JsonResponseBody<?> byTrendPage = ordersService.getByTrendPage(ytime);
+        if (null==byTrendPage) {
+            return new JsonResponseBody<>(ResponseStatus.STATUS_204);
+        }else {
+            return new JsonResponseBody(ResponseStatus.STATUS_200, byTrendPage);
+        }
+    }
+
+    @RequestMapping("/ByYear")
+    @ResponseBody
+    public JsonResponseBody ByYear(){
+        List<Map<String, Object>> byYear = ordersService.getByYear();
+        return new JsonResponseBody(ResponseStatus.STATUS_200,byYear);
+    }
 }

@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("Per")
-public class DepController {
+public class PerController {
     @Autowired
     private IDepService iDepService;
 

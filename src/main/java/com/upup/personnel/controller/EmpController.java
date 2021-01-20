@@ -2,6 +2,7 @@ package com.upup.personnel.controller;
 
 import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.PageBean;
+import com.upup.base.util.PasswordHelper;
 import com.upup.base.util.ResponseStatus;
 import com.upup.personnel.model.Dep;
 import com.upup.personnel.service.IDepService;
@@ -20,7 +21,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("Emp")
-public class SysEmpDController {
+public class EmpController {
 
     @Autowired
     private ISysEmpServce iSysEmpServce;
@@ -51,6 +52,9 @@ public class SysEmpDController {
     @RequestMapping("/addEmp")
     @ResponseBody
     public JsonResponseBody addEmp(SysEmp sysEmp){
+        String salt = PasswordHelper.createSalt();
+        sysEmp.setSalt(salt);
+        sysEmp.setPwd(PasswordHelper.createCredentials("88888888",salt));
         int insert =iSysEmpServce.insertSelective(sysEmp);
         if(insert==1){
             return new JsonResponseBody(ResponseStatus.STATUS_200,"添加成功");

@@ -6,6 +6,7 @@ import com.upup.purchase.vo.OrderSa;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,4 +34,17 @@ public interface OrdersMapper {
      * @return
      */
     List<Map<String,Object>> getBySalesPage(OrderSa orderSa);
+
+    /**
+     * 销售趋势
+     * @param ytime
+     * @return
+     */
+    List<Map<String,Object>> getByTrendPage(String ytime);
+
+    /**
+     * 查询到所有的销售年份
+     * @return
+     */
+    List<Map<String,Object>> getByYear();
 }

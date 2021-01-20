@@ -1,10 +1,16 @@
 package com.upup.sys.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Data
+@ToString
+@AllArgsConstructor
 public class SysEmp {
     private Integer uuid;
 
@@ -33,22 +39,6 @@ public class SysEmp {
     private String display;
 
     private String isPassword;
-
-    public SysEmp(Integer uuid, String username, String pwd, String salt, String name, Integer gender, String email, String tele, String address, Date birthday, Integer depuuid, String display, String isPassword) {
-        this.uuid = uuid;
-        this.username = username;
-        this.pwd = pwd;
-        this.salt = salt;
-        this.name = name;
-        this.gender = gender;
-        this.email = email;
-        this.tele = tele;
-        this.address = address;
-        this.birthday = birthday;
-        this.depuuid = depuuid;
-        this.display = display;
-        this.isPassword = isPassword;
-    }
 
     public SysEmp() {
         super();

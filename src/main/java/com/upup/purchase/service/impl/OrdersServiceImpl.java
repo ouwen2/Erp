@@ -10,6 +10,8 @@ import com.upup.purchase.vo.OrderSa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,6 +64,34 @@ public class OrdersServiceImpl implements IOrdersService {
     @Override
     public List<Map<String,Object>>  getBySalesPage(OrderSa orderSa, PageBean pageBean) {
         return ordersMapper.getBySalesPage(orderSa);
+    }
+
+    @Override
+    public JsonResponseBody<?> getByTrendPage(String ytime) {
+        List<Map<String, Object>> byTrendPage = ordersMapper.getByTrendPage(ytime);
+        int a = byTrendPage.size();
+        for (int i = 1; i <= 12 ; i++){
+            boolean b = true;
+            for (Map<String,Object> map : byTrendPage){
+                int month =(Integer) map.get("moneys");
+                if (i==month){
+                    b=false;
+                    break;
+                }
+            }
+            if (b){
+                Map<String,Object> map = new HashMap<>();
+                map.put("moneys",i);
+                map.put("totalmoney",0);
+                byTrendPage.add(map);
+            }
+        }
+        return new JsonResponseBody<>(byTrendPage);
+    }
+
+    @Override
+    public List<Map<String, Object>> getByYear() {
+        return ordersMapper.getByYear();
     }
 
 
