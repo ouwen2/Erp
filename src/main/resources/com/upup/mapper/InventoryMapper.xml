@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.upup.mapper.InventoryMapper" >
-  <resultMap id="BaseResultMap" type="com.upup.model.Inventory" >
+<mapper namespace="com.upup.stock.mapper.InventoryMapper" >
+  <resultMap id="BaseResultMap" type="com.upup.stock.model.Inventory" >
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="GOODSUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -30,7 +30,7 @@
     delete from inventory
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.upup.model.Inventory" >
+  <insert id="insert" parameterType="com.upup.stock.model.Inventory" >
     insert into inventory (UUID, GOODSUUID, STOREUUID, 
       NUM, TYPE, CREATETIME, CHECKTIME, 
       CREATER, CHECKER, STATE, 
@@ -40,7 +40,7 @@
       #{creater,jdbcType=INTEGER}, #{checker,jdbcType=INTEGER}, #{state,jdbcType=CHAR}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.model.Inventory" >
+  <insert id="insertSelective" parameterType="com.upup.stock.model.Inventory" >
     insert into inventory
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
@@ -113,7 +113,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.model.Inventory" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.stock.model.Inventory" >
     update inventory
     <set >
       <if test="goodsuuid != null" >
@@ -149,7 +149,7 @@
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.model.Inventory" >
+  <update id="updateByPrimaryKey" parameterType="com.upup.stock.model.Inventory" >
     update inventory
     set GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
       STOREUUID = #{storeuuid,jdbcType=INTEGER},

@@ -1,4 +1,6 @@
-package com.upup.model;
+package com.upup.stock.model;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -7,6 +9,7 @@ public class Storeoper {
 
     private Integer sysEmpuuid;
 
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date opertime;
 
     private Integer storeuuid;

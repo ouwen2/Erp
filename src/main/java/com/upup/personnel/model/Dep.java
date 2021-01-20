@@ -7,7 +7,8 @@ import java.io.Serializable;
 
 @Builder
 @ToString
-public class Dep implements Serializable {
+public class
+Dep implements Serializable {
     private Integer uuid;
 
     private String name;

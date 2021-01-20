@@ -3,18 +3,21 @@ package com.upup.sys.controller;
 import com.upup.base.controller.BaseController;
 import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.PageBean;
-import com.upup.base.util.ResponseStatus;
 import com.upup.sys.model.SysEmp;
-import com.upup.sys.servce.ISysEmpServce;
+import com.upup.sys.service.ISysEmpService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -23,12 +26,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("SysEmp")
 public class SysEmpController extends BaseController {
 
     @Autowired
-    private ISysEmpServce iSysEmpServce;
+    private ISysEmpService iSysEmpService;
 
     @RequestMapping("/login")
     @ResponseBody
@@ -57,6 +60,7 @@ public class SysEmpController extends BaseController {
         ModelAndView mv = new ModelAndView();
 
         if (magess.equals("")){
+            magess = "登陆成功";
             mv.addObject("magess",magess);
         }else {
             mv.addObject("magess",magess);
@@ -65,24 +69,40 @@ public class SysEmpController extends BaseController {
         return mv;
     }
 
+//    @RequiresRoles(value = {"管理员","高级用户"},logical = Logical.OR)
+//    @RequiresPermissions(value = "/getEmpListPage")
     @RequestMapping("/getEmpListPage")
     @ResponseBody
     public JsonResponseBody getEmpListPage(SysEmp sysEmp,HttpServletRequest request){
         PageBean pageBean = new PageBean();
         pageBean.setRequest(request);
         pageBean.setRows(5);
-        List<Map<String, Object>> sysEmpByUserNamePage = iSysEmpServce.getSysEmpByUserNamePage(sysEmp, pageBean);
+        List<Map<String, Object>> sysEmpByUserNamePage = iSysEmpService.getSysEmpByUserNamePage(sysEmp, pageBean);
 
-        for (Map<String, Object> stringObjectMap : sysEmpByUserNamePage) {
-            if(stringObjectMap.get("GENDER").equals(0)){
-                stringObjectMap.put("GENDER","男");
+        for (int i = 0;i<sysEmpByUserNamePage.size();i++) {
+//            //因为没有用join 会查到重复的用户  手动去重复并且把roleName合并
+//
+//            for (int y = i+1;y<sysEmpByUserNamePage.size();y++){
+//                if(sysEmpByUserNamePage.get(i).get("UUID").equals(
+//                        sysEmpByUserNamePage.get(y).get("UUID"))){
+//                    Object obj = sysEmpByUserNamePage.get(i).get("roleName")+","+sysEmpByUserNamePage.get(y).get("roleName");
+//                    sysEmpByUserNamePage.get(i).put("roleName",obj);
+//                    sysEmpByUserNamePage.remove(y);
+//                    System.out.println("size:"+sysEmpByUserNamePage.size());
+//                }
+//            }
+            //性别修改0为男,1为女
+            if(sysEmpByUserNamePage.get(i).get("GENDER").equals(0)){
+                sysEmpByUserNamePage.get(i).put("GENDER","男");
             }else{
-                stringObjectMap.put("GENDER","女");
+                sysEmpByUserNamePage.get(i).put("GENDER","女");
             }
         }
-
-        return new JsonResponseBody(ResponseStatus.STATUS_200,sysEmpByUserNamePage);
+        return new JsonResponseBody(sysEmpByUserNamePage,sysEmpByUserNamePage.size());
     }
 
+    public JsonResponseBody updatePassword(Integer empId){
 
+        return new JsonResponseBody();
+    }
 }

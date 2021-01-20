@@ -1,4 +1,4 @@
-package com.upup.sys.servce;
+package com.upup.sys.service;
 
 import com.github.pagehelper.Page;
 import com.upup.base.util.PageBean;
@@ -55,4 +55,5 @@ public interface ISysEmpServce {
     SysEmp selectByName(String empName);
 
     List<Map<String,Object>> getSysEmpByUserNamePage(SysEmp sysEmp, PageBean pageBean);
+
 }

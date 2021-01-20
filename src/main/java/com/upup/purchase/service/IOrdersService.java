@@ -4,17 +4,19 @@ import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.PageBean;
 import com.upup.purchase.model.Orders;
 import com.upup.purchase.vo.OrderSa;
+import com.upup.base.util.PageBean;
+import com.upup.purchase.vo.OrderVo;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+
 public interface IOrdersService {
 
-    int deleteByPrimaryKey(Integer uuid);
+    JsonResponseBody<?> insertSelective(OrderVo orderVo);
 
-    int insert(Orders record);
-
+    List<Map<String,Object>> queryPage(String supliername, PageBean pageBean);
     int insertSelective(Orders record);
 
     Orders selectByPrimaryKey(Integer uuid);

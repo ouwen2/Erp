@@ -16,7 +16,7 @@ import java.util.List;
 public class PageAop {
 
     @SneakyThrows
-    @Around("execution(* *..*Servce.*Page(..))")
+    @Around("execution(* *..*Service.*Page(..))")
     public Object invoke(ProceedingJoinPoint joinPoint){
         Object[] args = joinPoint.getArgs();
         PageBean pageBean = null;
@@ -28,11 +28,13 @@ public class PageAop {
         if(pageBean!=null&&pageBean.isPagination()){
             PageHelper.startPage(pageBean.getPage(),pageBean.getRows());
         }
-        Object proceed = (List)joinPoint.proceed(args);
+
+        Object proceed = joinPoint.proceed(args);
+
         if(pageBean!=null&&pageBean.isPagination()){
             PageInfo pageInfo = new PageInfo((List) proceed);
         }
-        System.out.println("proceed"+proceed);
+
         return proceed;
     }
 }

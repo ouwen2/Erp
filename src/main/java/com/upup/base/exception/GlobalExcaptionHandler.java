@@ -8,6 +8,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 
 public class GlobalExcaptionHandler implements HandlerExceptionResolver {
     @Override
@@ -16,10 +17,6 @@ public class GlobalExcaptionHandler implements HandlerExceptionResolver {
                                          Object o, Exception e) {
 
         ModelAndView mv = new ModelAndView();
-        if(isAjaxRequest(httpServletRequest)){
-            mv.addObject("msg","这个是ajax请求");
-            mv.setView(new MappingJackson2JsonView());
-        }else{
             if(e instanceof UnauthorizedException){
                 mv.addObject("msg","无权限异常");
                 mv.addObject("success",false);
@@ -28,13 +25,17 @@ public class GlobalExcaptionHandler implements HandlerExceptionResolver {
                 mv.addObject("msg","业务类异常");
                 mv.addObject("success",false);
                 mv.setView(new MappingJackson2JsonView());
+            }else if(e instanceof SQLException){
+                mv.addObject("msg","SQL异常");
+                mv.addObject("success",false);
+                mv.setView(new MappingJackson2JsonView());
             }
-//            else{
-//            }
-        }
-        mv.addObject("msg","其他异常");
-        mv.addObject("success",false);
-        mv.setView(new MappingJackson2JsonView());
+            else{
+                mv.addObject("msg","其他异常(代码有问题)");
+                mv.addObject("success",false);
+                mv.setView(new MappingJackson2JsonView());
+            }
+
         return mv;
     }
 

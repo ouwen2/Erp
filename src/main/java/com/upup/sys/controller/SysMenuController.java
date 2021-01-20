@@ -1,26 +1,25 @@
 package com.upup.sys.controller;
 
 import com.upup.base.controller.BaseController;
+import com.upup.base.util.JsonResponseBody;
+import com.upup.base.util.ResponseStatus;
 import com.upup.sys.model.SysMenu;
-import com.upup.sys.model.SysRole;
-import com.upup.sys.servce.ISysMenuServce;
+import com.upup.sys.service.ISysMenuService;
+import com.upup.sys.vo.SysRoleMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
-@RequestMapping("Sys")
+@RequestMapping("SysMenu")
 public class SysMenuController extends BaseController {
 
     @Autowired
-    private ISysMenuServce iSysMenuServce;
+    private ISysMenuService iSysMenuServce;
 
     @RequestMapping("/getLeftAsideByPid")
     @ResponseBody
@@ -33,6 +32,37 @@ public class SysMenuController extends BaseController {
         return leftAsideByPid;
     }
 
+    @RequestMapping("/getSysTreeList")
+    @ResponseBody
+    public JsonResponseBody getSysTreeList() {
+        List<SysMenu> sysTreeList = iSysMenuServce.getSysTreeList();
+        System.out.println(sysTreeList);
+        return new JsonResponseBody(sysTreeList);
+    }
 
+    @ResponseBody
+    @RequestMapping("/savaSysMenu")
+    public JsonResponseBody savaSysMenu(Integer roleId,String menuIdStr){
+        String[] menuIds = menuIdStr.split(",");
+
+        SysRoleMenu sysRoleMenu = new SysRoleMenu();
+        sysRoleMenu.setRoleUUID(roleId);
+
+        iSysMenuServce.deleteEmpRole(roleId);
+        for (String menuId : menuIds) {
+            sysRoleMenu.setMenuId(menuId);
+            iSysMenuServce.saveEmpRole(sysRoleMenu);
+        }
+
+
+        return new JsonResponseBody(ResponseStatus.STATUS_200,"保存权限成功");
+    }
+
+    @RequestMapping("getSysTreeByRoleUUIDList")
+    @ResponseBody
+    public JsonResponseBody getSysTreeByRoleUUIDList(Integer roleUUID) {
+        List<SysMenu> sysMenuList = iSysMenuServce.getSysTreeByRoleUUIDList(roleUUID);
+        return new JsonResponseBody(sysMenuList);
+    }
 
 }

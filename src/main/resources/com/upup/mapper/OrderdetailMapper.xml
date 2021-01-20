@@ -4,11 +4,11 @@
   <resultMap id="BaseResultMap" type="com.upup.purchase.model.Orderdetail" >
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="GOODSUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="GOODSNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="PRICE" jdbcType="REAL" javaType="java.lang.Float" />
-      <arg column="NUM" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="MONEY" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="orderdetailGoodsId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="orderdetailGoodsname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="orderdetailPrice" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="orderdetailNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="orderdetailMoney" jdbcType="REAL" javaType="java.lang.Float" />
       <arg column="ENDTIME" jdbcType="DATE" javaType="java.util.Date" />
       <arg column="ENDER" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="STOREUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -17,150 +17,28 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    UUID, GOODSUUID, GOODSNAME, PRICE, NUM, MONEY, ENDTIME, ENDER, STOREUUID, STATE, 
+    UUID, orderdetailGoodsId, orderdetailGoodsname, orderdetailPrice, orderdetailNum, orderdetailMoney, ENDTIME, ENDER, STOREUUID, STATE,
     ORDERSUUID
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from orderdetail
-    where UUID = #{uuid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from orderdetail
-    where UUID = #{uuid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.upup.purchase.model.Orderdetail" >
-    insert into orderdetail (UUID, GOODSUUID, GOODSNAME, 
-      PRICE, NUM, MONEY, ENDTIME, 
-      ENDER, STOREUUID, STATE, 
+
+
+  <insert id="insert" parameterType="com.upup.purchase.model.Orderdetail">
+    insert into orderdetail (GOODSUUID, GOODSNAME,
+      PRICE, NUM, MONEY,
       ORDERSUUID)
-    values (#{uuid,jdbcType=INTEGER}, #{goodsuuid,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, 
-      #{price,jdbcType=REAL}, #{num,jdbcType=INTEGER}, #{money,jdbcType=REAL}, #{endtime,jdbcType=DATE}, 
-      #{ender,jdbcType=INTEGER}, #{storeuuid,jdbcType=INTEGER}, #{state,jdbcType=CHAR}, 
-      #{ordersuuid,jdbcType=INTEGER})
+    values
+    <foreach collection="orderDetailList" item="list" separator=",">
+      (#{list.orderdetailGoodsId},
+      #{list.orderdetailGoodsname},
+      #{list.orderdetailPrice},
+      #{list.orderdetailNum},
+      #{list.orderdetailMoney},
+      #{orderid}
+      )
+    </foreach>
+
+
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.purchase.model.Orderdetail" >
-    insert into orderdetail
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        UUID,
-      </if>
-      <if test="goodsuuid != null" >
-        GOODSUUID,
-      </if>
-      <if test="goodsname != null" >
-        GOODSNAME,
-      </if>
-      <if test="price != null" >
-        PRICE,
-      </if>
-      <if test="num != null" >
-        NUM,
-      </if>
-      <if test="money != null" >
-        MONEY,
-      </if>
-      <if test="endtime != null" >
-        ENDTIME,
-      </if>
-      <if test="ender != null" >
-        ENDER,
-      </if>
-      <if test="storeuuid != null" >
-        STOREUUID,
-      </if>
-      <if test="state != null" >
-        STATE,
-      </if>
-      <if test="ordersuuid != null" >
-        ORDERSUUID,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        #{uuid,jdbcType=INTEGER},
-      </if>
-      <if test="goodsuuid != null" >
-        #{goodsuuid,jdbcType=INTEGER},
-      </if>
-      <if test="goodsname != null" >
-        #{goodsname,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=REAL},
-      </if>
-      <if test="num != null" >
-        #{num,jdbcType=INTEGER},
-      </if>
-      <if test="money != null" >
-        #{money,jdbcType=REAL},
-      </if>
-      <if test="endtime != null" >
-        #{endtime,jdbcType=DATE},
-      </if>
-      <if test="ender != null" >
-        #{ender,jdbcType=INTEGER},
-      </if>
-      <if test="storeuuid != null" >
-        #{storeuuid,jdbcType=INTEGER},
-      </if>
-      <if test="state != null" >
-        #{state,jdbcType=CHAR},
-      </if>
-      <if test="ordersuuid != null" >
-        #{ordersuuid,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.purchase.model.Orderdetail" >
-    update orderdetail
-    <set >
-      <if test="goodsuuid != null" >
-        GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
-      </if>
-      <if test="goodsname != null" >
-        GOODSNAME = #{goodsname,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        PRICE = #{price,jdbcType=REAL},
-      </if>
-      <if test="num != null" >
-        NUM = #{num,jdbcType=INTEGER},
-      </if>
-      <if test="money != null" >
-        MONEY = #{money,jdbcType=REAL},
-      </if>
-      <if test="endtime != null" >
-        ENDTIME = #{endtime,jdbcType=DATE},
-      </if>
-      <if test="ender != null" >
-        ENDER = #{ender,jdbcType=INTEGER},
-      </if>
-      <if test="storeuuid != null" >
-        STOREUUID = #{storeuuid,jdbcType=INTEGER},
-      </if>
-      <if test="state != null" >
-        STATE = #{state,jdbcType=CHAR},
-      </if>
-      <if test="ordersuuid != null" >
-        ORDERSUUID = #{ordersuuid,jdbcType=INTEGER},
-      </if>
-    </set>
-    where UUID = #{uuid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.purchase.model.Orderdetail" >
-    update orderdetail
-    set GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
-      GOODSNAME = #{goodsname,jdbcType=VARCHAR},
-      PRICE = #{price,jdbcType=REAL},
-      NUM = #{num,jdbcType=INTEGER},
-      MONEY = #{money,jdbcType=REAL},
-      ENDTIME = #{endtime,jdbcType=DATE},
-      ENDER = #{ender,jdbcType=INTEGER},
-      STOREUUID = #{storeuuid,jdbcType=INTEGER},
-      STATE = #{state,jdbcType=CHAR},
-      ORDERSUUID = #{ordersuuid,jdbcType=INTEGER}
-    where UUID = #{uuid,jdbcType=INTEGER}
-  </update>
+
+
 </mapper>

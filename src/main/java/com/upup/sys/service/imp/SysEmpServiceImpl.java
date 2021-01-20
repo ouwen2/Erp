@@ -1,4 +1,4 @@
-package com.upup.sys.servce.imp;
+package com.upup.sys.service.imp;
 
 import com.upup.base.util.PageBean;
 import com.upup.personnel.model.Dep;
@@ -6,6 +6,7 @@ import com.upup.sys.mapper.SysEmpMapper;
 import com.upup.sys.model.SysEmp;
 import com.upup.sys.servce.ISysEmpServce;
 import com.upup.sys.vo.SysEmpDate;
+import com.upup.sys.service.ISysEmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class SysEmpServceImpl implements ISysEmpServce {
+public class SysEmpServiceImpl implements ISysEmpService {
 
     @Autowired
     private SysEmpMapper SysEmpMapper;
@@ -69,4 +70,6 @@ public class SysEmpServceImpl implements ISysEmpServce {
             sysEmp.setUsername("");
         return SysEmpMapper.getSysEmpByUserNamePage(sysEmp);
     }
+
+
 }
