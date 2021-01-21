@@ -2,16 +2,26 @@ package com.upup.purchase.service;
 
 import com.upup.purchase.model.Orderdetail;
 
+import java.util.List;
+
 public interface IOrderdetailService {
-    int deleteByPrimaryKey(Integer uuid);
 
-    int insert(Orderdetail record);
 
-    int insertSelective(Orderdetail record);
+    //根据订单编号查询所对应的订单
+    List<Orderdetail> selectByoid(int orderuuid);
 
-    Orderdetail selectByPrimaryKey(Integer uuid);
+    //入库
+    int updateOrderdetail(Orderdetail orderdetail);
 
-    int updateByPrimaryKeySelective(Orderdetail record);
+    //退货登记
+    int updateTuiD(Orderdetail orderdetail);
 
-    int updateByPrimaryKey(Orderdetail record);
+    //退货审核
+    int updateTuiS(Orderdetail orderdetail);
+
+    //退货出库
+    int updateTuiC(Orderdetail orderdetail);
+
+
+
 }

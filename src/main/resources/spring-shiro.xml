@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--1.配置自定义的Realm-->
-    <bean id="shiroRealm" class="com.upup.base.shiro.ShiroRealm">
+    <bean id="shiroRealm" class="com.upup.sys.shiro.ShiroRealm">
         <!--配置Shiro明文密码如何进行加密-->
         <!--注意：重要的事情说三次~~~~~~此处加密方式要与用户注册时的算法一致 -->
         <!--注意：重要的事情说三次~~~~~~此处加密方式要与用户注册时的算法一致 -->
@@ -58,6 +58,8 @@
                  /dict/**              = authc
                  /console/**           = roles[admin]
                  /**                   = anon-->
+                /SysEmp/login          = anon
+                /SysEmp                = authc
             </value>
         </property>
     </bean>
@@ -65,5 +67,6 @@
     <!-- 4. -->
     <!-- Shiro生命周期，保证实现了Shiro内部lifecycle函数的bean执行 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
 
 </beans>

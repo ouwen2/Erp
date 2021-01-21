@@ -11,7 +11,7 @@
     UUID, NAME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
+    select 
     <include refid="Base_Column_List" />
     from goodstype
     where UUID = #{uuid,jdbcType=INTEGER}
@@ -45,8 +45,16 @@
     insert into goodstype (NAME)
     values (#{name,jdbcType=VARCHAR})
   </insert>
-
-  <update id="updateByPrimaryKey" parameterType="com.upup.basics.model.GoodsType" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.model.GoodsType" >
+    update goodstype
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.upup.model.GoodsType" >
     update goodstype
     set NAME = #{name,jdbcType=VARCHAR}
     where UUID = #{uuid,jdbcType=INTEGER}

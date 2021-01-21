@@ -20,18 +20,22 @@
     from dep
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
-  <select id="selectByDepName" resultType="java.lang.Integer">
-    <include refid="DepList"/> where name like concat(#{name},'%')
+  <select id="selectByDepName" resultType="com.upup.personnel.model.Dep">
+    <include refid="DepList"/> where name =#{name}
   </select>
-  <select id="selectByPager" resultType="com.upup.personnel.model.Dep">
-    <include refid="DepList"/> where 1=1
-    <if test="name !=null and name !=''">
+  <select id="selectByPage" resultType="com.upup.personnel.model.Dep">
+    <include refid="DepList"/>  where 1=1
+      <if test="name !=null and name !=''">
       and name like concat(#{name},'%')
-    </if>
-    <if test="tele !=null and tele !=''">
+      </if>
+      <if test="tele !=null and tele !=''">
       and tele like concat('%',#{tele},'%')
-    </if>
+      </if>
   </select>
+  <select id="selectByUUid" resultType="com.upup.personnel.model.Dep">
+    select uuid,name from dep
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     DELETE from dep where UUID &lt;&gt; 1 and UUID = #{uuid,jdbcType=INTEGER}
   </delete>
@@ -63,19 +67,16 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.upup.personnel.model.Dep" >
     update dep
     <set >
-      <if test="name != null" >
+      <if test="name != null and name!=''" >
         NAME = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="tele != null" >
+      <if test="tele != null and tele!=''" >
         TELE = #{tele,jdbcType=VARCHAR},
       </if>
     </set>
-    where UUID = #{uuid,jdbcType=INTEGER}
+    where UUID = #{uuid,jdbcType=INTEGER} and uuid &lt;&gt; 1
   </update>
   <update id="updateByPrimaryKey" parameterType="com.upup.personnel.model.Dep" >
-    update dep
-    set NAME = #{name,jdbcType=VARCHAR},
-      TELE = #{tele,jdbcType=VARCHAR}
-    where UUID = #{uuid,jdbcType=INTEGER}
+    update dep set tele=#{tele,jdbcType=VARCHAR} where uuid=1
   </update>
 </mapper>

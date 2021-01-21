@@ -2,6 +2,8 @@ package com.upup.sys.controller;
 
 import com.upup.base.controller.BaseController;
 import com.upup.base.util.*;
+import com.upup.sys.model.SysEmp;
+import com.upup.sys.service.ISysEmpService;
 import com.upup.basics.model.GoodsType;
 import com.upup.sys.model.SysEmp;
 import com.upup.sys.servce.ISysEmpService;
@@ -40,10 +42,8 @@ public class SysEmpController extends BaseController {
     @Autowired
     private ISysEmpService iSysEmpService;
 
-
-
-
     @ResponseBody
+
     @RequestMapping("/passwordEmp")
     public JsonResponseBody passwordEmp(String pwd,HttpServletRequest request){
         String ipAddr = GetIpAddr.getIpAddr(request);
@@ -99,7 +99,9 @@ public class SysEmpController extends BaseController {
         }
 
         HttpSession session = req.getSession();
+        System.out.println("userName:"+sysEmp.getUsername());
         session.setAttribute("user",iSysEmpService.selectByName(sysEmp.getUsername()));
+        System.out.println("user:"+session.getAttribute("user"));
         SysContent.setRequest(req);
 
         //IP地址为键 sysEmp对象为值 存入redis
@@ -149,7 +151,7 @@ public class SysEmpController extends BaseController {
     }
 
 //    @RequiresRoles(value = {"管理员","高级用户"},logical = Logical.OR)
-    @RequiresPermissions(value = "SyeEmp/getEmpListPage")
+//    @RequiresPermissions(value = "SyeEmp/getEmpListPage")
     @RequestMapping("/getEmpListPage")
     @ResponseBody
     public JsonResponseBody getEmpListPage(SysEmp sysEmp,HttpServletRequest request){

@@ -1,6 +1,7 @@
 package com.upup.personnel.mapper;
 
 import com.upup.personnel.model.Dep;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.Mapping;
 
@@ -27,12 +28,23 @@ public interface DepMapper {
     Dep selectByPrimaryKey(Integer uuid);
 
     /**
+     * 下拉框的值
+     * @return
+     */
+    List<Dep> selectByUUid();
+
+    /**
      * 修改
      * @param record
      * @return
      */
     int updateByPrimaryKeySelective(Dep record);
 
+    /**
+     * 修改管理员组的电话
+     * @param record
+     * @return
+     */
     int updateByPrimaryKey(Dep record);
 
     /**
@@ -40,7 +52,7 @@ public interface DepMapper {
      * @param name 要查询的部门名称
      * @return
      */
-    int selectByDepName(String name);
+    Dep selectByDepName(String name);
 
     /**
      * 模糊查询
@@ -48,5 +60,5 @@ public interface DepMapper {
      * @param tele 电话
      * @return
      */
-    List<Dep> selectByPager(String name, String tele);
+    List<Dep> selectByPage(Dep dep);
 }

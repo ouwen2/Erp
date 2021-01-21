@@ -150,4 +150,7 @@ public class PageBean implements Serializable {
 		return "PageBean [page=" + page + ", rows=" + rows + ", total=" + total + ", isPagination=" + isPagination
 				+ "]";
 	}
+
+    public void setRequest() {
+    }
 }

@@ -1,9 +1,14 @@
 package com.upup.sys.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Data
 @ToString
 public class SysEmp {
     private Integer uuid;
@@ -24,15 +29,17 @@ public class SysEmp {
 
     private String address;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     private Integer depuuid;
 
     private String display;
 
-    private String isPassword;
+    private Boolean isPassword;
 
-    public SysEmp(Integer uuid, String username, String pwd, String salt, String name, Integer gender, String email, String tele, String address, Date birthday, Integer depuuid, String display, String isPassword) {
+    public SysEmp(Integer uuid, String username, String pwd, String salt, String name, Integer gender, String email, String tele, String address, Date birthday, Integer depuuid, String display, Boolean isPassword) {
         this.uuid = uuid;
         this.username = username;
         this.pwd = pwd;
@@ -148,11 +155,11 @@ public class SysEmp {
         this.display = display;
     }
 
-    public String getIsPassword() {
+    public Boolean getIsPassword() {
         return isPassword;
     }
 
-    public void setIsPassword(String isPassword) {
+    public void setIsPassword(Boolean isPassword) {
         this.isPassword = isPassword;
     }
 }

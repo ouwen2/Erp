@@ -12,7 +12,7 @@
     <!-- redis的相关配置已经在applicationContext.xml导入了，因为spring只允许有一个context:property-placeholder -->
     <!-- 所以下面的配置会注释掉了 -->
     <!-- 1. 引入properties配置文件 -->
-    <!--<context:property-placeholder ignore-unresolvable="true" location="classpath:redis.properties" />-->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:redis.properties" />
 
     <!-- 2. redis连接池配置-->
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">

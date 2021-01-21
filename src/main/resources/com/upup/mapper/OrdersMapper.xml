@@ -4,10 +4,10 @@
   <resultMap id="BaseResultMap" type="com.upup.purchase.model.Orders" >
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="CREATETIME" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="CHECKTIME" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="STARTTIME" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="ENDTIME" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="CREATETIME" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="CHECKTIME" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="STARTTIME" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="ENDTIME" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="TYPE" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="CREATER" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="CHECKER" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -29,19 +29,42 @@
     from orders
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
-  <select id="queryall" resultType="java.util.Map">
+  <select id="queryPage" resultType="java.util.Map">
          select o.uuid,date_format(o.createtime,'%Y-%m-%d %H:%i:%s') as createtime,
              date_format(o.checktime,'%Y-%m-%d %H:%i:%s') as checktime,
              date_format(o.starttime,'%Y-%m-%d %H:%i:%s') as starttime,
              date_format(o.endtime,'%Y-%m-%d %H:%i:%s') as endtime,
                     o.type,u1.name as creatername,
        u2.name as checkername,u3.name as startername,u4.name as endername, s1.name as suppliername,o.totalmoney,
-       o.state,o.waybillsn  from orders o inner join sys_emp u1 on o.creater=u1.uuid
+       o.state,o.waybillsn  from orders o inner join  supplier s1 on o.supplieruuid=s1.uuid left join   sys_emp u1 on o.creater=u1.uuid
        left join sys_emp as u2 on o.checker =u2.uuid left join  sys_emp u3 on o.starter=u3.uuid left join
-      sys_emp u4 on o.ender=u4.uuid left join  supplier s1 on o.supplieruuid=s1.uuid
+      sys_emp u4 on o.ender=u4.uuid where s1.name like concat('%',#{supliername},'%')
   </select>
-  
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <select id="getBySalesPage" resultType="java.util.Map">
+    select b.name as toname,d.orderdetailmoney as tomoney from goods as a,goodstype as b ,orders as c,orderdetail as d where a.goodstypeuuid=b.uuid and c.uuid=d.ordersuuid and b.uuid=d.orderdetailgoodsld
+     and c.type =1
+    <if test="stime !=null and stime!=''">
+        and c.starttime &gt;=str_to_date(#{stime},'%Y-%m-%d %H:%i:%s')
+    </if>
+    <if test="etime !=null and etime !=''">
+        and c.endtime &lt;=str_to_date(#{etime},'%Y-%m-%d %H:%i:%s')
+    </if>
+    group by b.name
+  </select>
+  <select id="getByTrendPage" resultType="java.util.Map">
+    select moneys,totalmoney from
+ (select year(c.endtime) as years,month(c.endtime) as moneys,c.totalmoney from  orders as c,orderdetail as d where c.uuid=d.ordersuuid
+ and c.type =1
+ group by c.endtime having years=#{ytime}) as a  group by moneys
+  </select>
+  <select id="getByYear" resultType="java.util.Map">
+    select distinct year(endtime) as years from orders where type =1
+  </select>
+    <select id="queryall" resultType="java.util.Map">
+      select  * from  orders
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from orders
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
@@ -57,12 +80,9 @@
       #{supplieruuid,jdbcType=INTEGER}, #{totalmoney,jdbcType=INTEGER}, #{state,jdbcType=CHAR}, 
       #{waybillsn,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.purchase.model.Orders" >
+  <insert id="insertSelective" parameterType="com.upup.purchase.model.Orders" keyProperty="uuid" useGeneratedKeys="true">
     insert into orders
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        UUID,
-      </if>
       <if test="createtime != null" >
         CREATETIME,
       </if>
@@ -104,9 +124,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        #{uuid,jdbcType=INTEGER},
-      </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=DATE},
       </if>
@@ -148,6 +165,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.upup.purchase.model.Orders" >
     update orders
     <set >
@@ -210,4 +228,124 @@
       WAYBILLSN = #{waybillsn,jdbcType=INTEGER}
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
+
+  <select id="queryPageT" resultType="java.util.Map">
+         select o.uuid,date_format(o.createtime,'%Y-%m-%d %H:%i:%s') as createtime,
+             date_format(o.checktime,'%Y-%m-%d %H:%i:%s') as checktime,
+             date_format(o.starttime,'%Y-%m-%d %H:%i:%s') as starttime,
+             date_format(o.endtime,'%Y-%m-%d %H:%i:%s') as endtime,
+                    o.type,u1.name as creatername,
+       u2.name as checkername,u3.name as startername,u4.name as endername, s1.name as suppliername,o.totalmoney,
+       o.state,o.waybillsn  from orders o inner join  supplier s1 on o.supplieruuid=s1.uuid left join   sys_emp u1 on o.creater=u1.uuid
+       left join sys_emp as u2 on o.checker =u2.uuid left join  sys_emp u3 on o.starter=u3.uuid left join
+      sys_emp u4 on o.ender=u4.uuid where s1.name like concat('%',#{supliername},'%') and o.state =#{state}
+  </select>
+
+  <select id="selectQue" resultType="com.upup.purchase.model.Orderdetail">
+    select * from orderdetail where ORDERSUUID=#{orderuuid} and STATE=0
+  </select>
+  <select id="selectRu" resultType="com.upup.purchase.model.Orderdetail">
+    select * from orderdetail where ORDERSUUID=#{orderuuid} and STATE=1
+  </select>
+
+  <select id="selectDen" resultType="com.upup.purchase.model.Orderdetail">
+    select * from orderdetail where ORDERSUUID=#{orderuuid} and STATE=2
+  </select>
+
+  <select id="selectShen" resultType="com.upup.purchase.model.Orderdetail">
+     select * from orderdetail where ORDERSUUID=#{orderuuid} and STATE=3
+  </select>
+
+  <select id="queryPageC" resultType="java.util.Map">
+    select o.uuid,date_format(o.createtime,'%Y-%m-%d %H:%i:%s') as createtime,
+             date_format(o.checktime,'%Y-%m-%d %H:%i:%s') as checktime,
+             date_format(o.starttime,'%Y-%m-%d %H:%i:%s') as starttime,
+             date_format(o.endtime,'%Y-%m-%d %H:%i:%s') as endtime,
+                    o.type,u1.name as creatername,
+       u2.name as checkername,u3.name as startername,u4.name as endername, s1.name as suppliername,o.totalmoney,
+       o.state,o.waybillsn  from orders o inner join  supplier s1 on o.supplieruuid=s1.uuid left join   sys_emp u1 on o.creater=u1.uuid
+       left join sys_emp as u2 on o.checker =u2.uuid left join  sys_emp u3 on o.starter=u3.uuid left join
+      sys_emp u4 on o.ender=u4.uuid where s1.name like concat('%',#{supliername},'%') and o.state =#{state}
+      and o.type =#{type}
+  </select>
+
+  <update id="updateOrderState">
+    update orders
+    <set >
+      <if test="checktime != null" >
+        CHECKTIME = #{checktime},
+      </if>
+      <if test="checker != null" >
+        CHECKER = #{checker},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=CHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateOrderStateQ">
+    update orders
+    <set >
+      <if test="starttime != null" >
+        STARTTIME = #{starttime},
+      </if>
+      <if test="starter != null" >
+        STARTER = #{starter},
+      </if>
+      <if test="state != null" >
+        STATE = #{state},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateOrderStateR">
+    update orders
+    <set >
+      <if test="endtime != null" >
+        ENDTIME = #{endtime},
+      </if>
+      <if test="ender != null" >
+        ENDER = #{ender},
+      </if>
+      <if test="state != null" >
+        STATE = #{state},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateTuiD">
+    update orders
+      set CREATETIME = #{createtime},
+      CHECKTIME = #{checktime},
+      STARTTIME = #{starttime},
+      ENDTIME = #{endtime},
+      TYPE = #{type,jdbcType=CHAR},
+      STATE = #{state,jdbcType=CHAR}
+    where UUID = #{uuid,jdbcType=INTEGER}
+
+  </update>
+
+  <update id="updateTuiS">
+    update orders
+        set
+        CHECKTIME = #{checktime},
+        STATE = #{state,jdbcType=CHAR}
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateTuiC">
+    update orders
+        set
+        ENDTIME = #{endtime},
+        STATE = #{state,jdbcType=CHAR}
+      where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
+
+
+
 </mapper>

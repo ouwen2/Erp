@@ -7,7 +7,8 @@ import java.io.Serializable;
 
 @Builder
 @ToString
-public class Dep implements Serializable {
+public class
+Dep implements Serializable {
     private Integer uuid;
 
     private String name;
@@ -20,6 +21,11 @@ public class Dep implements Serializable {
         this.tele = tele;
     }
 
+   /* public Dep(Integer uuid, String name) {
+        this.uuid = uuid;
+        this.name = name;
+    }
+*/
     public Dep() {
         super();
     }

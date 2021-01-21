@@ -13,9 +13,8 @@ public enum ResponseStatus {
     STATUS_205(205,"登录身份过期，请重新登录！"),
     STATUS_206(206,"Token令牌失效或已过期！"),
     STATUS_207(207,"权限不足，当前请求无效！"),
-    STATUS_208(208,"修改失败"),
-    STATUS_209(209,"查询有问题"),
-
+    STATUS_208(208,"盈利盈亏登记成功"),
+    STATUS_209(209,"库存预警成功"),
     UNKNOWN_ERROR(999, "未知错误")
     ;
 

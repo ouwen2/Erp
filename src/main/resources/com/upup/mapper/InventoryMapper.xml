@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.upup.mapper.InventoryMapper" >
-  <resultMap id="BaseResultMap" type="com.upup.model.Inventory" >
+<mapper namespace="com.upup.stock.mapper.InventoryMapper" >
+  <resultMap id="BaseResultMap" type="com.upup.stock.model.Inventory" >
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="GOODSUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -26,11 +26,68 @@
     from inventory
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
+    <select id="queryInventoryPage" resultType="java.util.Map">
+      select a.UUID,b.`NAME` GOODSUUID,c.`NAME` STOREUUID ,a.TYPE,a.NUM,DATE_FORMAT(a.CREATETIME,'%Y-%m-%d ') as CREATETIME,DATE_FORMAT(a.CHECKTIME,'%Y-%m-%d ') as CHECKTIME,d.`NAME` CREATER,d.`NAME` CHECKER, STATE, REMARK
+      from inventory a,goods b,store c,sys_emp d
+      where a.GOODSUUID=b.UUID
+      and  a.STOREUUID=c.UUID
+      and a.CREATER=d.UUID
+      <if test="null!=goodsuuid and ''!=goodsuuid">
+        and b.NAME like concat('%',#{goodsuuid},'%')
+      </if>
+      <if test="null!=storeuuid and ''!=storeuuid">
+        and c.NAME like concat('%',#{storeuuid},'%')
+      </if>
+    <if test="null!=type and ''!=type">
+      and a.type like concat('%',#{type},'%')
+    </if>
+      <if test="null!=min and ''!=min">
+        and a.CREATETIME &gt;= #{min}
+      </if>
+      <if test="null!=max and ''!=max">
+      and a.CREATETIME &lt;= #{max}
+     </if>
+      <if test="null!=state and ''!=state">
+        and STATE=#{state}
+      </if>
+
+
+    </select>
+  <select id="queryInventoryshPage" resultType="java.util.Map">
+    select a.UUID,b.`NAME` GOODSUUID,c.`NAME` STOREUUID ,a.TYPE,a.NUM,DATE_FORMAT(a.CREATETIME,'%Y-%m-%d ') as CREATETIME ,a.CHECKTIME,d.`NAME` CREATER,CHECKER, STATE, REMARK
+    from inventory a,goods b,store c,sys_emp d
+     where a.GOODSUUID=b.UUID
+     and  a.STOREUUID=c.UUID
+     and a.CREATER=d.UUID
+     and state=1
+     <if test="null!=storeuuid and ''!=storeuuid">
+       and b.name=#{storeuuid}
+     </if>
+    <if test="null!=goodsuuid and ''!=goodsuuid">
+    and c.name=#{goodsuuid}
+  </if>
+    <if test="null!=type and ''!=type">
+      and type=#{type}
+    </if>
+  </select>
+  <select id="querykc" resultType="com.upup.stock.model.Storedetail">
+     select * from storedetail where 1=1
+          and uuid=#{uuid}
+  </select>
+  <select id="getList" resultType="java.lang.Integer">
+     select uuid from store where name = #{name}
+  </select>
+  <select id="queryGoodId" resultType="java.lang.Integer">
+    select uuid from goods where name = #{goodsuuid}
+  </select>
+  <select id="queryStoreId" resultType="java.lang.Integer">
+    select uuid from store where name=#{storeuuid}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from inventory
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.upup.model.Inventory" >
+  <insert id="insert" parameterType="com.upup.stock.model.Inventory" >
     insert into inventory (UUID, GOODSUUID, STOREUUID, 
       NUM, TYPE, CREATETIME, CHECKTIME, 
       CREATER, CHECKER, STATE, 
@@ -40,7 +97,7 @@
       #{creater,jdbcType=INTEGER}, #{checker,jdbcType=INTEGER}, #{state,jdbcType=CHAR}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.model.Inventory" >
+  <insert id="insertSelective" parameterType="com.upup.stock.model.Inventory" >
     insert into inventory
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
@@ -113,7 +170,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.model.Inventory" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.stock.model.Inventory" >
     update inventory
     <set >
       <if test="goodsuuid != null" >
@@ -149,18 +206,10 @@
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.model.Inventory" >
+  <update id="updateByPrimaryKey" parameterType="com.upup.stock.model.Inventory" >
     update inventory
-    set GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
-      STOREUUID = #{storeuuid,jdbcType=INTEGER},
-      NUM = #{num,jdbcType=INTEGER},
-      TYPE = #{type,jdbcType=CHAR},
-      CREATETIME = #{createtime,jdbcType=DATE},
-      CHECKTIME = #{checktime,jdbcType=DATE},
-      CREATER = #{creater,jdbcType=INTEGER},
-      CHECKER = #{checker,jdbcType=INTEGER},
-      STATE = #{state,jdbcType=CHAR},
-      REMARK = #{remark,jdbcType=VARCHAR}
+    set STATE = 2,CHECKTIME=#{checktime},
+    CHECKER=#{checker}
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
 </mapper>

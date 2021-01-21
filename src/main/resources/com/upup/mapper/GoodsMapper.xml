@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.upup.basics.mapper.GoodsMapper" >
-  <resultMap id="BaseResultMap" type="com.upup.basics.model.Goods" >
+<mapper namespace="com.upup.sale.mapper.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.upup.sale.model.Goods" >
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -22,6 +22,16 @@
     from goods
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
+    <select id="querygoodall" resultType="java.util.Map">
+         SELECT g.UUID as uuid,g.`NAME` as goodname,g.ORIGIN as origin,g.PRODUCER as producer,g.UNIT as unit,
+         g.INPRICE as inprice,g.OUTPRICE as outprice,gt.`NAME` AS goodtype
+        FROM goods g,goodstype gt WHERE g.GOODSTYPEUUID=gt.UUID
+    </select>
+
+  <select id="selectSinglegood" resultType="com.upup.sale.model.Goods">
+    select  <include refid="Base_Column_List"/> from goods where name= #{goodname}
+  </select>
+
     <select id="queryAllGoods" resultType="java.util.Map">
       select g.uuid,g.name, g.origin,g.producer,g.UNIT,g.INPRICE,g.OUTPRICE ,
       gt.`NAME` GOODSTYPEUUID from goods g,goodstype gt where g.GOODSTYPEUUID=gt.UUID
@@ -60,14 +70,72 @@
     delete from goods
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
+  <insert id="insert" parameterType="com.upup.sale.model.Goods" >
+    insert into goods (UUID, NAME, ORIGIN, 
   <insert id="insert" parameterType="com.upup.basics.model.Goods" >
     insert into goods (NAME, ORIGIN,
-      PRODUCER, UNIT, INPRICE, 
+      PRODUCER, UNIT, INPRICE,
       OUTPRICE, GOODSTYPEUUID)
     values (#{name,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR},
       #{producer,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{inprice,jdbcType=REAL},
       #{outprice,jdbcType=REAL}, #{goodstypeuuid,jdbcType=INTEGER})
   </insert>
+  <insert id="insertSelective" parameterType="com.upup.sale.model.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="origin != null" >
+        ORIGIN,
+      </if>
+      <if test="producer != null" >
+        PRODUCER,
+      </if>
+      <if test="unit != null" >
+        UNIT,
+      </if>
+      <if test="inprice != null" >
+        INPRICE,
+      </if>
+      <if test="outprice != null" >
+        OUTPRICE,
+      </if>
+      <if test="goodstypeuuid != null" >
+        GOODSTYPEUUID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="producer != null" >
+        #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="inprice != null" >
+        #{inprice,jdbcType=REAL},
+      </if>
+      <if test="outprice != null" >
+        #{outprice,jdbcType=REAL},
+      </if>
+      <if test="goodstypeuuid != null" >
+        #{goodstypeuuid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.sale.model.Goods" >
 
   <update id="updateByPrimaryKeySelective" parameterType="com.upup.basics.model.Goods" >
     update goods
@@ -96,5 +164,15 @@
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-
+  <update id="updateByPrimaryKey" parameterType="com.upup.sale.model.Goods" >
+    update goods
+    set NAME = #{name,jdbcType=VARCHAR},
+      ORIGIN = #{origin,jdbcType=VARCHAR},
+      PRODUCER = #{producer,jdbcType=VARCHAR},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      INPRICE = #{inprice,jdbcType=REAL},
+      OUTPRICE = #{outprice,jdbcType=REAL},
+      GOODSTYPEUUID = #{goodstypeuuid,jdbcType=INTEGER}
+    where UUID = #{uuid,jdbcType=INTEGER}
+  </update>
 </mapper>
