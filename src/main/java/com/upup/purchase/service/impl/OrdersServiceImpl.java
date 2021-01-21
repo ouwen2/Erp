@@ -44,6 +44,31 @@ public class OrdersServiceImpl implements IOrdersService {
     }
 
     @Override
+    public int insertSelective(Orders record) {
+        return 0;
+    }
+
+    @Override
+    public Orders selectByPrimaryKey(Integer uuid) {
+        return null;
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Orders record) {
+        return 0;
+    }
+
+    @Override
+    public int updateByPrimaryKey(Orders record) {
+        return 0;
+    }
+
+    @Override
+    public JsonResponseBody<?> queryall() {
+        return null;
+    }
+
+    @Override
     public List<Map<String,Object>>  getBySalesPage(OrderSa orderSa, PageBean pageBean) {
         return ordersMapper.getBySalesPage(orderSa);
     }

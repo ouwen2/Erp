@@ -10,7 +10,6 @@ import java.util.Date;
 
 @Data
 @ToString
-@AllArgsConstructor
 public class SysEmp {
     private Integer uuid;
 

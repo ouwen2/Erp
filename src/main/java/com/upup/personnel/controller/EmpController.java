@@ -8,7 +8,7 @@ import com.upup.personnel.model.Dep;
 import com.upup.personnel.service.IDepService;
 import com.upup.sys.model.SysEmp;
 import com.upup.sys.model.SysRole;
-import com.upup.sys.servce.ISysEmpServce;
+import com.upup.sys.service.ISysEmpService;
 import com.upup.sys.vo.SysEmpDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ import java.util.Map;
 public class EmpController {
 
     @Autowired
-    private ISysEmpServce iSysEmpServce;
+    private ISysEmpService iSysEmpServce;
 
     @Autowired
     private IDepService iDepService;
