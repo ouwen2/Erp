@@ -42,7 +42,12 @@ public class GoodsTypeServiceImpl implements IGoodsTypeService {
     }
 
     @Override
-    public List<GoodsType> queryGoodsTypePager(GoodsType goodsType, PageBean pageBean) {
-        return goodsTypeMapper.queryGoodsTypePager(goodsType);
+    public List<GoodsType> queryGoodsTypePage(GoodsType goodsType, PageBean pageBean) {
+        return goodsTypeMapper.queryGoodsTypePage(goodsType);
+    }
+
+    @Override
+    public List<GoodsType> cxsp() {
+        return goodsTypeMapper.cxsp();
     }
 }

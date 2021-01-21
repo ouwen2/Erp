@@ -1,7 +1,10 @@
 package com.upup.sys.model;
 
+import lombok.ToString;
+
 import java.util.Date;
 
+@ToString
 public class SysEmp {
     private Integer uuid;
 

@@ -8,21 +8,27 @@ import java.util.List;
 
 @Repository
 public interface SupplierMapper {
+    //删除供应商或客户信息
     int deleteByPrimaryKey(Integer uuid);
 
+    //添加供应商或客户信息
     int insert(Supplier record);
 
-    int insertSelective(Supplier record);
+    //添加供应商或客户信息2
+    int insert2(Supplier record);
 
-    Supplier selectByPrimaryKey(Integer uuid);
+    //供应商或客户名单个查询
+    Supplier selectByPrimaryKey(String supplier);
 
-    int updateByPrimaryKeySelective(Supplier record);
-
+    //修改供应商或客户信息
     int updateByPrimaryKey(Supplier record);
 
     //查询
     List<Supplier> queryAllSupplier(Supplier supplier);
 
-    //分页查询
-    List<Supplier> querySupplierPager(Supplier supplier);
+    //分页查询供应商
+    List<Supplier> querySupplierPage(Supplier supplier);
+
+    //分页查询客户
+    List<Supplier> queryCustomerPage(Supplier supplier);
 }

@@ -4,6 +4,7 @@ import com.upup.base.util.PageBean;
 import com.upup.basics.model.Goods;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface IGoodsService {
@@ -13,7 +14,6 @@ public interface IGoodsService {
     //添加
     int insert(Goods record);
 
-    int insertSelective(Goods record);
 
     //单个查询
     Goods selectByPrimaryKey(Integer uuid);
@@ -22,10 +22,10 @@ public interface IGoodsService {
     int updateByPrimaryKeySelective(Goods record);
 
     //查询
-    List<Goods> queryAllGoods(Goods goods);
+    List<Map<String,Object>> queryAllGoods(Goods goods);
 
     //分页查询
-    List<Goods> queryGoodsPager(Goods goods, PageBean pageBean);
+    List<Map<String,Object>> queryGoodsPage(Goods goods, PageBean pageBean);
 
-    int updateByPrimaryKey(Goods record);
+
 }

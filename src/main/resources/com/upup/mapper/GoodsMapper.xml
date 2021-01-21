@@ -22,18 +22,38 @@
     from goods
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
-    <select id="queryAllGoods" resultType="com.upup.basics.model.Goods">
-      select <include refid="Base_Column_List"/> from goods where 1=1
+    <select id="queryAllGoods" resultType="java.util.Map">
+      select g.uuid,g.name, g.origin,g.producer,g.UNIT,g.INPRICE,g.OUTPRICE ,
+      gt.`NAME` GOODSTYPEUUID from goods g,goodstype gt where g.GOODSTYPEUUID=gt.UUID
       <if test="null!=name and ''!=name">
         and name like concat('%',#{name},'%')
       </if>
+      <if test="null!=origin and ''!=origin">
+        and origin like concat('%',#{origin},'%')
+      </if>
+      <if test="null!=producer and ''!=producer">
+        and producer like concat('%',#{producer},'%')
+      </if>
     </select>
-  <select id="queryGoodsPager" resultType="com.upup.basics.model.Goods">
-    select  <include refid="Base_Column_List"/> from goods where 1=1
+  <select id="queryGoodsPager" resultType="java.util.Map">
+
+    select * from
+    ( select g.uuid,g.name ,g.origin,g.producer,g.unit,g.inprice, g.outprice,g.goodstypeuuid as goodstypeuuid ,
+    t.name as goodstypename from goods g,goodstype t where g.goodstypeuuid=t.uuid
     <if test="null!=name and ''!=name">
-      and goodstype like concat('%',#{name},'%')
+      and g.name like concat('%',#{name},'%')
     </if>
-    order by uuid desc
+    <if test="null!=origin and ''!=origin">
+      and g.origin like concat('%',#{origin},'%')
+    </if>
+    <if test="null!=producer and ''!=producer">
+      and g.producer like concat('%',#{producer},'%')
+    </if>
+    <if test="null!=goodstypeuuid and ''!=goodstypeuuid">
+      and g.goodstypeuuid = #{goodstypeuuid}
+    </if>
+    ) as a
+     order by uuid desc
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -45,64 +65,10 @@
       PRODUCER, UNIT, INPRICE, 
       OUTPRICE, GOODSTYPEUUID)
     values (#{name,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR},
-      #{producer,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{inprice,jdbcType=REAL}, 
+      #{producer,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{inprice,jdbcType=REAL},
       #{outprice,jdbcType=REAL}, #{goodstypeuuid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.basics.model.Goods" >
-    insert into goods
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        UUID,
-      </if>
-      <if test="name != null" >
-        NAME,
-      </if>
-      <if test="origin != null" >
-        ORIGIN,
-      </if>
-      <if test="producer != null" >
-        PRODUCER,
-      </if>
-      <if test="unit != null" >
-        UNIT,
-      </if>
-      <if test="inprice != null" >
-        INPRICE,
-      </if>
-      <if test="outprice != null" >
-        OUTPRICE,
-      </if>
-      <if test="goodstypeuuid != null" >
-        GOODSTYPEUUID,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        #{uuid,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="origin != null" >
-        #{origin,jdbcType=VARCHAR},
-      </if>
-      <if test="producer != null" >
-        #{producer,jdbcType=VARCHAR},
-      </if>
-      <if test="unit != null" >
-        #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="inprice != null" >
-        #{inprice,jdbcType=REAL},
-      </if>
-      <if test="outprice != null" >
-        #{outprice,jdbcType=REAL},
-      </if>
-      <if test="goodstypeuuid != null" >
-        #{goodstypeuuid,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.upup.basics.model.Goods" >
     update goods
     <set >
@@ -130,15 +96,5 @@
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.basics.model.Goods" >
-    update goods
-    set NAME = #{name,jdbcType=VARCHAR},
-      ORIGIN = #{origin,jdbcType=VARCHAR},
-      PRODUCER = #{producer,jdbcType=VARCHAR},
-      UNIT = #{unit,jdbcType=VARCHAR},
-      INPRICE = #{inprice,jdbcType=REAL},
-      OUTPRICE = #{outprice,jdbcType=REAL},
-      GOODSTYPEUUID = #{goodstypeuuid,jdbcType=INTEGER}
-    where UUID = #{uuid,jdbcType=INTEGER}
-  </update>
+
 </mapper>

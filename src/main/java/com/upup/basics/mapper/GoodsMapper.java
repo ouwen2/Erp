@@ -4,6 +4,7 @@ import com.upup.basics.model.Goods;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface GoodsMapper {
@@ -13,8 +14,6 @@ public interface GoodsMapper {
     //添加
     int insert(Goods record);
 
-    int insertSelective(Goods record);
-
     //单个查询
     Goods selectByPrimaryKey(Integer uuid);
 
@@ -22,10 +21,10 @@ public interface GoodsMapper {
     int updateByPrimaryKeySelective(Goods record);
 
     //查询
-    List<Goods> queryAllGoods(Goods goods);
+    List<Map<String,Object>> queryAllGoods(Goods goods);
 
     //分页查询
-    List<Goods> queryGoodsPager(Goods goods);
+    List<Map<String,Object>> queryGoodsPager(Goods goods);
 
-    int updateByPrimaryKey(Goods record);
+
 }

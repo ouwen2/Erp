@@ -1,10 +1,12 @@
 package com.upup.sys.servce;
 
+import com.upup.base.util.PageBean;
 import com.upup.sys.model.SysEmp;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
-public interface ISysEmpServce {
+import java.util.List;
+import java.util.Map;
+
+public interface ISysEmpService {
     int deleteByPrimaryKey(Integer uuid);
 
     int insert(SysEmp record);
@@ -18,4 +20,9 @@ public interface ISysEmpServce {
     int updateByPrimaryKey(SysEmp record);
 
     SysEmp selectByName(String empName);
+
+    List<Map<String,Object>> getSysEmpByUserNamePage(SysEmp sysEmp, PageBean pageBean);
+
+    int updatePassword(SysEmp sysEmp);
+
 }

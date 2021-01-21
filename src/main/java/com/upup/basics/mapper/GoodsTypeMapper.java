@@ -23,5 +23,8 @@ public interface GoodsTypeMapper {
     List<GoodsType> queryAllGoodsType(GoodsType goodsType);
 
     //分页查询
-    List<GoodsType> queryGoodsTypePager(GoodsType goodsType);
+    List<GoodsType> queryGoodsTypePage(GoodsType goodsType);
+
+    //查询所有
+    List<GoodsType> cxsp();
 }

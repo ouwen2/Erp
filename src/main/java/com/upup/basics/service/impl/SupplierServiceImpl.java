@@ -1,20 +1,23 @@
 package com.upup.basics.service.impl;
 
+import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.PageBean;
+import com.upup.base.util.ResponseStatus;
 import com.upup.basics.mapper.SupplierMapper;
 import com.upup.basics.model.Supplier;
 import com.upup.basics.service.ISupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+
 
 @Service
 public class SupplierServiceImpl implements ISupplierService {
 
     @Autowired
     public SupplierMapper supplierMapper;
-
 
 
     @Override
@@ -28,23 +31,18 @@ public class SupplierServiceImpl implements ISupplierService {
     }
 
     @Override
-    public int insertSelective(Supplier record) {
-        return 0;
+    public int insert2(Supplier record) {
+        return supplierMapper.insert(record);
     }
 
     @Override
-    public Supplier selectByPrimaryKey(Integer uuid) {
-        return supplierMapper.selectByPrimaryKey(uuid);
-    }
-
-    @Override
-    public int updateByPrimaryKeySelective(Supplier record) {
-        return supplierMapper.updateByPrimaryKeySelective(record);
+    public Supplier selectByPrimaryKey(String supplier) {
+        return supplierMapper.selectByPrimaryKey(supplier);
     }
 
     @Override
     public int updateByPrimaryKey(Supplier record) {
-        return 0;
+        return supplierMapper.updateByPrimaryKey(record);
     }
 
     @Override
@@ -53,8 +51,16 @@ public class SupplierServiceImpl implements ISupplierService {
     }
 
     @Override
-    public List<Supplier> querySupplierPager(Supplier supplier, PageBean pageBean) {
-        return supplierMapper.querySupplierPager(supplier);
+    public JsonResponseBody<?> querySupplierPage(Supplier supplier, PageBean pageBean) {
+        List<Supplier> list = supplierMapper.querySupplierPage(supplier);
+        return new JsonResponseBody<>(list,pageBean.getTotal());
     }
+
+    @Override
+    public JsonResponseBody<?> queryCustomerPage(Supplier supplier, PageBean pageBean) {
+        List<Supplier> customer = supplierMapper.queryCustomerPage(supplier);
+        return new JsonResponseBody<>(customer,pageBean.getTotal());
+    }
+
 
 }

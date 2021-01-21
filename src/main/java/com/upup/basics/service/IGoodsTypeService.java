@@ -22,7 +22,9 @@ public interface IGoodsTypeService {
     List<GoodsType> queryAllGoodsType(GoodsType goodsType);
 
     //分页查询
-    List<GoodsType> queryGoodsTypePager(GoodsType goodsType, PageBean pageBean);
+    List<GoodsType> queryGoodsTypePage(GoodsType goodsType, PageBean pageBean);
 
+    //查询所有
+    List<GoodsType> cxsp();
 
 }

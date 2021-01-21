@@ -24,12 +24,15 @@
       </if>
   </select>
 
-  <select id="queryGoodsTypePager" resultType="com.upup.basics.model.GoodsType">
+  <select id="queryGoodsTypePage" resultType="com.upup.basics.model.GoodsType">
     select  <include refid="Base_Column_List"/> from goodstype where 1=1
     <if test="null!=name and ''!=name">
-      and goodstype like concat('%',#{name},'%')
+      and name like concat('%',#{name},'%')
     </if>
     order by uuid desc
+  </select>
+  <select id="cxsp" resultType="com.upup.basics.model.GoodsType">
+    select <include refid="Base_Column_List"/> from goodstype
   </select>
 
 

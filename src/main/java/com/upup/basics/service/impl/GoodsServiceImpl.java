@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GoodsServiceImpl implements IGoodsService {
@@ -29,32 +30,23 @@ public class GoodsServiceImpl implements IGoodsService {
     }
 
     @Override
-    public int insertSelective(Goods record) {
-        return 0;
-    }
-
-    @Override
     public Goods selectByPrimaryKey(Integer uuid) {
         return goodsMapper.selectByPrimaryKey(uuid);
     }
 
     @Override
     public int updateByPrimaryKeySelective(Goods record) {
-        return 0;
+        return goodsMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
-    public List<Goods> queryAllGoods(Goods goods) {
+    public List<Map<String,Object>> queryAllGoods(Goods goods) {
         return goodsMapper.queryAllGoods(goods);
     }
 
     @Override
-    public List<Goods> queryGoodsPager(Goods goods, PageBean pageBean) {
+    public List<Map<String,Object>> queryGoodsPage(Goods goods, PageBean pageBean) {
         return goodsMapper.queryGoodsPager(goods);
     }
 
-    @Override
-    public int updateByPrimaryKey(Goods record) {
-        return 0;
-    }
 }

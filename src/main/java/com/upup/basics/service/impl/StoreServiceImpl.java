@@ -1,19 +1,24 @@
 package com.upup.basics.service.impl;
 
+import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.PageBean;
 import com.upup.basics.mapper.StoreMapper;
+import com.upup.basics.mapper.SupplierMapper;
 import com.upup.basics.model.Store;
 import com.upup.basics.service.IStoreService;
+import com.upup.sys.model.SysEmp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StoreServiceImpl implements IStoreService {
 
     @Autowired
     public StoreMapper storeMapper;
+
 
     @Override
     public int deleteByPrimaryKey(Integer uuid) {
@@ -26,32 +31,30 @@ public class StoreServiceImpl implements IStoreService {
     }
 
     @Override
-    public int insertSelective(Store record) {
-        return 0;
-    }
-
-    @Override
     public Store selectByPrimaryKey(Integer uuid) {
-        return null;
-    }
-
-    @Override
-    public int updateByPrimaryKeySelective(Store record) {
-        return 0;
+        return storeMapper.selectByPrimaryKey(uuid);
     }
 
     @Override
     public int updateByPrimaryKey(Store record) {
-        return 0;
+        return storeMapper.updateByPrimaryKey(record);
     }
 
     @Override
     public List<Store> queryAllStore(Store store) {
-        return null;
+        return storeMapper.queryAllStore(store);
     }
 
     @Override
-    public List<Store> queryStorePager(Store store, PageBean pageBean) {
-        return null;
+    public JsonResponseBody<?> queryStorerPage(Store store, PageBean pageBean) {
+        List<Map<String,Object>> list = storeMapper.queryStorePage(store);
+        return new JsonResponseBody<>(list,pageBean.getTotal());
     }
+
+    @Override
+    public List<Map<String,Object>> queryAllSysEmp(SysEmp sysEmp) {
+        return storeMapper.queryAllSysEmp(sysEmp);
+    }
+
+
 }
