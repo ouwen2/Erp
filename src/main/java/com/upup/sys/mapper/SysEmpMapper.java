@@ -34,4 +34,6 @@ public interface SysEmpMapper {
     Set<String> findPermissions(String username);
 
     List<Map<String,Object>> getSysEmpByUserNamePage(SysEmp sysEmp);
+
+    int updatePassword(SysEmp sysEmp);
 }

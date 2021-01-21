@@ -5,6 +5,16 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
            version="3.0">
     <display-name>Archetype Created Web Application</display-name>
+
+    <!--一个用于存储request和response和session的过滤器 -->
+    <filter>
+        <filter-name>InitContent</filter-name>
+        <filter-class>com.upup.base.util.InitContent</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>InitContent</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <!-- Spring和web项目集成start -->
     <!-- spring上下文配置文件 -->
     <context-param>

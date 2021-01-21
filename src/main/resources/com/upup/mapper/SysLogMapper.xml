@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.upup.sys.mapper.SysLogMapper" >
+  <resultMap id="BaseResultMap" type="com.upup.sys.model.SysLog" >
+    <constructor >
+      <idArg column="uuid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="log_ip" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="log_method" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="log_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" />
+      <arg column="menu_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uuid, log_ip, log_method, user_name, log_date
+  </sql>
+  <select id="getListPage" resultType="java.util.Map">
+    select *
+    from sys_log l,sys_menu m
+    where l.menu_id = m.MENUID
+    <if test="uuid != null and uuid!=0">
+      and uuid = #{uuid}
+    </if>
+    <if test="logIp != null and logIp!=''" >
+      and log_ip like concat('%',#{logIp},'%')
+    </if>
+    <if test="logMethod != null and logMethod!=''" >
+      and log_method like concat('%',#{logMethod},'%')
+    </if>
+    <if test="userName != null and userName!=''" >
+      and user_name like concat('%',#{userName},'%')
+    </if>
+    <if test="logDate != null" >
+      and log_date like concat('%',#{logDate},'%')
+    </if>
+    order by l.uuid desc
+
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_log
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_log
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.upup.sys.model.SysLog" >
+    insert into sys_log (uuid, log_ip, log_method, 
+      user_name, log_date,menu_id)
+    values (null , #{logIp,jdbcType=VARCHAR}, #{logMethod,jdbcType=VARCHAR},
+      #{userName,jdbcType=VARCHAR}, #{logDate,jdbcType=TIMESTAMP},#{menuId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.upup.sys.model.SysLog" >
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="logIp != null" >
+        log_ip,
+      </if>
+      <if test="logMethod != null" >
+        log_method,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="logDate != null" >
+        log_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=INTEGER},
+      </if>
+      <if test="logIp != null" >
+        #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logMethod != null" >
+        #{logMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="logDate != null" >
+        #{logDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.sys.model.SysLog" >
+    update sys_log
+    <set >
+      <if test="logIp != null" >
+        log_ip = #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logMethod != null" >
+        log_method = #{logMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="logDate != null" >
+        log_date = #{logDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.upup.sys.model.SysLog" >
+    update sys_log
+    set log_ip = #{logIp,jdbcType=VARCHAR},
+      log_method = #{logMethod,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      log_date = #{logDate,jdbcType=TIMESTAMP}
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </update>
+</mapper>

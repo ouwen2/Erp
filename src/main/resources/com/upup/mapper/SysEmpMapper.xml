@@ -212,4 +212,9 @@
       is_password = #{isPassword,jdbcType=VARCHAR}
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
+    <update id="updatePassword">
+      update sys_emp
+      set salt = #{salt},pwd = #{pwd}
+      where uuid = #{uuid}
+    </update>
 </mapper>

@@ -30,4 +30,6 @@ public interface SysMenuMapper {
     int saveSysRoleMenu(SysRoleMenu sysRoleMenu);
 
     int delSysRoleMenu(Integer roleuuid);
+
+    SysMenu selectByUrl(@Param("url") String url);
 }

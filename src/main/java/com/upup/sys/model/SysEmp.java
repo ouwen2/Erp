@@ -34,9 +34,9 @@ public class SysEmp {
 
     private String display;
 
-    private String isPassword;
+    private Boolean isPassword;
 
-    public SysEmp(Integer uuid, String username, String pwd, String salt, String name, Integer gender, String email, String tele, String address, Date birthday, Integer depuuid, String display, String isPassword) {
+    public SysEmp(Integer uuid, String username, String pwd, String salt, String name, Integer gender, String email, String tele, String address, Date birthday, Integer depuuid, String display, Boolean isPassword) {
         this.uuid = uuid;
         this.username = username;
         this.pwd = pwd;
@@ -152,11 +152,11 @@ public class SysEmp {
         this.display = display;
     }
 
-    public String getIsPassword() {
+    public Boolean getIsPassword() {
         return isPassword;
     }
 
-    public void setIsPassword(String isPassword) {
+    public void setIsPassword(Boolean isPassword) {
         this.isPassword = isPassword;
     }
 }

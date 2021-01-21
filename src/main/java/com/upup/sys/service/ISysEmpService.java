@@ -23,4 +23,6 @@ public interface ISysEmpService {
 
     List<Map<String,Object>> getSysEmpByUserNamePage(SysEmp sysEmp, PageBean pageBean);
 
+    int updatePassword(SysEmp sysEmp);
+
 }

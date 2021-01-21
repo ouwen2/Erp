@@ -58,7 +58,7 @@ public class SysMenuController extends BaseController {
         return new JsonResponseBody(ResponseStatus.STATUS_200,"保存权限成功");
     }
 
-    @RequestMapping("getSysTreeByRoleUUIDList")
+    @RequestMapping("/getSysTreeByRoleUUIDList")
     @ResponseBody
     public JsonResponseBody getSysTreeByRoleUUIDList(Integer roleUUID) {
         List<SysMenu> sysMenuList = iSysMenuServce.getSysTreeByRoleUUIDList(roleUUID);

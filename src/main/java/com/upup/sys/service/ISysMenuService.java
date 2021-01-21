@@ -29,4 +29,6 @@ public interface ISysMenuService {
     int deleteEmpRole(Integer empId);
 
     int saveEmpRole(SysRoleMenu sysRoleMenu);
+
+    SysMenu selectByUrl(String url);
 }

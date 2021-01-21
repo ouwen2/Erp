@@ -59,5 +59,10 @@ public class SysEmpServiceImpl implements ISysEmpService {
         return SysEmpMapper.getSysEmpByUserNamePage(sysEmp);
     }
 
+    @Override
+    public int updatePassword(SysEmp sysEmp) {
+        return SysEmpMapper.updatePassword(sysEmp);
+    }
+
 
 }

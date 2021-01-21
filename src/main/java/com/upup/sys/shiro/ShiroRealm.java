@@ -1,5 +1,6 @@
 package com.upup.sys.shiro;
 
+import com.upup.base.util.GetIpAddr;
 import com.upup.sys.mapper.SysEmpMapper;
 import com.upup.sys.model.SysEmp;
 import org.apache.shiro.authc.*;
@@ -11,14 +12,20 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
+import redis.clients.jedis.Jedis;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired
     private SysEmpMapper sysEmpMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
     /**
      * 授权
      * @param principalCollection
@@ -55,13 +62,13 @@ public class ShiroRealm extends AuthorizingRealm {
         if(sysEmp==null)
             throw new UnknownAccountException("账号错误");
 
+
         SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
                 sysEmp.getUsername(),
                 sysEmp.getPwd(),
                 ByteSource.Util.bytes(sysEmp.getSalt()),
                 this.getName()
         );
-        System.out.println(sysEmp);
         return simpleAuthenticationInfo;
     }
 

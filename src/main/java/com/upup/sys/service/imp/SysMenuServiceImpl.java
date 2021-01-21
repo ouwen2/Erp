@@ -91,4 +91,10 @@ public class SysMenuServiceImpl implements ISysMenuService {
     public int saveEmpRole(SysRoleMenu sysRoleMenu) {
         return sysMenuMapper.saveSysRoleMenu(sysRoleMenu);
     }
+
+    @Override
+    public SysMenu selectByUrl(String url) {
+        return sysMenuMapper.selectByUrl(url);
+
+    }
 }

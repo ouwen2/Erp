@@ -21,7 +21,7 @@ public class SysRoleController {
     @Autowired
     private ISysRoleService iSysRoleServce;
 
-    @RequiresPermissions(value = "/getListPage")
+//    @RequiresPermissions(value = "/getListPage")
     @RequestMapping("/getListPage")
     @ResponseBody
     public JsonResponseBody getListPage(SysRole sysRole, HttpServletRequest request){
@@ -66,14 +66,14 @@ public class SysRoleController {
         }
     }
 
-    @RequestMapping("getRoleListByEmpId")
+    @RequestMapping("/getRoleListByEmpId")
     @ResponseBody
     public JsonResponseBody getRoleListByEmpId(Integer empId){
         List<SysRole> roleListByEmpId = iSysRoleServce.getRoleListByEmpId(empId);
         return new JsonResponseBody(roleListByEmpId);
     }
 
-    @RequestMapping("saveEmpRole")
+    @RequestMapping("/saveEmpRole")
     @ResponseBody
     public JsonResponseBody saveEmpRole(Integer empId,String roleId){
         String [] roleIds = roleId.split(",");
