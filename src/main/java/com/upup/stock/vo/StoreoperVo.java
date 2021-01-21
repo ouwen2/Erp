@@ -15,5 +15,9 @@ public class StoreoperVo extends Storeoper {
     private String storeName;
     private String goodsName;
 
+    private String min;
+    private String max;
+
+
 
 }

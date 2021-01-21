@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.upup.stock.mapper.StoredetailMapper" >
-  <resultMap id="BaseResultMap" type="com.upup.model.Storedetail" >
+  <resultMap id="BaseResultMap" type="com.upup.stock.model.Storedetail" >
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="STOREUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -18,26 +18,45 @@
     from storedetail
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
-  <select id="queryStoredetailPager" resultType="java.util.Map">
-    SELECT a.UUID,b.name STOREUUID,c.NAME GOODSUUID,a.NUM
+    <select id="queryStoredetailPage" resultType="java.util.Map">
+     SELECT a.UUID,b.name STOREUUID,c.NAME GOODSUUID,a.NUM
     FROM storedetail a,store b,goods c
     where a.STOREUUID=b.UUID
     and a.GOODSUUID = c.UUID
     and b.name like concat('%',#{storeName},'%')
     and c.NAME like concat('%',#{goodsName},'%')
-
-</select>
+    </select>
+  <select id="selectStores" resultType="com.upup.model.Store">
+     select uuid,name from store
+  </select>
+  <select id="selectGoods" resultType="com.upup.sale.model.Goods">
+    select uuid,name from goods
+  </select>
+  <select id="xlkck" resultType="java.lang.String">
+    select name from store where uuid=#{goodsuuid}
+  </select>
+  <select id="queryYjPage" resultType="java.util.Map">
+    SELECT DISTINCT a.UUID,b.name STOREUUID,c.NAME GOODSUUID,a.NUM,e.sum
+    FROM storedetail a,store b,goods c,orderdetail d,
+		(select GOODSNAME,sum(num) sum from orderdetail
+		where STATE = 1
+		GROUP BY GOODSNAME) e
+    where a.STOREUUID=b.UUID
+    and a.GOODSUUID = c.UUID
+	and c.name = e.GOODSNAME
+	and e.sum&gt;=a.NUM
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from storedetail
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.upup.model.Storedetail" >
+  <insert id="insert" parameterType="com.upup.stock.model.Storedetail" >
     insert into storedetail (UUID, STOREUUID, GOODSUUID, 
       NUM)
     values (#{uuid,jdbcType=INTEGER}, #{storeuuid,jdbcType=INTEGER}, #{goodsuuid,jdbcType=INTEGER}, 
       #{num,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.model.Storedetail" >
+  <insert id="insertSelective" parameterType="com.upup.stock.model.Storedetail" >
     insert into storedetail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
@@ -68,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.model.Storedetail" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.stock.model.Storedetail" >
     update storedetail
     <set >
       <if test="storeuuid != null" >
@@ -83,7 +102,7 @@
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.model.Storedetail" >
+  <update id="updateByPrimaryKey" parameterType="com.upup.stock.model.Storedetail" >
     update storedetail
     set STOREUUID = #{storeuuid,jdbcType=INTEGER},
       GOODSUUID = #{goodsuuid,jdbcType=INTEGER},

@@ -23,9 +23,26 @@
       select <include refid="Base_Column_List"/> from sys_menu
       where pid = #{pid}
     </select>
+    <select id="getSysTreeByRoleUUIDList" resultType="com.upup.sys.model.SysMenu">
+      select m.*
+      from sys_role r,sys_role_menu rm,sys_menu m
+      where r.uuid = rm.ROLEUUID
+      and rm.MENUUUID = m.MENUID
+      and r.uuid=#{roleUUID}
+      <if test="pid!=null">
+        and m.pid = #{pid}
+      </if>
+    </select>
+    <select id="selectByUrl" resultType="com.upup.sys.model.SysMenu">
+      select * from sys_menu where url = #{url}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sys_menu
     where MENUID = #{menuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="delSysRoleMenu">
+    delete from sys_role_menu
+    where roleuuid = #{roleuuid}
   </delete>
   <insert id="insert" parameterType="com.upup.sys.model.SysMenu" >
     insert into sys_menu (MENUID, MENUNAME, ICON, 
@@ -69,6 +86,10 @@
         #{pid,jdbcType=VARCHAR},
       </if>
     </trim>
+  </insert>
+  <insert id="saveSysRoleMenu">
+    insert into sys_role_menu
+    values(#{roleUUID},#{menuId})
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.upup.sys.model.SysMenu" >
     update sys_menu

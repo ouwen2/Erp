@@ -2,6 +2,8 @@ package com.upup.stock.mapper;
 
 import com.upup.stock.model.Inventory;
 import com.upup.stock.model.Storedetail;
+import com.upup.stock.vo.InventoryVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,24 +23,18 @@ public interface InventoryMapper {
 
     int updateByPrimaryKey(Inventory record);
 
-    List<Map<String,Object>> queryInventoryPage(Inventory inventory);
+    List<Map<String,Object>> queryInventoryPage(InventoryVo inventoryVo);
 
     List<Map<String,Object>> queryInventoryshPage(Inventory inventory);
 
-    Storedetail querykc(Inventory inventory);
+    Storedetail querykc(int inventory);
 
-//    update inventory
-//    set GOODSUUID = #{goodsuuid,jdbcType=INTEGER},
-//    STOREUUID = #{storeuuid,jdbcType=INTEGER},
-//    NUM = #{num,jdbcType=INTEGER},
-//    TYPE = #{type,jdbcType=CHAR},
-//    CREATETIME = #{createtime,jdbcType=DATE},
-//    CHECKTIME = #{checktime,jdbcType=DATE},
-//    CREATER = #{creater,jdbcType=INTEGER},
-//    CHECKER = #{checker,jdbcType=INTEGER},
-//    STATE = #{state,jdbcType=CHAR},
-//    REMARK = #{remark,jdbcType=VARCHAR}
-//    where UUID = #{uuid,jdbcType=INTEGER}
+    Integer getList(@Param("name") String name);
+
+    int queryGoodId(@Param("goodsuuid") String goodsuuid);
+
+    int queryStoreId(@Param("storeuuid") String storeuuid);
+
 
 
 

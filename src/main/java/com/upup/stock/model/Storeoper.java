@@ -10,7 +10,7 @@ public class Storeoper {
     private Integer sysEmpuuid;
 
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
-    private Date opertime;
+    private String opertime;
 
     private Integer storeuuid;
 
@@ -20,7 +20,7 @@ public class Storeoper {
 
     private String type;
 
-    public Storeoper(Integer uuid, Integer sysEmpuuid, Date opertime, Integer storeuuid, Integer goodsuuid, Integer num, String type) {
+    public Storeoper(Integer uuid, Integer sysEmpuuid, String opertime, Integer storeuuid, Integer goodsuuid, Integer num, String type) {
         this.uuid = uuid;
         this.sysEmpuuid = sysEmpuuid;
         this.opertime = opertime;
@@ -50,11 +50,11 @@ public class Storeoper {
         this.sysEmpuuid = sysEmpuuid;
     }
 
-    public Date getOpertime() {
+    public String getOpertime() {
         return opertime;
     }
 
-    public void setOpertime(Date opertime) {
+    public void setOpertime(String opertime) {
         this.opertime = opertime;
     }
 
@@ -89,4 +89,6 @@ public class Storeoper {
     public void setType(String type) {
         this.type = type;
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.upup.sys.mapper;
 
 import com.upup.sys.model.SysRole;
+import com.upup.sys.vo.SysEmpRole;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -21,4 +22,10 @@ public interface SysRoleMapper {
     int updateByPrimaryKey(SysRole record);
 
     List<SysRole> getSysRoleByRoleNamePage(SysRole sysRole);
+
+    List<SysRole> getRoleListByEmpId(Integer empId);
+
+    int deleteEmpRole(Integer empId);
+
+    int saveEmpRole(SysEmpRole sysEmpRole);
 }

@@ -1,5 +1,6 @@
 package com.upup.stock.mapper;
 
+import com.upup.stock.model.Inventory;
 import com.upup.stock.model.Storeoper;
 import com.upup.stock.vo.StoredetailVo;
 import com.upup.stock.vo.StoreoperVo;
@@ -12,8 +13,6 @@ import java.util.Map;
 public interface StoreoperMapper {
     int deleteByPrimaryKey(Integer uuid);
 
-    int insert(Storeoper record);
-
     int insertSelective(Storeoper record);
 
     Storeoper selectByPrimaryKey(Integer uuid);
@@ -23,5 +22,8 @@ public interface StoreoperMapper {
     int updateByPrimaryKey(Storeoper record);
 
     List<Map<String,Object>> queryStoredetailPage(StoreoperVo storeoperVo);
+
+    int insert(Inventory record);
+
 
 }

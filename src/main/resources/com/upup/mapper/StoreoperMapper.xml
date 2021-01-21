@@ -12,36 +12,54 @@
       <arg column="TYPE" jdbcType="CHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
+  <select id="queryStoredetailPage" resultType="java.util.Map">
+    select a.UUID,b.`NAME` sys_empUUID,DATE_FORMAT(a.OPERTIME,'%Y-%m-%d ') as OPERTIME ,c.`NAME` STOREUUID,
+    d.`NAME` GOODSUUID ,a.NUM,a.TYPE
+    from storeoper a,sys_emp b,store c,goods d
+    where a.sys_empUUID=b.UUID
+    and a.STOREUUID=c.UUID
+    and a.GOODSUUID=d.UUID
+    <if test="null!=sysEmpUuid and ''!=sysEmpUuid">
+    and b.NAME like concat('%',#{sysEmpUuid},'%')
+  </if>
+    <if test="null!=storeName and ''!=storeName">
+      and c.NAME like concat('%',#{storeName},'%')
+    </if>
+    <if test="null!=goodsName and ''!=goodsName">
+      and d.NAME like concat('%',#{goodsName},'%')
+  </if>
+    <if test="null!=min and ''!=min and null!=max and ''!=max" >
+      and a.OPERTIME &gt;= #{min}
+      and a.OPERTIME &lt;= #{max}
+    </if>
+
+
+
+
+
+
+
+  </select>
   <sql id="Base_Column_List" >
     UUID, sys_empUUID, OPERTIME, STOREUUID, GOODSUUID, NUM, TYPE
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from storeoper
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
-    <select id="queryStoredetailPager" resultType="java.util.Map">
 
-    select a.UUID,b.`NAME` sys_empUUID,DATE_FORMAT(a.OPERTIME,'%Y-%m-%d ') as OPERTIME ,c.`NAME` STOREUUID,
-    d.`NAME` GOODSUUID ,a.NUM,a.TYPE
-    from storeoper a,sys_emp b,store c,goods d
-     where a.sys_empUUID=b.UUID
-     and a.STOREUUID=c.UUID
-     and a.GOODSUUID=d.UUID
-     and b.NAME like concat('%',#{sysEmpUuid},'%')
-     and c.NAME like concat('%',#{storeName},'%')
-     and d.NAME like concat('%',#{goodsName},'%')
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from storeoper
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.upup.stock.model.Storeoper" >
+  <insert id="insert" parameterType="com.upup.stock.model.Inventory" >
     insert into storeoper (UUID, sys_empUUID, OPERTIME, 
-      STOREUUID, GOODSUUID, NUM, 
-      TYPE)
-    values (#{uuid,jdbcType=INTEGER}, #{sysEmpuuid,jdbcType=INTEGER}, #{opertime,jdbcType=DATE}, 
+      STOREUUID, GOODSUUID, NUM, TYPE)
+    values (null, #{checker,jdbcType=INTEGER}, #{checktime,jdbcType=DATE},
       #{storeuuid,jdbcType=INTEGER}, #{goodsuuid,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
       #{type,jdbcType=CHAR})
   </insert>
