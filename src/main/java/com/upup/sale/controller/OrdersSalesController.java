@@ -16,13 +16,13 @@ public class OrdersSalesController {
     private IOrdersService ordersService;
 
 
-//    @RequestMapping("/queryall")
-//    @ResponseBody
-//    public JsonResponseBody queryall(){
-//        System.out.println("来了");
-//
-//        return ordersService.queryall();
-//    }
+    @RequestMapping("/queryall")
+    @ResponseBody
+    public JsonResponseBody queryall(){
+        System.out.println("来了");
+
+        return ordersService.queryall();
+    }
 
 
 }

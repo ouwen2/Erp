@@ -3,7 +3,6 @@ package com.upup.sale.service.impl;
 import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.PageBean;
 import com.upup.model.Store;
-import com.upup.model.Storedetail;
 import com.upup.model.Supplier;
 import com.upup.purchase.model.Orderdetail;
 import com.upup.purchase.model.Orders;
@@ -16,6 +15,7 @@ import com.upup.sale.service.IGoodsService;
 import com.upup.sale.vo.GoodsVo;
 import com.upup.sale.vo.OrderVo;
 import com.upup.sale.vo.ReturnordersVo;
+import com.upup.stock.model.Storedetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

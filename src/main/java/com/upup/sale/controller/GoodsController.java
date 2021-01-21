@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.PageBean;
 import com.upup.model.Store;
-import com.upup.model.Storedetail;
 import com.upup.purchase.model.Orderdetail;
 import com.upup.purchase.model.Orders;
 import com.upup.purchase.model.Returnorderdetail;
@@ -15,6 +14,7 @@ import com.upup.sale.service.IGoodsService;
 import com.upup.sale.vo.GoodsVo;
 import com.upup.sale.vo.OrderVo;
 import com.upup.sale.vo.ReturnordersVo;
+import com.upup.stock.model.Storedetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -179,7 +179,7 @@ public class GoodsController {
         returnordersVo.setTYPE(2);
         returnordersVo.setCREATER(xdyuuid);
         returnordersVo.setSUPPLIERUUID(i1);
-        returnordersVo.setTOTALMONEY(orderdetail.getMoney());
+        returnordersVo.setTOTALMONEY(orderdetail.getOrderdetailMoney());
         returnordersVo.setSTATE(2);
         returnordersVo.setWAYBILLSN(orderdetail.getOrdersuuid());
             System.out.println(returnordersVo);
@@ -187,7 +187,7 @@ public class GoodsController {
             System.out.println(insertreturnorders);
         }else{
             System.out.println("laile");
-            goodsService.updatemonryjia(orderuuid,orderdetail.getMoney());
+            goodsService.updatemonryjia(orderuuid,orderdetail.getOrderdetailMoney());
         }
         System.out.println(orderdetail.toString());
         goodsService.insertreturnordersdetail(orderdetail);

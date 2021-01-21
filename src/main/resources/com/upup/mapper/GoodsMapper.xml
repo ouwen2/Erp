@@ -80,7 +80,7 @@ select o.uuid,date_format(o.createtime,'%Y-%m-%d %H:%i:%s') as createtime,
     	select * from store where sys_empUUID =#{glyuuid}
   </select>
 
-  <select id="selectcangkudetauiluuid" resultType="com.upup.model.Storedetail">
+  <select id="selectcangkudetauiluuid" resultType="com.upup.stock.model.Storedetail">
     select * from storedetail where STOREUUID=#{storeuuid} and GOODSUUID =#{goodsuuid}
   </select>
 

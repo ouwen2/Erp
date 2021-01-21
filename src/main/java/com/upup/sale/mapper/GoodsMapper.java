@@ -1,7 +1,6 @@
 package com.upup.sale.mapper;
 
 import com.upup.model.Store;
-import com.upup.model.Storedetail;
 import com.upup.model.Supplier;
 import com.upup.purchase.model.Orderdetail;
 import com.upup.purchase.model.Orders;
@@ -11,6 +10,7 @@ import com.upup.sale.model.Goods;
 import com.upup.sale.vo.GoodsVo;
 import com.upup.sale.vo.OrderVo;
 import com.upup.sale.vo.ReturnordersVo;
+import com.upup.stock.model.Storedetail;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

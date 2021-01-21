@@ -65,7 +65,7 @@ public class OrdersServiceImpl implements IOrdersService {
 
     @Override
     public JsonResponseBody<?> queryall() {
-        return null;
+        return  new JsonResponseBody<>(ordersMapper.queryall());
     }
 
     @Override

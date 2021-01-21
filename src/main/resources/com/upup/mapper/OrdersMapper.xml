@@ -60,8 +60,11 @@
   <select id="getByYear" resultType="java.util.Map">
     select distinct year(endtime) as years from orders where type =1
   </select>
+    <select id="queryall" resultType="java.util.Map">
+      select  * from  orders
+    </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from orders
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>

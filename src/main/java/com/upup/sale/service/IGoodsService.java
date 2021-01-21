@@ -3,7 +3,6 @@ package com.upup.sale.service;
 import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.PageBean;
 import com.upup.model.Store;
-import com.upup.model.Storedetail;
 import com.upup.purchase.model.Orderdetail;
 import com.upup.purchase.model.Orders;
 import com.upup.purchase.model.Returnorderdetail;
@@ -12,6 +11,7 @@ import com.upup.sale.model.Goods;
 import com.upup.sale.vo.GoodsVo;
 import com.upup.sale.vo.OrderVo;
 import com.upup.sale.vo.ReturnordersVo;
+import com.upup.stock.model.Storedetail;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
