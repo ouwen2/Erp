@@ -32,16 +32,52 @@
     select  <include refid="Base_Column_List"/> from goods where name= #{goodname}
   </select>
 
+    <select id="queryAllGoods" resultType="java.util.Map">
+      select g.uuid,g.name, g.origin,g.producer,g.UNIT,g.INPRICE,g.OUTPRICE ,
+      gt.`NAME` GOODSTYPEUUID from goods g,goodstype gt where g.GOODSTYPEUUID=gt.UUID
+      <if test="null!=name and ''!=name">
+        and name like concat('%',#{name},'%')
+      </if>
+      <if test="null!=origin and ''!=origin">
+        and origin like concat('%',#{origin},'%')
+      </if>
+      <if test="null!=producer and ''!=producer">
+        and producer like concat('%',#{producer},'%')
+      </if>
+    </select>
+  <select id="queryGoodsPager" resultType="java.util.Map">
+
+    select * from
+    ( select g.uuid,g.name ,g.origin,g.producer,g.unit,g.inprice, g.outprice,g.goodstypeuuid as goodstypeuuid ,
+    t.name as goodstypename from goods g,goodstype t where g.goodstypeuuid=t.uuid
+    <if test="null!=name and ''!=name">
+      and g.name like concat('%',#{name},'%')
+    </if>
+    <if test="null!=origin and ''!=origin">
+      and g.origin like concat('%',#{origin},'%')
+    </if>
+    <if test="null!=producer and ''!=producer">
+      and g.producer like concat('%',#{producer},'%')
+    </if>
+    <if test="null!=goodstypeuuid and ''!=goodstypeuuid">
+      and g.goodstypeuuid = #{goodstypeuuid}
+    </if>
+    ) as a
+     order by uuid desc
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goods
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.upup.sale.model.Goods" >
     insert into goods (UUID, NAME, ORIGIN, 
-      PRODUCER, UNIT, INPRICE, 
+  <insert id="insert" parameterType="com.upup.basics.model.Goods" >
+    insert into goods (NAME, ORIGIN,
+      PRODUCER, UNIT, INPRICE,
       OUTPRICE, GOODSTYPEUUID)
-    values (#{uuid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, 
-      #{producer,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{inprice,jdbcType=REAL}, 
+    values (#{name,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR},
+      #{producer,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{inprice,jdbcType=REAL},
       #{outprice,jdbcType=REAL}, #{goodstypeuuid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.upup.sale.model.Goods" >
@@ -100,6 +136,8 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.upup.sale.model.Goods" >
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.basics.model.Goods" >
     update goods
     <set >
       <if test="name != null" >

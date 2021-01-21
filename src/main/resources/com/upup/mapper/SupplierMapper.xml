@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.upup.mapper.SupplierMapper" >
-  <resultMap id="BaseResultMap" type="com.upup.model.Supplier" >
+<mapper namespace="com.upup.basics.mapper.SupplierMapper" >
+  <resultMap id="BaseResultMap" type="com.upup.basics.model.Supplier" >
     <constructor >
       <idArg column="UUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -19,7 +19,51 @@
     select 
     <include refid="Base_Column_List" />
     from supplier
-    where UUID = #{uuid,jdbcType=INTEGER}
+    where NAME = #{name,jdbcType=VARCHAR}
+  </select>
+    <select id="queryAllSupplier" resultType="com.upup.basics.model.Supplier">
+      select <include refid="Base_Column_List"/> from supplier where 1=1
+      <if test="null!=name and ''!=name">
+        and name like concat('%',#{name},'%')
+      </if>
+    </select>
+  <select id="querySupplierPage" resultType="com.upup.basics.model.Supplier">
+    select  <include refid="Base_Column_List"/> from supplier where type=0
+    <if test="null!=name and ''!=name">
+      and name like concat('%',#{name},'%')
+    </if>
+    <if test="null!=address and ''!=address">
+      and address like concat('%',#{address},'%')
+    </if>
+    <if test="null!=contact and ''!=contact">
+      and contact like concat('%',#{contact},'%')
+    </if>
+    <if test="null!=tele and ''!=tele">
+      and tele like concat('%',#{tele},'%')
+    </if>
+    <if test="null!=email and ''!=email">
+      and email  like concat('%',#{email},'%')
+    </if>
+    order by uuid desc
+  </select>
+  <select id="queryCustomerPage" resultType="com.upup.basics.model.Supplier">
+    select <include refid="Base_Column_List"/> from supplier where type=1
+    <if test="null!=name and ''!=name">
+      and name like concat('%',#{name},'%')
+    </if>
+    <if test="null!=address and ''!=address">
+      and address like concat('%',#{address},'%')
+    </if>
+    <if test="null!=contact and ''!=contact">
+      and contact like concat('%',#{contact},'%')
+    </if>
+    <if test="null!=tele and ''!=tele">
+      and tele like concat('%',#{tele},'%')
+    </if>
+    <if test="null!=email and ''!=email">
+      and email like concat('%',#{email},'%')
+    </if>
+    order by uuid desc
   </select>
 
   <select id="queryall" resultType="com.upup.model.Supplier">
@@ -30,95 +74,30 @@
     delete from supplier
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.upup.model.Supplier" >
-    insert into supplier (UUID, NAME, ADDRESS, 
+  <insert id="insert" parameterType="com.upup.basics.model.Supplier" >
+    insert into supplier (NAME, ADDRESS,
       CONTACT, TELE, EMAIL, 
       TYPE)
-    values (#{uuid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+    values (#{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
       #{contact,jdbcType=VARCHAR}, #{tele,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{type,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.upup.model.Supplier" >
-    insert into supplier
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        UUID,
-      </if>
-      <if test="name != null" >
-        NAME,
-      </if>
-      <if test="address != null" >
-        ADDRESS,
-      </if>
-      <if test="contact != null" >
-        CONTACT,
-      </if>
-      <if test="tele != null" >
-        TELE,
-      </if>
-      <if test="email != null" >
-        EMAIL,
-      </if>
-      <if test="type != null" >
-        TYPE,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        #{uuid,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="contact != null" >
-        #{contact,jdbcType=VARCHAR},
-      </if>
-      <if test="tele != null" >
-        #{tele,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=CHAR},
-      </if>
-    </trim>
+  <insert id="insert2" parameterType="com.upup.basics.model.Supplier">
+    insert into supplier (NAME, ADDRESS,
+      CONTACT, TELE, EMAIL,
+      TYPE)
+    values (#{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+      #{contact,jdbcType=VARCHAR}, #{tele,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+      #{type,jdbcType=CHAR})
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.model.Supplier" >
-    update supplier
-    <set >
-      <if test="name != null" >
-        NAME = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null" >
-        ADDRESS = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="contact != null" >
-        CONTACT = #{contact,jdbcType=VARCHAR},
-      </if>
-      <if test="tele != null" >
-        TELE = #{tele,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        EMAIL = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        TYPE = #{type,jdbcType=CHAR},
-      </if>
-    </set>
-    where UUID = #{uuid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.model.Supplier" >
+
+  <update id="updateByPrimaryKey" parameterType="com.upup.basics.model.Supplier" >
     update supplier
     set NAME = #{name,jdbcType=VARCHAR},
       ADDRESS = #{address,jdbcType=VARCHAR},
       CONTACT = #{contact,jdbcType=VARCHAR},
       TELE = #{tele,jdbcType=VARCHAR},
-      EMAIL = #{email,jdbcType=VARCHAR},
-      TYPE = #{type,jdbcType=CHAR}
+      EMAIL = #{email,jdbcType=VARCHAR}
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
 </mapper>

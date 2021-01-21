@@ -1,5 +1,10 @@
-package com.upup.model;
+package com.upup.basics.model;
 
+import lombok.ToString;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@ToString
 public class GoodsType {
     private Integer uuid;
 
