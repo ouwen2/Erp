@@ -24,7 +24,7 @@
   </select>
   <select id="queryNameAll" resultType="com.upup.sale.model.Goods">
     select
-    uuid,name
+   *
     from goods
   </select>
 
@@ -33,6 +33,163 @@
     select * from store where sys_empUUID =
 (select uuid from sys_emp where name =#{name})
     </select>
+
+  <select id="queryStateList" resultType="java.lang.Integer">
+    select state as a from orderdetail where ordersuuid =#{ordersuuid} group by a
+  </select>
+
+
+  <select id="querySupplierAllList" resultType="com.upup.model.Supplier">
+    select * from supplier where type =2
+  </select>
+
+  <select id="getBygoodesname" resultType="com.upup.sale.model.Goods">
+    select * from goods where name =#{goodname}
+  </select>
+
+  <select id="selectByid" resultType="com.upup.purchase.model.Orderdetail">
+    select * from orderdetail where uuid = #{uuid}
+  </select>
+
+  <select id="selectByorderid" resultType="com.upup.purchase.model.Returnorders">
+    select * from Returnorders where WAYBILLSN = #{orderuuid}
+  </select>
+
+  <select id="selectsuppGetByname" resultType="java.lang.Integer">
+    select uuid from supplier where  name =#{suppliername}
+  </select>
+
+
+  <select id="queryReturnorderdetailAllList" resultType="java.util.Map">
+select o.uuid,date_format(o.createtime,'%Y-%m-%d %H:%i:%s') as createtime,
+             date_format(o.checktime,'%Y-%m-%d %H:%i:%s') as checktime,
+             date_format(o.endtime,'%Y-%m-%d %H:%i:%s') as endtime, u1.name as creatername,u2.name as checkername ,u3.name as endername ,s1.name as suppliername,o.TOTALMONEY,o.STATE,o.WAYBILLSN,o.ORDERSUUID from returnorders o inner join sys_emp u1 on o.creater=u1.uuid left join sys_emp as u2 on o.checker =u2.uuid left join  sys_emp u3 on o.ender=u3.uuid left join  supplier s1 on o.supplieruuid=s1.uuid where o.state ='h'
+  </select>
+
+  <select id="queryReturnorderdetailAllListtype" resultType="java.util.Map">
+select o.uuid,date_format(o.createtime,'%Y-%m-%d %H:%i:%s') as createtime,
+             date_format(o.checktime,'%Y-%m-%d %H:%i:%s') as checktime,
+             date_format(o.endtime,'%Y-%m-%d %H:%i:%s') as endtime, u1.name as creatername,u2.name as checkername ,u3.name as endername ,s1.name as suppliername,o.TOTALMONEY,o.STATE,o.WAYBILLSN,o.ORDERSUUID from returnorders o inner join sys_emp u1 on o.creater=u1.uuid left join sys_emp as u2 on o.checker =u2.uuid left join  sys_emp u3 on o.ender=u3.uuid left join  supplier s1 on o.supplieruuid=s1.uuid where o.type =2 and state ='y'
+  </select>
+
+  <select id="queryByreturnid" resultType="com.upup.purchase.model.Returnorderdetail">
+    select * from returnorderdetail where ordersuuid = #{orderuuid}
+  </select>
+
+  <select id="queryByglyuuidAll" resultType="com.upup.model.Store">
+    	select * from store where sys_empUUID =#{glyuuid}
+  </select>
+
+  <select id="selectcangkudetauiluuid" resultType="com.upup.model.Storedetail">
+    select * from storedetail where STOREUUID=#{storeuuid} and GOODSUUID =#{goodsuuid}
+  </select>
+
+  <update id="updateReturndetailstateH">
+      update returnorderdetail set state ='h' where uuid =#{ordersuuid}
+  </update>
+
+  <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
+  <select id="selectgetByhenduo" resultType="java.lang.Integer">
+      select uuid from storedetail where storeuuid=
+      (select uuid from store where name = #{param1} and sys_empUUID = #{param2} ) and goodsuuid = #{param3}
+    </select>
+  <select id="selectcangkuuuid" resultType="java.lang.Integer">
+    select uuid from store where name = #{storename} and sys_empUUID = #{glyuuid}
+  </select>
+
+  <update id="updateNumJian">
+        update storedetail set num=num -#{param1} where uuid =#{param2}
+  </update>
+
+  <update id="updateOrdersDetail">
+    update orderdetail set state = 2 where uuid =#{uuid}
+  </update>
+
+  <update id="updateOrderscjstate">
+    update orders set state =2 where uuid = #{ordersuuid}
+  </update>
+
+  <insert id="insertOrderssj">
+    insert into orders(uuid,CREATETIME,type,creater,TOTALMONEY,state,SUPPLIERUUID) values(#{uuid},#{CREATETIME},#{type},#{creater},#{TOTALMONEY},#{state},#{SUPPLIERUUID})
+  </insert>
+
+  <insert id="insertOrderxiangxi">
+    insert into orderdetail (GoodsuuId, Goodsname,
+    Price, Num, Money,
+    ORDERSUUID,STATE)
+    values
+    <foreach collection="orderDetailList" item="list" separator=",">
+      (#{list.orderdetailGoodsId},
+      #{list.orderdetailGoodname},
+      #{list.orderdetailPrice},
+      #{list.orderdetailNum},
+      #{list.orderdetailMoney},
+      #{orderid},
+      1
+      )
+    </foreach>
+
+  </insert>
+  <update id="updatereturn">
+      update orderdetail set STATE = 't' where uuid = #{uuid}
+  </update>
+
+  <insert id="insertreturnorders">
+    insert into returnorders(CREATETIME,TYPE,CREATER,SUPPLIERUUID,TOTALMONEY,STATE,WAYBILLSN) values
+     (#{CREATETIME},#{TYPE},#{CREATER},#{SUPPLIERUUID},#{TOTALMONEY},#{STATE},#{WAYBILLSN})
+  </insert>
+
+  <select id="queryStateListString" resultType="java.lang.String">
+    select state as a from returnorderdetail where ordersuuid =#{ordersuuid} group by a
+  </select>
+  <select id="queryStateListStringss" resultType="java.lang.String">
+    select state as a from orderdetail where ordersuuid =#{ordersuuid} group by a
+  </select>
+  <select id="queryReturnorderdetailAllListPage" resultType="java.util.Map">
+    select o.uuid, date_format(o.createtime,'%Y-%m-%d %H:%i:%s') as createtime,
+             date_format(o.checktime,'%Y-%m-%d %H:%i:%s') as checktime,
+             date_format(o.endtime,'%Y-%m-%d %H:%i:%s') as endtime, u1.name as creatername,u2.name as checkername ,u3.name as endername ,s1.name as suppliername,TOTALMONEY,STATE,WAYBILLSN,ORDERSUUID from returnorders o inner join sys_emp u1 on o.creater=u1.uuid left join sys_emp as u2 on o.checker =u2.uuid left join  sys_emp u3 on o.ender=u3.uuid left join  supplier s1 on o.supplieruuid=s1.uuid where o.type =2
+  </select>
+
+
+  <update id="updatemonryjia">
+    update returnorders set TOTALMONEY =TOTALMONEY+#{money} where WAYBILLSN =#{orderuuid}
+  </update>
+
+  <insert id="insertreturnordersdetail">
+     insert into returnorderdetail (GoodsuuId, Goodsname,
+    Price, Num, Money,
+    ORDERSUUID,STATE)
+    values
+    (#{goodsuuid},#{goodsname},#{price},#{num},#{money},#{ordersuuid},#{state})
+
+  </insert>
+
+  <update id="updatesetstateY">
+    update  returnorderdetail set state = 'y' where ordersuuid=#{orderuuid}
+  </update>
+
+  <update id="updatesetreturnOrders">
+    update  returnorders set state = 'y', CREATER = #{glyuuid},CHECKTIME=#{shijian} where uuid=#{orderuuid}
+  </update>
+  <update id="updateStoreJia">
+ update storedetail set num=num +#{num} where uuid =#{storedetailuuid}
+  </update>
+
+  <update id="updateStoreJian">
+ update storedetail set num=num -#{num} where uuid =#{storedetailuuid}
+  </update>
+
+  <update id="updatereturnorderssetstateH">
+    update returnorders set state = 'h' where uuid = #{ordersuuid}
+  </update>
+
+
+
+
+  <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
+
+
 <!---->
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goods
@@ -101,6 +258,9 @@
       </if>
     </trim>
   </insert>
+
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.upup.sale.model.Goods" >
     update goods
     <set >
@@ -139,4 +299,7 @@
       GOODSTYPEUUID = #{goodstypeuuid,jdbcType=INTEGER}
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
+
+
+
 </mapper>

@@ -16,6 +16,8 @@
     from goodstype
     where UUID = #{uuid,jdbcType=INTEGER}
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goodstype
     where UUID = #{uuid,jdbcType=INTEGER}
@@ -57,4 +59,5 @@
     set NAME = #{name,jdbcType=VARCHAR}
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
+
 </mapper>
