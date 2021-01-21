@@ -40,7 +40,27 @@
        left join sys_emp as u2 on o.checker =u2.uuid left join  sys_emp u3 on o.starter=u3.uuid left join
       sys_emp u4 on o.ender=u4.uuid where s1.name like concat('%',#{supliername},'%')
   </select>
-  
+  <select id="getBySalesPage" resultType="java.util.Map">
+    select b.name as toname,d.orderdetailmoney as tomoney from goods as a,goodstype as b ,orders as c,orderdetail as d where a.goodstypeuuid=b.uuid and c.uuid=d.ordersuuid and b.uuid=d.orderdetailgoodsld
+     and c.type =1
+    <if test="stime !=null and stime!=''">
+        and c.starttime &gt;=str_to_date(#{stime},'%Y-%m-%d %H:%i:%s')
+    </if>
+    <if test="etime !=null and etime !=''">
+        and c.endtime &lt;=str_to_date(#{etime},'%Y-%m-%d %H:%i:%s')
+    </if>
+    group by b.name
+  </select>
+  <select id="getByTrendPage" resultType="java.util.Map">
+    select moneys,totalmoney from
+ (select year(c.endtime) as years,month(c.endtime) as moneys,c.totalmoney from  orders as c,orderdetail as d where c.uuid=d.ordersuuid
+ and c.type =1
+ group by c.endtime having years=#{ytime}) as a  group by moneys
+  </select>
+  <select id="getByYear" resultType="java.util.Map">
+    select distinct year(endtime) as years from orders where type =1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from orders
     where UUID = #{uuid,jdbcType=INTEGER}

@@ -1,12 +1,16 @@
 package com.upup.sys.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Data
 @ToString
+@AllArgsConstructor
 public class SysEmp {
     private Integer uuid;
 
