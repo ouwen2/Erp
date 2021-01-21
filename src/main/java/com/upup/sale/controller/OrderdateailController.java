@@ -16,18 +16,5 @@ public class OrderdateailController {
     private IOrderdetailService iOrderdetailService;
 
 
-    @RequestMapping("/queryByuuidAll")
-    @ResponseBody
-    public JsonResponseBody queryByuuidAll(Integer ordersuuid){
-        System.out.println(ordersuuid);
-        return iOrderdetailService.queryByuuidAll(ordersuuid);
-    }
-
-    @RequestMapping("/queryByuuidwfh")
-    @ResponseBody
-    public JsonResponseBody queryByuuidwfh(Integer ordersuuid){
-        System.out.println(ordersuuid+"sssssssdas");
-        return iOrderdetailService.queryByuuidwfh(ordersuuid);
-    }
 
 }

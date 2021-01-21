@@ -2,10 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <!-- 通过context:component-scan元素扫描指定包下的控制器-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
     <!--1) 扫描com.zking.zf及子子孙孙包下的控制器(扫描范围过大，耗时)-->
     <context:component-scan base-package="com.upup"/>
 
@@ -83,13 +85,13 @@
     </bean>
 
     <!--10.开启shiro注解-->
-<!--    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"-->
-<!--          depends-on="lifecycleBeanPostProcessor">-->
-<!--        <property name="proxyTargetClass" value="true"></property>-->
-<!--    </bean>-->
-<!--    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
-<!--        <property name="securityManager" ref="securityManager"/>-->
-<!--    </bean>-->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true"></property>
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 
     <!--11.捕获-->
 <!--    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->

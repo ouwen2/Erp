@@ -59,6 +59,7 @@
                  /console/**           = roles[admin]
                  /**                   = anon-->
                 /SysEmp/login          = anon
+                /SysEmp                = authc
             </value>
         </property>
     </bean>
@@ -66,5 +67,6 @@
     <!-- 4. -->
     <!-- Shiro生命周期，保证实现了Shiro内部lifecycle函数的bean执行 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
 
 </beans>

@@ -10,15 +10,13 @@ public interface IGoodsService {
 
     int insertSelective(Goods record);
 
-
-    JsonResponseBody<Goods> selectByPrimaryKey(Integer uuid);
-
     int updateByPrimaryKeySelective(Goods record);
 
     int updateByPrimaryKey(Goods record);
 
     JsonResponseBody<?> queryNameAll();
 
-    JsonResponseBody<?> queryBynameAll(String name);
+    JsonResponseBody<?> querygoodall();
 
+    JsonResponseBody<?> selectSinglegood(String goodname);
 }

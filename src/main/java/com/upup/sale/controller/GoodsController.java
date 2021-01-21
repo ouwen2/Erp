@@ -3,15 +3,13 @@ package com.upup.sale.controller;
 import com.upup.base.util.JsonResponseBody;
 import com.upup.sale.service.IGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/GoodsController")
+@RequestMapping("/good")
 public class GoodsController {
 
     @Autowired
@@ -24,16 +22,19 @@ public class GoodsController {
         return goodsService.queryNameAll();
     }
 
-    @RequestMapping("GoodGetByName")
+
+
+    @RequestMapping("/querygoodall")
     @ResponseBody
-    public JsonResponseBody GoodGetByName(Integer uuidd) {
-        return goodsService.selectByPrimaryKey(uuidd);
+    public JsonResponseBody querygoodall(){
+        return goodsService.querygoodall();
     }
 
-    @RequestMapping("StoreQueryByNameAll")
-    @ResponseBody
-    public JsonResponseBody StoreQueryByNameAll(String name) {
-        return goodsService.queryBynameAll(name);
-    }
 
+    @RequestMapping("/selectSinglegood")
+    @ResponseBody
+    public JsonResponseBody selectSinglegood(String goodname){
+        System.out.println(goodname);
+        return goodsService.selectSinglegood(goodname);
+    }
 }
