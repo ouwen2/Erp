@@ -96,7 +96,9 @@ public class SysEmpController extends BaseController {
         }
 
         HttpSession session = req.getSession();
+        System.out.println("userName:"+sysEmp.getUsername());
         session.setAttribute("user",iSysEmpService.selectByName(sysEmp.getUsername()));
+        System.out.println("user:"+session.getAttribute("user"));
         SysContent.setRequest(req);
 
         //IP地址为键 sysEmp对象为值 存入redis

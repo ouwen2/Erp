@@ -13,45 +13,40 @@ import java.util.Date;
 @NoArgsConstructor
 public class Orders implements Serializable {
 
-    //订单编号
-    private Integer uuid;
+  //订单编号
+  private Integer uuid;
 
-    //创建时间
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" ,timezone = "GMT+8")
-    private Date createtime;
+  //创建时间
+  private String createtime;
 
   //检查时间
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" ,timezone = "GMT+8")
-    private Date checktime;
+  private String checktime;
 
-    //开始时间
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" ,timezone = "GMT+8")
-    private Date starttime;
+  //开始时间
+  private String starttime;
 
-    //结束时间
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" ,timezone = "GMT+8")
-    private Date endtime;
+  //结束时间
+  private String endtime;
 
-    private String type;
+  private String type;
 
-    private Integer creater;
+  private Integer creater;
 
-    private Integer checker;
+  private Integer checker;
 
-    private Integer starter;
+  private Integer starter;
 
-    private Integer ender;
+  private Integer ender;
 
-    //供应商编号
-    private Integer supplieruuid;
+  //供应商编号
+  private Integer supplieruuid;
 
-    //总订单金额
-    private Float totalmoney;
+  //总订单金额
+  private Float totalmoney;
 
-    //状态
-    private String state;
+  //状态
+  private String state;
 
-    //运单号
-    private Integer waybillsn;
-
+  //运单号
+  private Integer waybillsn;
 }

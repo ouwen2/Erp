@@ -74,13 +74,15 @@ public class ControllerAop {
 
         SysLog sysLog = new SysLog();
         sysLog.setLogMethod(name3);
-        sysLog.setUserName(sysEmp.getUsername());
-        sysLog.setLogDate(new Timestamp(GetDateUtil.getDate().getTime()));
-        sysLog.setLogIp(GetIpAddr.getIpAddr(SysContent.getRequest()));
+        if(sysEmp!=null) {
+            sysLog.setUserName(sysEmp.getUsername());
+            sysLog.setLogDate(new Timestamp(GetDateUtil.getDate().getTime()));
+            sysLog.setLogIp(GetIpAddr.getIpAddr(SysContent.getRequest()));
 
-        if(sysMenu!=null){
-            sysLog.setMenuId(sysMenu.getMenuid());
-            iSysLogService.insert(sysLog);
+            if (sysMenu != null) {
+                sysLog.setMenuId(sysMenu.getMenuid());
+                iSysLogService.insert(sysLog);
+            }
         }
 
         proceed = joinPoint.proceed(args);

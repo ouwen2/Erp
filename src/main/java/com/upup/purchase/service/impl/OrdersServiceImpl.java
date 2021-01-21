@@ -5,6 +5,7 @@ import com.upup.base.util.PageBean;
 import com.upup.base.util.ResponseStatus;
 import com.upup.purchase.mapper.OrderdetailMapper;
 import com.upup.purchase.mapper.OrdersMapper;
+import com.upup.purchase.model.Orderdetail;
 import com.upup.purchase.model.Orders;
 import com.upup.purchase.service.IOrdersService;
 import com.upup.purchase.vo.OrderSa;
@@ -25,23 +26,6 @@ public class OrdersServiceImpl implements IOrdersService {
 
     @Autowired
     private OrderdetailMapper orderdetailMapper;
-
-    @Override
-    public JsonResponseBody<Integer> insertSelective(OrderVo orderVo) {
-        int i = ordersMapper.insertSelective(orderVo);
-        if (i>0){
-            orderdetailMapper.insert(orderVo.getOrderDetailList(),orderVo.getUuid());
-        } else if(i==0){
-            return new JsonResponseBody<>(ResponseStatus.STATUS_201);
-        }
-        return new JsonResponseBody<>(i);
-    }
-
-    @Override
-    public List<Map<String,Object>> queryPage(String supliername, PageBean pageBean) {
-        List<Map<String,Object>> list=ordersMapper.queryPage(supliername);
-        return list;
-    }
 
     @Override
     public int insertSelective(Orders record) {
@@ -99,6 +83,86 @@ public class OrdersServiceImpl implements IOrdersService {
     @Override
     public List<Map<String, Object>> getByYear() {
         return ordersMapper.getByYear();
+    }
+
+    //-------------------------采购
+    @Override
+    public JsonResponseBody<Integer> insertSelective(OrderVo orderVo) {
+        int i = ordersMapper.insertSelective(orderVo);
+        if (i>0){
+            orderdetailMapper.insert(orderVo.getOrderDetailList(),orderVo.getUuid());
+        } else if(i==0){
+            return new JsonResponseBody<>(ResponseStatus.STATUS_201);
+        }
+        return new JsonResponseBody<>(i);
+    }
+
+    @Override
+    public List<Map<String,Object>> queryPage(String supliername, PageBean pageBean) {
+        List<Map<String,Object>> list=ordersMapper.queryPage(supliername);
+        return list;
+    }
+
+    @Override
+    public List<Map<String, Object>> queryPageT(String supliername, String state,PageBean pageBean) {
+        return ordersMapper.queryPageT(supliername,state);
+    }
+
+    @Override
+    public List<Map<String, Object>> queryPageC(String supliername, String state, String type,PageBean pageBean) {
+        return ordersMapper.queryPageC(supliername,state,type);
+    }
+
+    @Override
+    public int updateOrderState(Orders orders) {
+        return ordersMapper.updateOrderState(orders);
+    }
+
+    @Override
+    public int updateOrderStateQ(Orders orders) {
+        return ordersMapper.updateOrderStateQ(orders);
+    }
+
+    @Override
+    public int updateOrderStateR(Orders orders) {
+        return ordersMapper.updateOrderStateR(orders);
+    }
+
+
+    @Override
+    public List<Orderdetail> selectQue(int orderuuid) {
+        return ordersMapper.selectQue(orderuuid);
+    }
+
+    @Override
+    public List<Orderdetail> selectRu(int orderuuid) {
+        return ordersMapper.selectRu(orderuuid);
+    }
+
+    @Override
+    public List<Orderdetail> selectDen(int orderuuid) {
+        return ordersMapper.selectDen(orderuuid);
+    }
+
+    @Override
+    public List<Orderdetail> selectShen(int orderuuid) {
+        return ordersMapper.selectShen(orderuuid);
+    }
+
+    @Override
+    public int updateTuiD(Orders orders) {
+
+        return ordersMapper.updateTuiD(orders);
+    }
+
+    @Override
+    public int updateTuiS(Orders orders) {
+        return ordersMapper.updateTuiS(orders);
+    }
+
+    @Override
+    public int updateTuiC(Orders orders) {
+        return ordersMapper.updateTuiC(orders);
     }
 
 

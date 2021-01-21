@@ -9,7 +9,7 @@
       <arg column="orderdetailPrice" jdbcType="REAL" javaType="java.lang.Float" />
       <arg column="orderdetailNum" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="orderdetailMoney" jdbcType="REAL" javaType="java.lang.Float" />
-      <arg column="ENDTIME" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="ENDTIME" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="ENDER" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="STOREUUID" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="STATE" jdbcType="CHAR" javaType="java.lang.String" />
@@ -23,9 +23,9 @@
 
 
   <insert id="insert" parameterType="com.upup.purchase.model.Orderdetail">
-    insert into orderdetail (GOODSUUID, GOODSNAME,
-      PRICE, NUM, MONEY,
-      ORDERSUUID)
+    insert into orderdetail (orderdetailGoodsId, orderdetailGoodsname,
+    orderdetailPrice, orderdetailNum, orderdetailMoney,
+    ORDERSUUID,STATE)
     values
     <foreach collection="orderDetailList" item="list" separator=",">
       (#{list.orderdetailGoodsId},
@@ -33,12 +33,66 @@
       #{list.orderdetailPrice},
       #{list.orderdetailNum},
       #{list.orderdetailMoney},
-      #{orderid}
+      #{orderid},
+      #{list.state}
       )
     </foreach>
 
-
   </insert>
+
+  <update id="updateOrderdetail">
+    update orderdetail
+    <set >
+      <if test="endtime != null" >
+        ENDTIME = #{endtime},
+      </if>
+      <if test="ender != null" >
+        ENDER = #{ender},
+      </if>
+      <if test="storeuuid != null" >
+        STOREUUID = #{storeuuid},
+      </if>
+      <if test="state != null" >
+        STATE = #{state},
+      </if>
+    </set>
+    where ORDERSUUID = #{ordersuuid,jdbcType=INTEGER} and orderdetailGoodsId= #{orderdetailGoodsId}
+  </update>
+
+  <update id="updateTuiD">
+    update orderdetail
+    <set >
+      <if test="state != null" >
+        STATE = #{state},
+      </if>
+    </set>
+    where ORDERSUUID = #{ordersuuid,jdbcType=INTEGER} and orderdetailGoodsId= #{orderdetailGoodsId}
+  </update>
+
+  <update id="updateTuiS">
+    update orderdetail
+    <set >
+      <if test="state != null" >
+        STATE = #{state},
+      </if>
+    </set>
+    where ORDERSUUID = #{ordersuuid,jdbcType=INTEGER} and orderdetailGoodsId= #{orderdetailGoodsId}
+  </update>
+
+  <update id="updateTuiC">
+    update orderdetail
+    <set >
+      <if test="state != null" >
+        STATE = #{state},
+      </if>
+    </set>
+    where ORDERSUUID = #{ordersuuid,jdbcType=INTEGER} and orderdetailGoodsId= #{orderdetailGoodsId}
+  </update>
+
+
+  <select id="selectByoid" resultType="com.upup.purchase.model.Orderdetail">
+      select * from orderdetail where ORDERSUUID= #{orderuuid}
+  </select>
 
 
 </mapper>

@@ -12,7 +12,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class Orderdetail {
 
-
     private Integer uuid;
     //商品编号
     private Integer orderdetailGoodsId;
@@ -26,8 +25,7 @@ public class Orderdetail {
     private Float orderdetailMoney;
 
     //结束日期
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" ,timezone = "GMT+8")
-    private Date endtime;
+    private String endtime;
 
     //库管员
     private Integer ender;
@@ -42,35 +40,4 @@ public class Orderdetail {
     private Integer ordersuuid;
 
 
-    public Integer getEnder() {
-        return ender;
-    }
-
-    public void setEnder(Integer ender) {
-        this.ender = ender;
-    }
-
-    public Integer getStoreuuid() {
-        return storeuuid;
-    }
-
-    public void setStoreuuid(Integer storeuuid) {
-        this.storeuuid = storeuuid;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public Integer getOrdersuuid() {
-        return ordersuuid;
-    }
-
-    public void setOrdersuuid(Integer ordersuuid) {
-        this.ordersuuid = ordersuuid;
-    }
 }
