@@ -66,7 +66,7 @@
     order by uuid desc
   </select>
 
-  <select id="queryall" resultType="com.upup.model.Supplier">
+  <select id="queryall" resultType="com.upup.basics.model.Supplier">
     select <include refid="Base_Column_List"/> from supplier
   </select>
 

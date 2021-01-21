@@ -44,13 +44,13 @@ public class SupplierController {
     public int insert(Supplier supplier){
 
         System.out.println(supplier);
-        try {
+//        try {
             supplier.setType("0");
             return supplierService.insert(supplier);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new BusinessException(ResponseStatus.STATUS_201);
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new BusinessException(ResponseStatus.STATUS_201);
+//        }
     }
 
     //添加客户
@@ -60,13 +60,13 @@ public class SupplierController {
     public int insert2(Supplier supplier){
 
         System.out.println(supplier);
-        try {
+//        try {
             supplier.setType("1");
             return supplierService.insert2(supplier);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new BusinessException(ResponseStatus.STATUS_201);
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new BusinessException(ResponseStatus.STATUS_201);
+//        }
     }
 
 
@@ -103,11 +103,12 @@ public class SupplierController {
     public JsonResponseBody querySupplierPage(Supplier supplier, HttpServletRequest req){
         PageBean pageBean=new PageBean();
         pageBean.setRequest(req);
-        try{
-            return supplierService.querySupplierPage(supplier,pageBean);
-        }catch (Exception e){
-            throw new BusinessException(ResponseStatus.STATUS_209);
-        }
+//        try{
+            return new JsonResponseBody(supplierService.querySupplierPage(supplier,null));
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            throw new BusinessException(ResponseStatus.STATUS_209);
+//        }
     }
 
     /**
@@ -121,11 +122,12 @@ public class SupplierController {
     public JsonResponseBody queryCustomerPager(Supplier supplier, HttpServletRequest req){
         PageBean pageBean=new PageBean();
         pageBean.setRequest(req);
-        try {
-            return supplierService.queryCustomerPage(supplier, pageBean);
-        } catch (Exception e) {
-            throw new BusinessException(ResponseStatus.STATUS_209);
-        }
+//        try {
+            return supplierService.queryCustomerPage(supplier, null);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new BusinessException(ResponseStatus.STATUS_209);
+//        }
     }
 
 

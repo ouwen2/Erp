@@ -22,7 +22,6 @@ public class GoodsTypeController  {
     public IGoodsTypeService goodsTypeService;
 
     //查询所有
-    @RequiresPermissions(value ="GoodsType/cxsy")
     @RequestMapping("/cxsy")
     @ResponseBody
     public Map<String,Object> cxsy(){

@@ -6,7 +6,6 @@ import com.upup.sys.model.SysEmp;
 import com.upup.sys.service.ISysEmpService;
 import com.upup.basics.model.GoodsType;
 import com.upup.sys.model.SysEmp;
-import com.upup.sys.servce.ISysEmpService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;

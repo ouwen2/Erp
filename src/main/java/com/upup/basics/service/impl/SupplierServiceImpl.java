@@ -53,13 +53,13 @@ public class SupplierServiceImpl implements ISupplierService {
     @Override
     public JsonResponseBody<?> querySupplierPage(Supplier supplier, PageBean pageBean) {
         List<Supplier> list = supplierMapper.querySupplierPage(supplier);
-        return new JsonResponseBody<>(list,pageBean.getTotal());
+        return new JsonResponseBody<>(list,list.size());
     }
 
     @Override
     public JsonResponseBody<?> queryCustomerPage(Supplier supplier, PageBean pageBean) {
         List<Supplier> customer = supplierMapper.queryCustomerPage(supplier);
-        return new JsonResponseBody<>(customer,pageBean.getTotal());
+        return new JsonResponseBody<>(customer,customer.size());
     }
 
 

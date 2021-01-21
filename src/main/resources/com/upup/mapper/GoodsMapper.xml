@@ -71,8 +71,6 @@
     where UUID = #{uuid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.upup.sale.model.Goods" >
-    insert into goods (UUID, NAME, ORIGIN, 
-  <insert id="insert" parameterType="com.upup.basics.model.Goods" >
     insert into goods (NAME, ORIGIN,
       PRODUCER, UNIT, INPRICE,
       OUTPRICE, GOODSTYPEUUID)
@@ -136,8 +134,6 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.upup.sale.model.Goods" >
-
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.basics.model.Goods" >
     update goods
     <set >
       <if test="name != null" >

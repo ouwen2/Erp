@@ -1,7 +1,7 @@
 package com.upup.stock.service;
 
 import com.upup.base.util.PageBean;
-import com.upup.model.Store;
+import com.upup.basics.model.Store;
 import com.upup.sale.model.Goods;
 import com.upup.stock.model.Inventory;
 import com.upup.stock.model.Storedetail;

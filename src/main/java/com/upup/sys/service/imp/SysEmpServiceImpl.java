@@ -1,9 +1,10 @@
-package com.upup.sys.servce.imp;
+package com.upup.sys.service.imp;
 
 import com.upup.base.util.PageBean;
 import com.upup.sys.mapper.SysEmpMapper;
 import com.upup.sys.model.SysEmp;
-import com.upup.sys.servce.ISysEmpService;
+import com.upup.sys.service.ISysEmpService;
+import com.upup.sys.vo.SysEmpDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,11 @@ public class SysEmpServiceImpl implements ISysEmpService {
     @Override
     public int updateByPrimaryKey(SysEmp record) {
         return SysEmpMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<Map<String, Object>> selectByEmpPage(SysEmpDate sysEmpDate, PageBean pageBean) {
+        return null;
     }
 
     @Override

@@ -45,7 +45,7 @@
     insert into goodstype (NAME)
     values (#{name,jdbcType=VARCHAR})
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.upup.model.GoodsType" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.upup.basics.model.GoodsType" >
     update goodstype
     <set >
       <if test="name != null" >
@@ -54,7 +54,7 @@
     </set>
     where UUID = #{uuid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.upup.model.GoodsType" >
+  <update id="updateByPrimaryKey" parameterType="com.upup.basics.model.GoodsType" >
     update goodstype
     set NAME = #{name,jdbcType=VARCHAR}
     where UUID = #{uuid,jdbcType=INTEGER}

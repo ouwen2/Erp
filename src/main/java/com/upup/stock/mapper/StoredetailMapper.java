@@ -1,6 +1,6 @@
 package com.upup.stock.mapper;
 
-import com.upup.model.Store;
+import com.upup.basics.model.Store;
 import com.upup.sale.model.Goods;
 import com.upup.stock.model.Storedetail;
 import com.upup.stock.vo.StoredetailVo;

@@ -37,7 +37,6 @@ public class StoreController {
     }
 
     //管理员查询
-    @RequiresPermissions(value ="Store/querySysEmpAll")
     @RequestMapping("/querySysEmpAll")
     @ResponseBody
     public Map<String,Object> querySysEmpAll(SysEmp sysEmp){
@@ -85,11 +84,11 @@ public class StoreController {
         PageBean pageBean=new PageBean();
         pageBean.setRequest(req);
         System.out.println(store);
-        try {
-            return storeService.queryStorerPage(store, pageBean);
-        } catch (Exception e) {
-            throw new BusinessException(ResponseStatus.STATUS_202);
-        }
+//        try {
+            return storeService.queryStorerPage(store, null);
+//        } catch (Exception e) {
+//            throw new BusinessException(ResponseStatus.STATUS_202);
+//        }
     }
 
 

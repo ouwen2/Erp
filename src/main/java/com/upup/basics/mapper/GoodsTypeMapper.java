@@ -13,6 +13,8 @@ public interface GoodsTypeMapper {
     //添加
     int insert(GoodsType record);
 
+    int updateByPrimaryKeySelective(GoodsType goodsType);
+
     //根据id查询
     GoodsType selectByPrimaryKey(Integer uuid);
 

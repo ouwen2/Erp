@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface SupplierMapper {
+    List<Supplier> queryall();
     //删除供应商或客户信息
     int deleteByPrimaryKey(Integer uuid);
 
@@ -31,4 +32,6 @@ public interface SupplierMapper {
 
     //分页查询客户
     List<Supplier> queryCustomerPage(Supplier supplier);
+
+
 }

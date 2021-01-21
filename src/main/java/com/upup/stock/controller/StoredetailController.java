@@ -3,7 +3,7 @@ package com.upup.stock.controller;
 import com.upup.base.util.JsonResponseBody;
 import com.upup.base.util.PageBean;
 import com.upup.base.util.ResponseStatus;
-import com.upup.model.Store;
+import com.upup.basics.model.Store;
 import com.upup.sale.model.Goods;
 import com.upup.stock.service.IStoredetailService;
 import com.upup.stock.vo.StoredetailVo;

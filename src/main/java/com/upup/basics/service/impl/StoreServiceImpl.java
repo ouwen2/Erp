@@ -48,7 +48,7 @@ public class StoreServiceImpl implements IStoreService {
     @Override
     public JsonResponseBody<?> queryStorerPage(Store store, PageBean pageBean) {
         List<Map<String,Object>> list = storeMapper.queryStorePage(store);
-        return new JsonResponseBody<>(list,pageBean.getTotal());
+        return new JsonResponseBody<>(list,list.size());
     }
 
     @Override
