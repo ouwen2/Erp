@@ -1,13 +1,17 @@
 package com.upup.stock.model;
 
+import lombok.ToString;
+
 import java.util.Date;
+
+@ToString
 
 public class Inventory {
     private Integer uuid;
 
-    private Integer goodsuuid;
+    private String goodsuuid;
 
-    private Integer storeuuid;
+    private String storeuuid;
 
     private Integer num;
 
@@ -25,7 +29,7 @@ public class Inventory {
 
     private String remark;
 
-    public Inventory(Integer uuid, Integer goodsuuid, Integer storeuuid, Integer num, String type, Date createtime, Date checktime, Integer creater, Integer checker, String state, String remark) {
+    public Inventory(Integer uuid, String goodsuuid, String storeuuid, Integer num, String type, Date createtime, Date checktime, Integer creater, Integer checker, String state, String remark) {
         this.uuid = uuid;
         this.goodsuuid = goodsuuid;
         this.storeuuid = storeuuid;
@@ -51,19 +55,19 @@ public class Inventory {
         this.uuid = uuid;
     }
 
-    public Integer getGoodsuuid() {
+    public String getGoodsuuid() {
         return goodsuuid;
     }
 
-    public void setGoodsuuid(Integer goodsuuid) {
+    public void setGoodsuuid(String goodsuuid) {
         this.goodsuuid = goodsuuid;
     }
 
-    public Integer getStoreuuid() {
+    public String getStoreuuid() {
         return storeuuid;
     }
 
-    public void setStoreuuid(Integer storeuuid) {
+    public void setStoreuuid(String storeuuid) {
         this.storeuuid = storeuuid;
     }
 
