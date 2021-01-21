@@ -12,6 +12,7 @@ import com.upup.stock.service.IStoredetailService;
 import com.upup.stock.service.IStoreoperService;
 import com.upup.stock.vo.InventoryVo;
 import com.upup.stock.vo.StoredetailVo;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -41,7 +42,7 @@ public class InventoryController {
     private IStoreoperService storeoperService;
 
 
-
+    @RequiresPermissions(value = "Inventory/Page")
     @ResponseBody
     @RequestMapping("/Page")
     public JsonResponseBody Page(InventoryVo inventoryVo,PageBean pageBean){
@@ -58,6 +59,8 @@ public class InventoryController {
         }
     }
 
+
+    @RequiresPermissions(value = "Inventory/ShPage")
     @ResponseBody
     @RequestMapping("/ShPage")
     public JsonResponseBody ShPage(Inventory inventory, PageBean pageBean){
@@ -75,15 +78,9 @@ public class InventoryController {
     }
 
 
-//    @RequestMapping("/Add")
-//    public void Add(Inventory inventory){
-//        inventory.setState("1");
-//        inventory.setCreater(2);
-//        inventory.setCreatetime(new Date());
-//        int insert = iInventoryService.insert(inventory);
-//    }
 
 
+    @RequiresPermissions(value = "Inventory/Add")
     @RequestMapping("/Add")
     @ResponseBody
     public JsonResponseBody Add(Inventory inventory){
@@ -98,6 +95,8 @@ public class InventoryController {
         return new JsonResponseBody(ResponseStatus.STATUS_208);
     }
 
+
+    @RequiresPermissions(value = "Inventory/Update")
     @RequestMapping("/Update")
     @ResponseBody
     public JsonResponseBody Update(Inventory inventory){
@@ -108,8 +107,9 @@ public class InventoryController {
     }
 
 
+    @RequiresPermissions(value = "Inventory/sendword")
     @RequestMapping("/sendword")
-    public void handle(StoredetailVo storedetail, PageBean pageBean) {
+    public void sendword(StoredetailVo storedetail, PageBean pageBean) {
         List<Map<String, Object>> maps = storedetailService.queryYjPage(storedetail, pageBean);
 
         String name="";

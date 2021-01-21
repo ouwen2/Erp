@@ -5,6 +5,7 @@ import com.upup.base.util.PageBean;
 import com.upup.base.util.ResponseStatus;
 import com.upup.stock.service.IStoreoperService;
 import com.upup.stock.vo.StoreoperVo;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/storeoper")
+@RequestMapping("Storeoper")
 public class StoreoperController {
 
     @Autowired
     private IStoreoperService storeoperService;
 
-    @RequestMapping("/page")
+    @RequiresPermissions(value = "Storeoper/Page")
+    @RequestMapping("/Page")
     @ResponseBody
     public List<Map<String, Object>> Page(StoreoperVo storeoperVo, PageBean pageBean){
 

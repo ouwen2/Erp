@@ -7,6 +7,7 @@ import com.upup.basics.model.Store;
 import com.upup.sale.model.Goods;
 import com.upup.stock.service.IStoredetailService;
 import com.upup.stock.vo.StoredetailVo;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/storedetail")
+@RequestMapping("Storedetail")
 public class StoredetailController {
 
     @Autowired
@@ -24,15 +25,12 @@ public class StoredetailController {
 
 
 
-
-
-
-
+    @RequiresPermissions(value = "Storedetail/Page")
     @RequestMapping("/Page")
     @ResponseBody
     public JsonResponseBody Page(StoredetailVo storeoperVo, PageBean pageBean){
         List<Map<String, Object>> maps = storedetailService.queryStoredetailPage(storeoperVo,pageBean);
-        String msg="查询失败";
+        String msg="查询";
             if(null!=msg){
                 int total = pageBean.getTotal();
                 return new JsonResponseBody(maps,total);
@@ -81,21 +79,19 @@ public class StoredetailController {
     public JsonResponseBody xlkck(Integer goodsuuid){
         String xlkck = storedetailService.xlkck(goodsuuid);
         System.out.println(goodsuuid);
-        String msg="查询";
-        if(null!=msg){
+        if(null!=xlkck){
             return new JsonResponseBody(xlkck);
         }else{
             return new JsonResponseBody(ResponseStatus.STATUS_202);
         }
     }
 
-
+    @RequiresPermissions(value = "Storedetail/yjPage")
     @RequestMapping("/yjPage")
     @ResponseBody
     public JsonResponseBody yjPage(StoredetailVo storeoperVo, PageBean pageBean){
         List<Map<String, Object>> maps = storedetailService.queryYjPage(storeoperVo, pageBean);
-        String msg="查询失败";
-        if(null!=msg){
+        if(null!=maps ||maps.size()!=0){
             int total = pageBean.getTotal();
             return new JsonResponseBody(maps,total);
         }else{
